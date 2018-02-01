@@ -1,0 +1,157 @@
+/* -------------------------- GENERAL RULES -------------------------- 
+
+Colours: 
+Primary color: #330867
+Secondary color: #9345f0
+Dark text: #333333
+Light text: #eeeeee
+White text: #ffffff 
+
+*/
+
+*,
+*::after,
+*::before{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%;
+    text-rendering: optimizeLegibility;
+}
+
+body{
+    box-sizing: border-box;
+    font-family: 'Lato', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    color: #eee;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    background-image: linear-gradient(to top, #30cfd069 0%, #33086769 100%), url('/resources/css/img/street.jpg');    
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.row{
+    max-width: 90vw;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+/* -------------------------- COMPONENTS -------------------------- */
+
+.btn:link,
+.btn:visited,
+input[type=submit]{
+    padding: 1.5rem 4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px transparent;
+}
+
+.matbox{
+    -webkit-box-shadow: 0px 15px 22px -13px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 15px 22px -13px rgba(0,0,0,0.4);
+    box-shadow: 0px 15px 22px -13px rgba(0,0,0,0.4);
+}
+
+
+/* -------------------------- HEADER -------------------------- */
+.header__text-box{
+    display: block;
+    text-align: center;
+}
+
+.header__heading{
+    font-size: 6rem;
+    font-weight: 300;
+    margin: 60px 0px;
+}
+
+.content__heading--secondary{
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+
+/* -------------------------- TABLE -------------------------- */
+.reqtable {
+    color: #333333;
+    width: 95%;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    border-spacing: 0px;
+    text-align: center;
+}
+
+.reqtable th {
+    color: #ffffff;
+    background-color: #330867;
+    border-width: 0px;
+    padding: 1rem;
+    margin: 0;
+}
+
+.reqtable tr {
+    background-color: #ffffff;
+}
+
+.reqtable td {
+    font-size: 80%;
+    border-bottom: solid 1px #ddd;
+    padding: 1rem;
+    transition: all 0.1s ease-out;
+}
+
+.reqtable tr:hover{
+    background-color: #9345f0;
+    color: #ffffff;
+}
+
+
+/* -------------------------- FORM -------------------------- */
+.sign-form {
+    width: 90%;
+    background-color: #eee;
+    padding: 3rem 2rem;
+    color: #444444;
+    border-radius: .5rem;
+}
+
+input[type=email]:focus,
+input[type=password]:focus{
+    outline: none !important;
+    border:1px solid #330867;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+select,
+textarea {
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    margin-bottom: 1.2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+input[type=submit]{
+    background-color: #330867;
+    color: #eee;
+    transition: all 0.3s ease-in-out;
+    margin-top: 2rem;
+}
+
+input[type=submit]:hover,
+input[type=submit]:active{
+    background-color: #9345f0;
+}
+
