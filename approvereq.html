@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fleet Management System | Approve</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="vendors/css/ionicicons.min.css">
+    <link rel="stylesheet" href="vendors/css/normalize.css">
+    <link rel="stylesheet" href="vendors/css/grid.css">
+    <link rel="stylesheet" href="vendors/css/animate.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
+</head>
+
+<body class="grey-bg">
+    <section class="main-form">
+        <div class="row">
+            <div class="col span-1-of-4">
+                <h2>Fleet Management System</h2>
+            </div>
+            <div class="col span-3-of-4 approvaltable">
+                <h2 class="content__heading--secondary">Request #234</h2>
+                <table class="reqtable matbox" border="0">
+                    <tr>
+                        <th>Facility</th>
+                        <th>Department</th>
+                        <th>Pickup Point</th>
+                        <th>Departure</th>
+                        <th>Destination</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr>
+                        <td>Row:1 Cell:1</td>
+                        <td>Row:1 Cell:2</td>
+                        <td>Row:1 Cell:3</td>
+                        <td>Row:1 Cell:4</td>
+                        <td>Row:1 Cell:5</td>
+                        <td>Row:1 Cell:6</td>
+                    </tr>
+                </table>
+                <div class="row">
+                    <div class="col span-1-of-2 vehicle-col">
+                        <h3>Purpose: </h3>
+                        <textarea name="purpose" id="purpose" cols="30" rows="3" placeholder="Purpose of the trip goes here..." readonly></textarea>
+
+                    </div>
+                    <div class="col span-1-of-2 driver-col">
+                        <h3>Other Info: </h3>
+                        <textarea name="otherinfo" id="otherinfo" cols="30" rows="3" placeholder="Other info shows here..." readonly></textarea>
+                    </div>
+                    
+                    <input type="submit" class="btn danger" value="Disprove">
+                </div>
+
+                <br>
+                <form action="" method="get" class="clearfix">
+                    <h2 class="form__title">Request Approval</h2>
+                    <div class="row">
+                        <div class="col span-1-of-2 vehicle-col">
+                            <h3>Assign a vehicle</h3>
+                            <table class="reqtable matbox" border="0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Attach to Request</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for='vehicle1'>
+                                                Obi Wan Kenobi
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="vehicle" id='vehicle1'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for='vehicle2'>
+                                                Greedo
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="vehicle" id='vehicle2'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for='vehicle3'>
+                                                Darth Vader
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="vehicle" id='vehicle3'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col span-1-of-2 driver-col">
+                            <h3>Assign a driver</h3>
+                            <table class="reqtable matbox" border="0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Attach to Request</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for='driver1'>
+                                                Obi Wan Kenobi
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="driver" id='driver1'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for='driver2'>
+                                                Greedo
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="driver" id='driver2'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for='driver3'>
+                                                Darth Vader
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" class="cbx" name="driver" id='driver3'>
+                                            </input>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <input type="submit" class="btn" value="Approve">
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
