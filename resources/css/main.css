@@ -135,6 +135,13 @@ body {
     font-weight: 700;
 }
 
+.side-nav{
+    text-align: center;
+    background-color: #eee;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
 /* -------------------------- TABLE -------------------------- */
 
 .reqtable {

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fleet Management System | Approve</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="vendors/css/ionicicons.min.css">
+    <link rel="stylesheet" href="vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="vendors/css/normalize.css">
     <link rel="stylesheet" href="vendors/css/grid.css">
     <link rel="stylesheet" href="vendors/css/animate.css">
@@ -17,8 +17,17 @@
 <body class="grey-bg">
     <section class="main-form">
         <div class="row">
-            <div class="col span-1-of-4">
+            <div class="col span-1-of-4 sticky side-nav">
                 <h2>Fleet Management System</h2>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#" class="navlink logout"><i class="ion-log-out"></i> Logout</a></li>
+                        <li><a href="#" class="navlink">Requests</a></li>
+                        <li><a href="#" class="navlink">Vehicles</a></li>
+                        <li><a href="#" class="navlink">Drivers</a></li>
+                    </ul>
+                </nav>
+
             </div>
             <div class="col span-3-of-4 approvaltable">
                 <h2 class="content__heading--secondary">Request #234</h2>
@@ -51,7 +60,7 @@
                         <textarea name="otherinfo" id="otherinfo" cols="30" rows="3" placeholder="Other info shows here..." readonly></textarea>
                     </div>
                     
-                    <input type="submit" class="btn danger" value="Disprove">
+                    <input type="submit" class="btn danger" value="Disapprove">
                 </div>
 
                 <br>
