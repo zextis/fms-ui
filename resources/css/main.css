@@ -16,7 +16,7 @@ Danger Reg: #e65100
     margin: 0px;
     padding: 0px;
     -webkit-box-sizing: inherit;
-            box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 html {
@@ -26,7 +26,7 @@ html {
 
 body {
     -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
     font-family: 'Lato', 'Arial Narrow', Arial, sans-serif;
     font-weight: 400;
     color: #333;
@@ -55,39 +55,8 @@ body {
 
 /* -------------------------- COMPONENTS -------------------------- */
 
-
-/* Button Styles */
-
-.btn,
-.btn:link,
-.btn:visited {
-    background-color: #330867;
-    color: #eee;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    padding: 1.5rem 4rem;
-    border-radius: 100px;
-    text-decoration: none;
-    border: 1px transparent;
-    cursor: pointer;
-}
-
-.btn:hover,
-.btn:active {
-    background-color: #9345f0;
-}
-
 .grey-bg {
     background-color: #ccc;
-}
-
-.danger {
-    background-color: #e65100;
-}
-
-.danger:hover,
-.danger:active {
-    background-color: #ff833a;
 }
 
 .matbox {
@@ -115,6 +84,40 @@ body {
     border-radius: .5rem;
 }
 
+/* Button Styles */
+
+.btn,
+.btn:link,
+.btn:visited {
+    background-color: #330867;
+    color: #eee;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    padding: 1.5rem 4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px transparent;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #9345f0;
+}
+
+.danger,
+.danger:link,
+.danger:visited,
+li>.logout:hover,
+li>.logout:active {
+    background-color: #e65100;
+}
+
+.danger:hover,
+.danger:active {
+    background-color: #ff833a;
+}
+
 /* -------------------------- HEADER -------------------------- */
 
 .header__text-box {
@@ -135,17 +138,56 @@ body {
     font-weight: 700;
 }
 
-.side-nav{
+/* -------------------------- SIDE NAV -------------------------- */
+
+.side-nav {
     text-align: center;
     background-color: #eee;
-    padding: 2rem;
     border-radius: .5rem;
+}
+
+.sidenav__content {
+    margin-top: 1rem;
+}
+
+.nav>ul {
+    list-style-type: none;
+}
+
+.nav>ul>li {
+    color: #333333;
+}
+
+.navlink:link,
+.navlink:visited {
+    text-decoration: none;
+    display: block;
+    padding: 1rem 0px;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    color: inherit;
+}
+
+.navlink.active,
+.navlink:hover,
+.navlink:active {
+    background-color: #9345f0;
+    color: #ffffff;
+}
+
+.sidenav__heading {
+    padding: 1rem;
+    font-weight: 400;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+    font-size: 110%;
+    margin-bottom: 2rem;
+    color: #330867;
 }
 
 /* -------------------------- TABLE -------------------------- */
 
 .reqtable {
-    color: #333333;
     width: 100%;
     background-color: #ffffff;
     padding: 1.5rem;
@@ -189,7 +231,8 @@ textarea {
     resize: none;
 }
 
-.main-form {
+.main-form,
+.grey-bg {
     margin-top: 4rem;
 }
 
@@ -259,86 +302,86 @@ label span {
     height: 11px;
     opacity: 0;
     -webkit-transform: rotate(45deg) scale(0);
-            transform: rotate(45deg) scale(0);
+    transform: rotate(45deg) scale(0);
     border-right: 2px solid #fff;
     border-bottom: 2px solid #fff;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     -webkit-transition-delay: 0.15s;
-            transition-delay: 0.15s;
+    transition-delay: 0.15s;
 }
 
 .cbx:checked {
     border-color: transparent;
     background: #330867;
     -webkit-animation: jelly 0.6s ease;
-            animation: jelly 0.6s ease;
+    animation: jelly 0.6s ease;
 }
 
 .cbx:checked~.cbx:after {
     opacity: 1;
     -webkit-transform: rotate(45deg) scale(1);
-            transform: rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
 }
 
 @-webkit-keyframes jelly {
     from {
         -webkit-transform: scale(1, 1);
-                transform: scale(1, 1);
+        transform: scale(1, 1);
     }
     30% {
         -webkit-transform: scale(1.25, 0.75);
-                transform: scale(1.25, 0.75);
+        transform: scale(1.25, 0.75);
     }
     40% {
         -webkit-transform: scale(0.75, 1.25);
-                transform: scale(0.75, 1.25);
+        transform: scale(0.75, 1.25);
     }
     50% {
         -webkit-transform: scale(1.15, 0.85);
-                transform: scale(1.15, 0.85);
+        transform: scale(1.15, 0.85);
     }
     65% {
         -webkit-transform: scale(0.95, 1.05);
-                transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
     }
     75% {
         -webkit-transform: scale(1.05, 0.95);
-                transform: scale(1.05, 0.95);
+        transform: scale(1.05, 0.95);
     }
     to {
         -webkit-transform: scale(1, 1);
-                transform: scale(1, 1);
+        transform: scale(1, 1);
     }
 }
 
 @keyframes jelly {
     from {
         -webkit-transform: scale(1, 1);
-                transform: scale(1, 1);
+        transform: scale(1, 1);
     }
     30% {
         -webkit-transform: scale(1.25, 0.75);
-                transform: scale(1.25, 0.75);
+        transform: scale(1.25, 0.75);
     }
     40% {
         -webkit-transform: scale(0.75, 1.25);
-                transform: scale(0.75, 1.25);
+        transform: scale(0.75, 1.25);
     }
     50% {
         -webkit-transform: scale(1.15, 0.85);
-                transform: scale(1.15, 0.85);
+        transform: scale(1.15, 0.85);
     }
     65% {
         -webkit-transform: scale(0.95, 1.05);
-                transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
     }
     75% {
         -webkit-transform: scale(1.05, 0.95);
-                transform: scale(1.05, 0.95);
+        transform: scale(1.05, 0.95);
     }
     to {
         -webkit-transform: scale(1, 1);
-                transform: scale(1, 1);
+        transform: scale(1, 1);
     }
 }
