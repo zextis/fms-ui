@@ -6,8 +6,8 @@ Secondary color: #9345f0
 Dark text: #333333
 Light text: #eeeeee
 White text: #ffffff 
-Danger Ligh: #ff833a
-Danger Reg: #e65100
+Danger Ligh:#ec7919
+Danger Reg: #f09244
 */
 
 *,
@@ -39,9 +39,13 @@ body {
 }
 
 .row {
-    max-width: 92vw;
     height: auto;
     margin: 0 auto;
+    width: 100%;
+}
+
+.row.not-full {
+    width: 95%;
 }
 
 .light-text {
@@ -59,8 +63,21 @@ body {
     background-color: #ccc;
 }
 
+#bg-blue {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#a56ceb), to(#330867));
+}
+
+/* td[value="approved"]{
+    background-color: #30cfd069;
+    color: #fff;
+} */
+
+.good {
+    background-color: #30cfd069;
+    color: #fff;
+}
+
 .matbox {
-    padding: 3rem 2rem;
     -webkit-box-shadow: 0px 15px 22px -13px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 15px 22px -13px rgba(0, 0, 0, 0.4);
 }
@@ -77,13 +94,6 @@ body {
     visibility: hidden;
 }
 
-.form {
-    width: 100%;
-    background-color: #eee;
-    color: #333;
-    border-radius: .5rem;
-}
-
 /* Button Styles */
 
 .btn,
@@ -92,8 +102,8 @@ body {
     background-color: #330867;
     color: #eee;
     -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    padding: 1.5rem 4rem;
+    transition: all 0.2s ease-in-out;
+    padding: 1rem 3rem;
     border-radius: 100px;
     text-decoration: none;
     border: 1px transparent;
@@ -102,23 +112,62 @@ body {
 
 .btn:hover,
 .btn:active {
+    color: #ffffff;
     background-color: #9345f0;
 }
 
 .danger,
 .danger:link,
 .danger:visited,
-li>.logout:hover,
-li>.logout:active {
-    background-color: #e65100;
+li>.logout:link,
+li>.logout:visited {
+    background-color: #f09244;
+    border: 1px solid transparent;
 }
 
 .danger:hover,
-.danger:active {
-    background-color: #ff833a;
+.danger:active,
+li>.logout:hover,
+li>.logout:active {
+    background-color: #e63d00;
+    border: 1px solid transparent;
+}
+
+#reqList button,
+#reqList input[type=radio] {
+    margin: 1rem 0px 3rem 1rem;
+}
+
+#reqList input[type=radio] {
+    margin-right: .5rem;
+}
+
+.btn-small {
+    font-size: 90%;
+    padding: .6rem 1.8rem;
+    border-radius: 15px;
+}
+
+/* Icon Styles */
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    font-size: 160%;
+    margin-right: 10px;
+    /* Line up icons and text */
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -4px;
 }
 
 /* -------------------------- HEADER -------------------------- */
+
+.header {
+    margin: 0;
+    padding: 0;
+}
 
 .header__text-box {
     display: block;
@@ -128,12 +177,12 @@ li>.logout:active {
 .header__heading {
     font-size: 6rem;
     font-weight: 300;
-    margin: 60px 0px;
+    padding: 2rem 0px;
 }
 
 .content__heading--secondary,
 .form__title {
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
     font-size: 3rem;
     font-weight: 700;
 }
@@ -141,28 +190,53 @@ li>.logout:active {
 /* -------------------------- SIDE NAV -------------------------- */
 
 .side-nav {
+    background-color: #330867;
+    height: 100vh;
+    width: 15%;
+    margin: 0px;
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+}
+
+.sidenav__heading {
     text-align: center;
-    background-color: #eee;
-    border-radius: .5rem;
+    padding: 2.62rem 0px;
+    font-weight: 400;
+    letter-spacing: .5rem;
+    text-transform: uppercase;
+    font-size: 120%;
+    color: #ffffff;
+    margin: 0;
+}
+
+.sidenav__group--head {
+    font-size: 110%;
+    color: #d6b5ff;
+    padding: 1rem 2rem;
+    /* border-bottom:  solid #eeeeee; */
 }
 
 .sidenav__content {
-    margin-top: 1rem;
+    padding-top: 1rem;
+    /* padding-left: 3rem; */
 }
 
 .nav>ul {
-    list-style-type: none;
+    list-style-type: disc;
 }
 
 .nav>ul>li {
-    color: #333333;
+    color: #eee;
 }
 
 .navlink:link,
 .navlink:visited {
     text-decoration: none;
     display: block;
-    padding: 1rem 0px;
+    padding: 1rem 4rem;
     -webkit-transition: all .1s ease-in-out;
     transition: all .1s ease-in-out;
     color: inherit;
@@ -172,28 +246,77 @@ li>.logout:active {
 .navlink:hover,
 .navlink:active {
     background-color: #9345f0;
-    color: #ffffff;
 }
 
-.sidenav__heading {
-    padding: 1rem;
-    font-weight: 400;
-    letter-spacing: .2rem;
-    text-transform: uppercase;
-    font-size: 110%;
-    margin-bottom: 2rem;
+/* -------------------------- MAIN CONTENT -------------------------- */
+
+.main-content {
+    margin: 0px 0px 0px 15%;
+    width: 85%;
+    padding: 0px;
+}
+
+.main-content .header {
+    height: 100%;
+    background-color: #eee;
+}
+
+.main-content .sidenav__heading {
     color: #330867;
+}
+
+/* Style tab links */
+
+.tab {
+    margin: 0;
+    width: 50%;
+}
+
+.tablink {
+    background-color: #eee;
+    border: 2px solid transparent;
+    transition: all .2s ease-in-out;
+    outline: none;
+    cursor: pointer;
+    padding: 1rem 4rem;
+    width: 100%;
+}
+
+.tablink:hover {
+    background-color: #ddd;
+}
+
+.tablink.active,
+.tablink:active {
+    background-color: #ffffff;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+
+.tabcontent {
+    /* color: white; */
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
 }
 
 /* -------------------------- TABLE -------------------------- */
 
+/* .reqtable{
+ height: 40px;
+    overflow: auto;   
+} */
+
+#reqList {
+    text-align: center;
+}
+
 .reqtable {
     width: 100%;
-    background-color: #ffffff;
+    background-color: #eee;
     padding: 1.5rem;
     border-radius: .5rem;
     border-spacing: 0px;
-    text-align: center;
 }
 
 .reqtable th {
@@ -216,15 +339,20 @@ li>.logout:active {
     transition: all 0.1s ease-out;
 }
 
-.reqtable tr:hover {
+.reqtable tr:hover,
+.reqtable tr a:hover {
     background-color: #9345f0;
     color: #ffffff;
 }
 
 /* -------------------------- FORMS (sepcific) -------------------------- */
 
-.sign-form {
-    width: 90%;
+.form {
+    width: 100%;
+    background-color: #ddd;
+    color: #333;
+    border-radius: .5rem;
+    padding: 2rem;
 }
 
 textarea {
@@ -243,7 +371,7 @@ input[type=time]:focus,
 input[type=password]:focus,
 textarea:focus {
     outline: none !important;
-    border: 1px solid #330867;
+    border: 1px solid #9345f0;
 }
 
 input[type=text],
@@ -257,16 +385,21 @@ textarea {
     width: 100%;
     padding: 1.2rem;
     border-radius: 3px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     margin-bottom: 1.2rem;
     -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
-input[type=submit] {
+input[type=submit],
+input[type=reset] {
     margin-top: 2rem;
     margin-left: 1rem;
     float: right;
+}
+
+input[type=reset] {
+    transform: translate(0%, 20%);
 }
 
 input[type=number] {

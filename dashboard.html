@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fleet Management System | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
+    <link rel="stylesheet" href="./vendors/css/normalize.css">
+    <link rel="stylesheet" href="./vendors/css/grid.css">
+    <link rel="stylesheet" href="./vendors/css/animate.css">
+    <link rel="stylesheet" href="./resources/css/main.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col span-2-of-12 side-nav clearfix matbox">
+            <h2 class="sidenav__heading">FLEET</h2>
+            <div class="sidenav__content">
+                <nav class="nav">
+                    <ul>
+                        <h3 class="sidenav__group--head">Requests: </i>
+                        </h3>
+                        <li>
+                            <a href="#" class="navlink active">Request Management</a>
+                        </li>
+                        <li>
+                            <a href="#" class="navlink">Request History</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Vehicles:</i>
+                        </h3>
+                        <li>
+                            <a href="#" class="navlink">Vehicle Management</a>
+                        </li>
+                        <li>
+                            <a href="#" class="navlink">Maintenance History</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Drivers:</h3>
+                        <li>
+                            <a href="#" class="navlink">Driver Management</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Users: </h3>
+                        <li>
+                            <a href="#" class="navlink">User Management</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Journeys:</h3>
+                        <li>
+                            <a href="#" class="navlink">Journey Logs</a>
+                        </li>
+                        <li>
+                            <a href="#" class="navlink logout">Logout
+                                <i class="ion-android-exit icon-small"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col span-10-of-12 main-content">
+            <header class="header">
+                <div class="header__text-box">
+                    <!-- <h1 class="sidenav__heading">
+                        Fleet Management System
+                    </h1> -->
+                    <h2 class="header__heading">
+                        Request Manager
+                    </h2>
+                </div>
+            </header>
+            <div class="row tabs">
+                <div class="col span-1-of-3 tab">
+                    <button class="tablink" onclick="openPage('view', this, 'white')" id="defaultOpen">
+                        View Requests
+                        <i class="ion-ios-eye-outline icon-small"></i>
+                    </button>
+                </div>
+                <div class="col span-1-of-3 tab">
+                    <button class="tablink" onclick="openPage('addreq', this, 'white')">
+                        New Request
+                        <i class="ion-ios-plus-outline icon-small"></i>
+                    </button>
+                </div>
+                <!-- <div class="col span-1-of-3 tab">
+                    <button class="tablink" onclick="openPage('edit', this, 'white')">
+                        Edit Requests
+                        <i class="ion-ios-compose-outline icon-small"></i>
+                    </button>
+                </div> -->
+
+                <div id="view" class="tabcontent">
+
+                    <div id="reqList">
+                        <input type="text" class="search" placeholder="Type here to start searching..." />
+                        <button class="btn btn-small danger" onclick="resetReqList();">
+                            clear search
+                        </button>
+                        <button class="btn btn-small sort" data-sort="reqdate">
+                            sort by required date
+                        </button>
+                        <!-- <label for="status-all">
+                            <input type="radio" name="status" id="status-all" class="filter" checked> All
+                        </label>
+                        <label for="status-approved">
+                            <input type="radio" name="status" id="status-approved" class="filter"> Approved
+                        </label>
+                        <label for="status-pending">
+                            <input type="radio" name="status" id="status-pending" class="filter">Pending
+                        </label>
+                        <label for="status-disapproved">
+                            <input type="radio" name="status" id="status-disapproved" class="filter">Disapproved
+                        </label> -->
+
+                        <table class="reqtable matbox" border="0">
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Requested By</th>
+                                <th>Facility</th>
+                                <th>Department</th>
+                                <th>No. of Persons</th>
+                                <th>Required Date</th>
+                                <th>Departure Time</th>
+                                <th>Destination</th>
+                                <th>Contact No.</th>
+                                <th>Driver</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                            <tbody class="list">
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="id">0000001</td>
+                                    <td class="user">john Frescoe</td>
+                                    <td class="fac">May Pen</td>
+                                    <td class="dep">SRC</td>
+                                    <td class="nop">23</td>
+                                    <td class="reqdate">02/11/2018</td>
+                                    <td class="deptime">5:00PM</td>
+                                    <td class="dest">Uganda</td>
+                                    <td class="contno">4625789</td>
+                                    <td class="driver">De Qween</td>
+                                    <td class="stat" value="approved">approved</td>
+                                    <td class="edit">
+                                        <a href="" class="edit">
+                                            <i class="ion-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div id="addreq" class="tabcontent">
+                    <form action="" method="get" class="form sign-form matbox clearfix">
+                        <!-- <h2 class="form__title">New Request</h2> -->
+                        <div class="row">
+                            <div class="col span-1-of-2">
+                                <label for="department">Department</label>
+                                <input type="text" name="department" id="department" placeholder="Department" autofocus required>
+
+                                <label for="num_pers">Number of Persons
+                                    <span>(maximum: 30)</span>
+                                </label>
+                                <input type="number" value="1" name="num_pers" id="num_pers" min="1" max="30" required>
+
+                                <label for="purpose">Purpose</label>
+                                <textarea name="purpose" id="purpose" cols="20" rows="2" placeholder="State the reason for your trip." required></textarea>
+
+                                <label for="destination">Destination</label>
+                                <input type="text" name="destination" id="destination" placeholder="Destination" required>
+
+                                <label for="phone">Contact No.</label>
+                                <input type="text" name="phone" id="phone" placeholder="Phone number" required>
+
+                            </div>
+                            <div class="col span-1-of-2">
+                                <label for="reqdate">Required Date
+                                    <span>(mm/dd/yy)</span>
+                                </label>
+                                <input type="date" name="reqdate" id="reqdate" required>
+
+                                <label for="dep_time">Departure Time</label>
+                                <input type="time" name="dep_time" id="dep_time" required>
+
+                                <label for="pickup">Pickup Point</label>
+                                <input type="text" name="pickup" id="pickup" placeholder="Pickup location" required>
+
+                                <label for="other_info">Other Info
+                                    <span>(optional)</span>
+                                </label>
+                                <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?"></textarea>
+                            </div>
+                        </div>
+                        <input type="reset" value="clear fields" class="btn btn-small danger">
+                        <input type="submit" value="Send Request" class="btn">
+
+                    </form>
+                </div>
+
+                <div id="edit" class="tabcontent">
+                    <h3>Edit</h3>
+                    <p>Get in touch, or swing by for a cup of coffee.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script src="./resources/js/main.js"></script>
+</body>
+
+</html>
