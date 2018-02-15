@@ -1,16 +1,13 @@
-/* 
----------------------------------------------------------------------
-General Rules -------------------------------------------------------
----------------------------------------------------------------------
+/* -------------------------- GENERAL RULES -------------------------- 
+
 Colours: 
 Primary color: #330867
 Secondary color: #9345f0
 Dark text: #333333
 Light text: #eeeeee
 White text: #ffffff 
-Danger Reg: #ec7919
-Danger Dark:#e63d00
-
+Danger Ligh:#ec7919
+Danger Reg: #f09244
 */
 
 *,
@@ -60,11 +57,25 @@ body {
     background-image: linear-gradient(to top, #30cfd069 0%, #33086769 100%), url('/resources/css/img/street.jpg');
 }
 
-/*
----------------------------------------------------------------------
-Components ----------------------------------------------------------
---------------------------------------------------------------------- 
-*/
+/* -------------------------- COMPONENTS -------------------------- */
+
+.grey-bg {
+    background-color: #ccc;
+}
+
+#bg-blue {
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#a56ceb), to(#330867));
+}
+
+/* td[value="approved"]{
+    background-color: #30cfd069;
+    color: #fff;
+} */
+
+.good {
+    background-color: #30cfd0;
+    color: #fff;
+}
 
 .matbox {
     -webkit-box-shadow: 0px 15px 22px -13px rgba(0, 0, 0, 0.4);
@@ -90,7 +101,7 @@ Components ----------------------------------------------------------
 .btn:visited {
     background-color: #330867;
     color: #eee;
-    -webkit-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.2s ease-in-out;
     padding: 1rem 3rem;
     border-radius: 100px;
@@ -110,7 +121,7 @@ Components ----------------------------------------------------------
 .danger:visited,
 li>.logout:link,
 li>.logout:visited {
-    background-color: #ec7919;
+    background-color: #f09244;
     border: 1px solid transparent;
 }
 
@@ -124,18 +135,26 @@ li>.logout:active {
 
 .reqtable .edit>a,
 .reqtable .edit>a:link,
-.reqtable .edit>a:visited {
+.reqtable .edit>a:visited{
     background-color: transparent;
     color: #330867;
     border-radius: 4px;
-    -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
+
 .reqtable .edit>a:hover,
-.reqtable .edit>a:active {
+.reqtable .edit>a:active{
     background-color: #30cfd0;
     color: #ffffff;
+}
+
+#reqList input[type=radio] {
+    margin: 1rem 0px 3rem 1rem;
+}
+
+#reqList input[type=radio] {
+    margin-right: .5rem;
 }
 
 .btn-small,
@@ -159,11 +178,7 @@ li>.logout:active {
     margin-top: -4px;
 }
 
-/*
----------------------------------------------------------------------
-Header --------------------------------------------------------------
---------------------------------------------------------------------- 
-*/
+/* -------------------------- HEADER -------------------------- */
 
 .header {
     margin: 0;
@@ -181,17 +196,14 @@ Header --------------------------------------------------------------
     padding: 2rem 0px;
 }
 
-.content__heading--secondary {
+.content__heading--secondary,
+.form__title {
     padding-bottom: 1rem;
     font-size: 3rem;
     font-weight: 700;
 }
 
-/*
----------------------------------------------------------------------
-Side Nav ------------------------------------------------------------
---------------------------------------------------------------------- 
-*/
+/* -------------------------- SIDE NAV -------------------------- */
 
 .side-nav {
     background-color: #330867;
@@ -241,8 +253,8 @@ Side Nav ------------------------------------------------------------
     text-decoration: none;
     display: block;
     padding: 1rem 4rem;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
     color: inherit;
 }
 
@@ -252,11 +264,7 @@ Side Nav ------------------------------------------------------------
     background-color: #9345f0;
 }
 
-/*
----------------------------------------------------------------------
-Main Content --------------------------------------------------------
---------------------------------------------------------------------- 
-*/
+/* -------------------------- MAIN CONTENT -------------------------- */
 
 .main-content {
     margin: 0px 0px 0px 15%;
@@ -269,6 +277,10 @@ Main Content --------------------------------------------------------
     background-color: #eee;
 }
 
+.main-content .sidenav__heading {
+    color: #330867;
+}
+
 /* Style tab links */
 
 .tab {
@@ -279,7 +291,6 @@ Main Content --------------------------------------------------------
 .tablink {
     background-color: #eee;
     border: 2px solid transparent;
-    -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     outline: none;
     cursor: pointer;
@@ -291,6 +302,7 @@ Main Content --------------------------------------------------------
     background-color: #ddd;
 }
 
+.tablink.active,
 .tablink:active {
     background-color: #ffffff;
 }
@@ -298,46 +310,42 @@ Main Content --------------------------------------------------------
 /* Style the tab content (and add height:100% for full page content) */
 
 .tabcontent {
+    /* color: white; */
     display: none;
     padding: 100px 20px;
     height: 100%;
 }
 
-/*
----------------------------------------------------------------------
-Table Specific ------------------------------------------------------
---------------------------------------------------------------------- 
-*/
+/* -------------------------- TABLE -------------------------- */
 
-#reqList input[type=radio] {
-    margin: 1rem 0px 3rem 1rem;
-}
+/* .reqtable{
+ height: 40px;
+    overflow: auto;   
+} */
 
-#reqList input[type=radio] {
-    margin-right: .5rem;
-}
-
+/* #reqList {
+    text-align: center;
+} */
 .no-result {
-    display: none;
-    background-color: #e63d00;
+    display:none;
+    background-color: #ec7919;
     text-align: center;
     color: #ffffff;
-    -webkit-animation-duration: 3s;
-            animation-duration: 3s;
-    -webkit-animation-delay: 1s;
-            animation-delay: 1s;
-    -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
     -vendor-animation-duration: 3s;
     -vendor-animation-delay: 1s;
     -vendor-animation-iteration-count: infinite;
 }
 
-.tablewrapper {
+.tablewrapper{
     height: 50rem;
     overflow: auto;
     overflow-x: hidden;
     background-color: #eee;
+    /* padding: 1.5rem;
+    border-radius: .5rem; */
 }
 
 .reqtable {
@@ -348,12 +356,18 @@ Table Specific ------------------------------------------------------
     text-align: center;
 }
 
+/* .fixedtable{
+    table-layout: fixed;
+} */
+
 .reqtable th {
     color: #ffffff;
     background-color: #330867;
     border-width: 0px;
     padding: 1rem .5rem;
     margin: 0;
+    /* text-align: left; */
+
 }
 
 .reqtable tr {
@@ -373,13 +387,7 @@ Table Specific ------------------------------------------------------
     color: #ffffff;
 }
 
-
-/*
----------------------------------------------------------------------
-Form Specific -------------------------------------------------------
---------------------------------------------------------------------- 
-*/
-
+/* -------------------------- FORMS (sepcific) -------------------------- */
 
 .form {
     width: 100%;
@@ -391,6 +399,11 @@ Form Specific -------------------------------------------------------
 
 textarea {
     resize: none;
+}
+
+.main-form,
+.grey-bg {
+    margin-top: 4rem;
 }
 
 input[type=email]:focus,
@@ -409,6 +422,7 @@ input[type=password],
 input[type=number],
 input[type=time],
 input[type=date],
+select,
 textarea {
     width: 100%;
     padding: 1.2rem;
@@ -427,16 +441,122 @@ input[type=reset] {
 }
 
 input[type=reset] {
-    -webkit-transform: translate(0%, 20%);
-            transform: translate(0%, 20%);
+    transform: translate(0%, 20%);
 }
 
 input[type=number] {
     -moz-appearance: textfield;
-    -webkit-appearance: textfield;
 }
 
 label span {
     font-size: 90%;
     color: #777;
+}
+
+/* Radio Button */
+
+.cbx {
+    position: relative;
+    top: 1px;
+    width: 17px;
+    height: 17px;
+    border: 1px transparent;
+    border-radius: 3px;
+    vertical-align: middle;
+    -webkit-transition: background 0.1s ease;
+    transition: background 0.1s ease;
+    cursor: pointer;
+}
+
+.cbx:after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 5px;
+    width: 5px;
+    height: 11px;
+    opacity: 0;
+    -webkit-transform: rotate(45deg) scale(0);
+    transform: rotate(45deg) scale(0);
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+}
+
+.cbx:checked {
+    border-color: transparent;
+    background: #330867;
+    -webkit-animation: jelly 0.6s ease;
+    animation: jelly 0.6s ease;
+}
+
+.cbx:checked~.cbx:after {
+    opacity: 1;
+    -webkit-transform: rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
+}
+
+@-webkit-keyframes jelly {
+    from {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+    30% {
+        -webkit-transform: scale(1.25, 0.75);
+        transform: scale(1.25, 0.75);
+    }
+    40% {
+        -webkit-transform: scale(0.75, 1.25);
+        transform: scale(0.75, 1.25);
+    }
+    50% {
+        -webkit-transform: scale(1.15, 0.85);
+        transform: scale(1.15, 0.85);
+    }
+    65% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+    75% {
+        -webkit-transform: scale(1.05, 0.95);
+        transform: scale(1.05, 0.95);
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes jelly {
+    from {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+    30% {
+        -webkit-transform: scale(1.25, 0.75);
+        transform: scale(1.25, 0.75);
+    }
+    40% {
+        -webkit-transform: scale(0.75, 1.25);
+        transform: scale(0.75, 1.25);
+    }
+    50% {
+        -webkit-transform: scale(1.15, 0.85);
+        transform: scale(1.15, 0.85);
+    }
+    65% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+    75% {
+        -webkit-transform: scale(1.05, 0.95);
+        transform: scale(1.05, 0.95);
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
 }
