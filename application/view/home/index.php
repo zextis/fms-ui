@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fleet Management System | Home</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
-    <link rel="stylesheet" href="./vendors/css/normalize.css">
-    <link rel="stylesheet" href="./vendors/css/grid.css">
-    <link rel="stylesheet" href="./vendors/css/animate.css">
-    <link rel="stylesheet" href="./resources/css/main.css">
-</head>
-
 <body id="main">
+<div class="container">
     <header class="header">
         <div class="header__text-box">
             <h1 class="header__heading animated fadeInDown light-text">
@@ -24,6 +9,7 @@
     </header>
 
     <section class="content">
+
         <div class="row not-full">
             <div class="col span-3-of-4 table">
                 <table class="reqtable matbox" border="0">
@@ -165,19 +151,21 @@
 
             <div class="col span-1-of-4 signIn">
                 <h2 class="content__heading--secondary light-text">Sign In</h2>
-                <form action="" method="get" class="form sign-form matbox clearfix">
+
+                <form action="<?php echo URL; ?>login/login" method="post" class="form sign-form matbox clearfix">
+
+                    <!-- echo out the system feedback (error and success messages) -->
+                    <?php $this->renderFeedbackMessages(); ?>
+
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="yourlogin@example.com" required autofocus>
+                    <input type="email" name="email" id="email" placeholder="yourlogin@example.com">
 
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="*********" required>
+                    <input type="password" name="password" id="password" placeholder="*********">
 
                     <input type="submit" value="Sign In" class="btn animated infinite pulse">
                 </form>
             </div>
         </div>
-    </section>
-
-</body>
-
-</html>
+    </section>  
+</div>

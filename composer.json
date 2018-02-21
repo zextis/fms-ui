@@ -1,0 +1,21 @@
+{
+    "name": "srha/mini3",
+    "description": "SRHA Fleet Management System application",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SHRA MIS",
+            "email": ""
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Mini\\" : "application/"
+        }
+    }
+}

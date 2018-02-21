@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fleet Management System | Dashboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
-    <link rel="stylesheet" href="./vendors/css/normalize.css">
-    <link rel="stylesheet" href="./vendors/css/grid.css">
-    <link rel="stylesheet" href="./vendors/css/animate.css">
-    <link rel="stylesheet" href="./resources/css/main.css">
-</head>
-
 <body>
-    <div class="row">
+<div class="row">
+        <!-- echo out the system feedback (error and success messages) -->
+        <?php $this->renderFeedbackMessages(); ?>
+
         <div class="col span-2-of-12 side-nav clearfix matbox">
             <h2 class="sidenav__heading">FLEET</h2>
             <div class="sidenav__content">
@@ -50,7 +37,7 @@
                             <a href="#" class="navlink">Journey Logs</a>
                         </li>
                         <li>
-                            <a href="#" class="navlink logout">Logout
+                            <a href="<?= URL ?>login/logout" class="navlink logout">Logout
                                 <i class="ion-android-exit icon-small"></i>
                             </a>
                         </li>
@@ -375,27 +362,4 @@
             </div>
         </div>
     </div>
-
-    <!-- VENDOR JAVASCRIPT FILES -->
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-    </script>
-    <script>
-        window.jQuery || document.write('<script src="./vendors/js/jquery.min.js">\x3C/script>')
-    </script>
-    <!-- /JQuery -->
-
-    <!-- ListJs -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-    <script>
-        window.List || document.write('<script src="./vendors/js/list.min.js">\x3C/script>')
-    </script>
-    <!-- /ListJs -->
-
-    <!-- ORIGINAL JAVASCRIPT FILES -->
-    <script src="./resources/js/main.js"></script>
-    <script src="./resources/js/request_list.js"></script>
-</body>
-
-</html>
+</div>

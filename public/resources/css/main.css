@@ -56,8 +56,8 @@ body {
 }
 
 #main {
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#30cfd069), to(#33086769)), url('/resources/css/img/street.jpg');
-    background-image: linear-gradient(to top, #30cfd069 0%, #33086769 100%), url('/resources/css/img/street.jpg');
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#30cfd069), to(#33086769)), url('../css/img/street.jpg');
+    background-image: linear-gradient(to top, #30cfd069 0%, #33086769 100%), url('../css/img/street.jpg');
 }
 
 /*
