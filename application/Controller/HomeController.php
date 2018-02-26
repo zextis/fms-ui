@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         // load views
         if(Session::userIsLoggedIn()){ 
-            $this->View->render('admin/index');
+            $this->View->render('request/index');
         } else {
             $this->View->render('home/index'); 
         }

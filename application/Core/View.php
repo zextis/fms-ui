@@ -87,6 +87,16 @@ class View
     /**
      * renders the feedback messages into the view
      */
+    public function renderSidebar()
+    {
+        // echo out the feedback messages (errors and success messages etc.),
+        // they are in $_SESSION["feedback_positive"] and $_SESSION["feedback_negative"]
+        require APP . 'view/layouts/sidebar.php';
+    }
+
+    /**
+     * renders the feedback messages into the view
+     */
     public function renderFeedbackMessages()
     {
         // echo out the feedback messages (errors and success messages etc.),
