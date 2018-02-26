@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fleet Management System | Dashboard</title>
+    <title>FMS | Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="./vendors/css/normalize.css">
     <link rel="stylesheet" href="./vendors/css/grid.css">
     <link rel="stylesheet" href="./vendors/css/animate.css">
+    <link rel="stylesheet" href="./vendors/css/jquery.dynatable.css">
+    <link rel="stylesheet" href="./vendors/css/selectric.css">
     <link rel="stylesheet" href="./resources/css/main.css">
 </head>
 
-<body>
+<body class="grey-bg">
     <div class="row">
         <div class="col span-2-of-12 side-nav clearfix matbox">
             <h2 class="sidenav__heading">FLEET</h2>
@@ -35,7 +37,7 @@
                             <a href="#" class="navlink">Vehicle Management</a>
                         </li>
                         <li>
-                            <a href="#" class="navlink">Maintenance History</a>
+                            <a href="#" class="navlink">Maintenance</a>
                         </li>
                         <h3 class="sidenav__group--head">Drivers:</h3>
                         <li>
@@ -61,64 +63,42 @@
         <div class="col span-10-of-12 main-content">
             <header class="header">
                 <div class="header__text-box">
-                    <h2 class="header__heading">
+                    <h2 class="content__heading--secondary managetext animated fadeInLeft">
                         Request Manager
                     </h2>
                 </div>
             </header>
-            <div class="row tabs">
-                <div class="col span-1-of-2 tab">
-                    <button class="tablink" onclick="openPage('view', this, 'white')" id="defaultOpen">
-                        View Requests
-                        <i class="ion-ios-eye-outline icon-small"></i>
-                    </button>
-                </div>
-                <div class="col span-1-of-2 tab">
-                    <button class="tablink" onclick="openPage('addreq', this, 'white')">
-                        New Request
-                        <i class="ion-ios-plus-outline icon-small"></i>
-                    </button>
-                </div>
-                <div id="view" class="tabcontent">
-
-                    <div id="reqList">
-                        <input type="text" class="search" placeholder="Type here to start searching...">
-                        <button class="btn btn-small danger" onclick="resetReqList();">
-                            reset
-                        </button>
-                        <button class="btn btn-small sort" data-sort="reqdate">
-                            sort required date
-                        </button>
-                        <label for="status-all">
-                            <input type="radio" name="status" id="status-all" class="filter-all" value="all" checked> All
-                        </label>
-                        <label for="status-approved">
-                            <input type="radio" name="status" id="status-approved" class="filter" value="approved"> Approved
-                        </label>
-                        <label for="status-pending">
-                            <input type="radio" name="status" id="status-pending" class="filter" value="pending">Pending
-                        </label>
-                        <label for="status-disapproved">
-                            <input type="radio" name="status" id="status-disapproved" class="filter" value="disapproved">Disapproved
-                        </label>
-                        <!-- <table class="reqtable fixedtable">
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Requested By</th>
-                                <th>Facility</th>
-                                <th>Department</th>
-                                <th>No. of Persons</th>
-                                <th>Required Date</th>
-                                <th>Departure Time</th>
-                                <th>Destination</th>
-                                <th>Contact No.</th>
-                                <th>Driver</th>
-                                <th>Status</th>
-                                <th>Edit</th>
-                            </tr>
-                        </table> -->
+            <div class="row tab">
+                <ul class="tabs">
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-eye-outline icon-small"></i>
+                            View Requests</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-plus-outline icon-small"></i>
+                            New Request</a>
+                    </li>
+                </ul>
+                <div class="tab_content">
+                    <div id="view" class="tabs_item">
+                        <p class="hint">
+                            <strong>Hint:</strong> Click on column titles to sort. You can also hold
+                            <kbd>Shift</kbd> or
+                            <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
                         <div class="tablewrapper">
-                            <div class="no-result animated infinite flash">No Results</div>
+                            <span class="in_form">
+                                <label for="search-status">Status: </label>
+                                <select id="search-status" name="status">
+                                    <option value="" disabled selected>Select status</option>
+                                    <option value="">all</option>
+                                    <option>pending</option>
+                                    <option>approved</option>
+                                    <option>disapproved</option>
+                                </select>
+                            </span>
+
                             <table class="reqtable" border="0">
                                 <thead>
                                     <tr>
@@ -137,184 +117,192 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="list">
+                                <tbody>
                                     <tr>
                                         <td class="id">0000001</td>
-                                        <td class="user">john Frescoe</td>
+                                        <td class="user">John Frescoe</td>
                                         <td class="fac">May Pen</td>
                                         <td class="dep">SRC</td>
                                         <td class="nop">23</td>
-                                        <td class="reqdate">02/11/2018</td>
+                                        <td class="reqdate">02/26/2018</td>
                                         <td class="deptime">5:00PM</td>
                                         <td class="dest">Uganda</td>
                                         <td class="contno">4625789</td>
                                         <td class="driver">De Qween</td>
                                         <td class="status" value="approved">approved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
+                                        <td>
+                                            <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="id">0000002</td>
-                                        <td class="user">Frescoe Merlot</td>
-                                        <td class="fac">MHD</td>
-                                        <td class="dep">MIS</td>
-                                        <td class="nop">8</td>
-                                        <td class="reqdate">02/19/2018</td>
-                                        <td class="deptime">2:00PM</td>
-                                        <td class="dest">Willowgate</td>
-                                        <td class="contno">4625789</td>
-                                        <td class="driver">Samothy Jones</td>
-                                        <td class="status" value="pending">pending</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
+                                        <td class="deptime">4:00PM</td>
+                                        <td class="dest">The Succ
+                                        </td>
+                                        <td class="contno">454389</td>
+                                        <td class="driver">Slurpy</td>
+                                        <td class="status" value="approved">disapproved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="id">0000003</td>
-                                        <td class="user">Marc Jacobs</td>
-                                        <td class="fac">Santa Cruz</td>
+                                        <td class="user">Rwan</td>
+                                        <td class="fac">Syonrie</td>
+                                        <td class="dep">MIS</td>
+                                        <td class="nop">4</td>
+                                        <td class="reqdate">03/21/2018</td>
+                                        <td class="deptime">5:00PM</td>
+                                        <td class="dest">THESUCC
+                                        </td>
+                                        <td class="contno">4625789</td>
+                                        <td class="driver">De Qween</td>
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
                                         <td class="dep">HR</td>
-                                        <td class="nop">13</td>
-                                        <td class="reqdate">02/23/2018</td>
-                                        <td class="deptime">12:00PM</td>
-                                        <td class="dest">Johns Reed</td>
-                                        <td class="contno">4623489</td>
-                                        <td class="driver">Knuckles</td>
-                                        <td class="status" value="disapproved">disapproved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">0000004</td>
-                                        <td class="user">Jimothy Hubert</td>
-                                        <td class="fac">Play Pen</td>
-                                        <td class="dep">Accounts</td>
-                                        <td class="nop">6</td>
-                                        <td class="reqdate">03/12/2018</td>
-                                        <td class="deptime">9:00AM</td>
-                                        <td class="dest">Fridays</td>
-                                        <td class="contno">2334463</td>
-                                        <td class="driver">Shlerpy Derpy</td>
-                                        <td class="status" value="pending">pending</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">0000005</td>
-                                        <td class="user">Leroy Jenkins</td>
-                                        <td class="fac">Percy Junior</td>
-                                        <td class="dep">SRC</td>
-                                        <td class="nop">14</td>
-                                        <td class="reqdate">02/15/2018</td>
-                                        <td class="deptime">3:00PM</td>
-                                        <td class="dest">Linstead Hospital</td>
-                                        <td class="contno">5682189</td>
-                                        <td class="driver">Howie</td>
-                                        <td class="status">pending</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">0000006</td>
-                                        <td class="user">Francis Numan</td>
-                                        <td class="fac">Southern Regional</td>
-                                        <td class="dep">Custodial</td>
-                                        <td class="nop">6</td>
-                                        <td class="reqdate">04/13/2018</td>
-                                        <td class="deptime">11:15PM</td>
-                                        <td class="dest">May Pen Health Centre</td>
-                                        <td class="contno">9895372</td>
-                                        <td class="driver">Trevor Jones</td>
-                                        <td class="status">approved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="id">0000001</td>
-                                        <td class="user">john Frescoe</td>
-                                        <td class="fac">May Pen</td>
-                                        <td class="dep">SRC</td>
-                                        <td class="nop">23</td>
-                                        <td class="reqdate">02/11/2018</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
                                         <td class="deptime">5:00PM</td>
-                                        <td class="dest">Uganda</td>
+                                        <td class="dest">THESUCC
+                                        </td>
                                         <td class="contno">4625789</td>
                                         <td class="driver">De Qween</td>
-                                        <td class="status">approved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
+                                        <td class="status" value="approved">pending</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="id">0000001</td>
-                                        <td class="user">john Frescoe</td>
-                                        <td class="fac">May Pen</td>
-                                        <td class="dep">SRC</td>
-                                        <td class="nop">23</td>
-                                        <td class="reqdate">02/11/2018</td>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
                                         <td class="deptime">5:00PM</td>
-                                        <td class="dest">Uganda</td>
+                                        <td class="dest">THESUCC
+                                        </td>
                                         <td class="contno">4625789</td>
                                         <td class="driver">De Qween</td>
-                                        <td class="status">approved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="id">0000001</td>
-                                        <td class="user">john Frescoe</td>
-                                        <td class="fac">May Pen</td>
-                                        <td class="dep">SRC</td>
-                                        <td class="nop">23</td>
-                                        <td class="reqdate">02/11/2018</td>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
                                         <td class="deptime">5:00PM</td>
-                                        <td class="dest">Uganda</td>
+                                        <td class="dest">THESUCC
+                                        </td>
                                         <td class="contno">4625789</td>
                                         <td class="driver">De Qween</td>
-                                        <td class="status">approved</td>
-                                        <td class="edit">
-                                            <a href="" class="edit">
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="id">0000001</td>
-                                        <td class="user">john Frescoe</td>
-                                        <td class="fac">May Pen</td>
-                                        <td class="dep">SRC</td>
-                                        <td class="nop">23</td>
-                                        <td class="reqdate">02/11/2018</td>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
                                         <td class="deptime">5:00PM</td>
-                                        <td class="dest">Uganda</td>
+                                        <td class="dest">THESUCC
+                                        </td>
                                         <td class="contno">4625789</td>
                                         <td class="driver">De Qween</td>
-                                        <td class="status">approved</td>
-                                        <td class="edit">
-                                            <!-- <button type="submit" class="ion-edit btn-small"></button> -->
-                                            <a href="" class="edit">
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
+                                        <td class="deptime">5:00PM</td>
+                                        <td class="dest">THESUCC
+                                        </td>
+                                        <td class="contno">4625789</td>
+                                        <td class="driver">De Qween</td>
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
+                                        <td class="deptime">5:00PM</td>
+                                        <td class="dest">THESUCC
+                                        </td>
+                                        <td class="contno">4625789</td>
+                                        <td class="driver">De Qween</td>
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="id">0000002</td>
+                                        <td class="user">Walk Foot</td>
+                                        <td class="fac">Walkanda</td>
+                                        <td class="dep">HR</td>
+                                        <td class="nop">25</td>
+                                        <td class="reqdate">02/18/2018</td>
+                                        <td class="deptime">5:00PM</td>
+                                        <td class="dest">THESUCC
+                                        </td>
+                                        <td class="contno">4625789</td>
+                                        <td class="driver">De Qween</td>
+                                        <td class="status" value="approved">approved</td>
+                                        <td class="opt">
+                                            <a href="" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
@@ -323,57 +311,76 @@
                             </table>
                         </div>
                     </div>
-                </div>
 
-                <div id="addreq" class="tabcontent">
-                    <form action="" method="get" class="form sign-form matbox clearfix">
-                        <!-- <h2 class="form__title">New Request</h2> -->
-                        <div class="row">
-                            <div class="col span-1-of-2">
+
+                    <div id="addreq" class="tabs_item">
+                        <form action="" method="get" class="form  clearfix newform">
+                            <span class="in_form">
                                 <label for="department">Department</label>
                                 <input type="text" name="department" id="department" placeholder="Department" required>
+                            </span>
 
-                                <label for="num_pers">Number of Persons
-                                    <span>(maximum: 30)</span>
-                                </label>
-                                <input type="number" value="1" name="num_pers" id="num_pers" min="1" max="30" required>
-
-                                <label for="purpose">Purpose</label>
-                                <textarea name="purpose" id="purpose" cols="20" rows="2" placeholder="State the reason for your trip." required></textarea>
-
+                            <span class="in_form">
                                 <label for="destination">Destination</label>
                                 <input type="text" name="destination" id="destination" placeholder="Destination" required>
+                            </span>
 
+                            <span class="in_form">
+                                <label for="num_pers">No. of Persons
+                                    <span>(max: 30)</span>
+                                </label>
+                                <input type="number" value="1" name="num_pers" id="num_pers" min="1" max="30" required>
+                            </span>
+
+
+                            <span class="in_form">
                                 <label for="phone">Contact No.</label>
                                 <input type="text" name="phone" id="phone" placeholder="Phone number" required>
+                            </span>
 
-                            </div>
-                            <div class="col span-1-of-2">
+                            <span class="in_form">
+                                <label for="pickup">Pickup Point</label>
+                                <input type="text" name="pickup" id="pickup" placeholder="Pickup location" required>
+                            </span>
+
+
+                            <span class="in_form">
                                 <label for="reqdate">Required Date
                                     <span>(mm/dd/yy)</span>
                                 </label>
                                 <input type="date" name="reqdate" id="reqdate" required>
+                            </span>
 
-                                <label for="dep_time">Departure Time</label>
-                                <input type="time" name="dep_time" id="dep_time" required>
+                            <span class="in_form">
+                                <label for="purpose">Purpose</label>
+                                <textarea name="purpose" id="purpose" cols="20" rows="3" placeholder="State the reason for your trip." required></textarea>
+                            </span>
 
-                                <label for="pickup">Pickup Point</label>
-                                <input type="text" name="pickup" id="pickup" placeholder="Pickup location" required>
-
+                            <span class="in_form">
                                 <label for="other_info">Other Info
                                     <span>(optional)</span>
                                 </label>
                                 <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?"></textarea>
-                            </div>
-                        </div>
-                        <input type="reset" value="clear fields" class="btn btn-small danger">
-                        <input type="submit" value="Send Request" class="btn">
+                            </span>
 
-                    </form>
+                            <span class="in_form">
+                                <label for="dep_time">Departure Time</label>
+                                <input type="time" name="dep_time" id="dep_time" required>
+                            </span>
+
+                            <span class="form__btn--group">
+                                <input type="reset" value="reset" class="btn btn-small btn-reset">
+                                <input type="submit" value="Send Request" class="btn">
+                            </span>
+
+                        </form>
+                    </div>
                 </div>
-
             </div>
         </div>
+
+    </div>
+    </div>
     </div>
 
     <!-- VENDOR JAVASCRIPT FILES -->
@@ -386,16 +393,13 @@
     </script>
     <!-- /JQuery -->
 
-    <!-- ListJs -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-    <script>
-        window.List || document.write('<script src="./vendors/js/list.min.js">\x3C/script>')
-    </script>
-    <!-- /ListJs -->
+    <script src="./vendors/js/jquery.dynatable.js"></script>
+    <script src="./vendors/js/jquery.selectric.min.js"></script>
 
     <!-- ORIGINAL JAVASCRIPT FILES -->
     <script src="./resources/js/main.js"></script>
-    <script src="./resources/js/request_list.js"></script>
+
+
 </body>
 
 </html>
