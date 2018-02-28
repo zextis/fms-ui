@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FMS | Dashboard</title>
+    <title>Driver | Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="./vendors/css/normalize.css">
@@ -26,7 +26,7 @@
                         <h3 class="sidenav__group--head">Requests: </i>
                         </h3>
                         <li>
-                            <a href="./dashboard.html" class="navlink active">Request Management</a>
+                            <a href="./dashboard.html" class="navlink">Request Management</a>
                         </li>
                         <li>
                             <a href="./reqhistory.html" class="navlink">Request History</a>
@@ -41,7 +41,7 @@
                         </li>
                         <h3 class="sidenav__group--head">Drivers:</h3>
                         <li>
-                            <a href="drivers.html" class="navlink ">Driver Management</a>
+                            <a href="drivers.html" class="navlink active">Driver Management</a>
                         </li>
                         <h3 class="sidenav__group--head">Users:</h3>
                         <li>
@@ -64,7 +64,7 @@
             <header class="header">
                 <div class="header__text-box">
                     <h2 class="content__heading--secondary managetext animated fadeInLeft">
-                        Request Manager
+                        Driver Manager
                     </h2>
                 </div>
             </header>
@@ -89,17 +89,17 @@
                             <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
                         <div class="tablewrapper">
                             <span class="in_form">
-                                <label for="search-status">Filter: </label>
-                                <select id="search-status" name="status">
-                                    <option value="" disabled selected>Status</option>
+                                <label for="search-department">Filter: </label>
+                                <select id="search-department" name="department">
+                                    <option value="" disabled selected>Department</option>
                                     <option value="">all</option>
-                                    <option>pending</option>
-                                    <option>approved</option>
-                                    <option>disapproved</option>
+                                    <option>HR</option>
+                                    <option>MIS</option>
+                                    <option>SRC</option>
                                 </select>
                             </span>
 
-                            <table class="ptable" id="requestTable" border="0">
+                            <table class="ptable" id="driverTable" border="0">
                                 <thead>
                                     <tr>
                                         <th>Request ID</th>
@@ -128,7 +128,7 @@
                                         <td>5:00PM</td>
                                         <td>Uganda</td>
                                         <td>4625789</td>
-                                        <td>Skorpion Kang</td>
+                                        <td>De Qween</td>
                                         <td>approved</td>
                                         <td>
                                             <a href="#" class="opt">
@@ -137,106 +137,16 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>0000002</td>
-                                        <td>Simone James</td>
-                                        <td>May Pen</td>
-                                        <td>SRC</td>
-                                        <td>23</td>
-                                        <td>07/16/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>Uganda</td>
-                                        <td>4357631</td>
-                                        <td>Martin Lutha</td>
-                                        <td>approved</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000003</td>
-                                        <td>Resu Nrop</td>
+                                        <td>0000001</td>
+                                        <td>John Frescoe</td>
                                         <td>May Pen</td>
                                         <td>MIS</td>
                                         <td>23</td>
-                                        <td>07/12/2018</td>
-                                        <td>2:00PM</td>
-                                        <td>Myanmar</td>
-                                        <td>5983231</td>
-                                        <td>De Crept</td>
-                                        <td>approved</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000004</td>
-                                        <td>John Frescoe</td>
-                                        <td>May Pen</td>
-                                        <td>HR</td>
-                                        <td>23</td>
-                                        <td>11/06/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>K'wele</td>
-                                        <td>8902234</td>
-                                        <td>Poor Man Joe</td>
-                                        <td>disapproved</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000005</td>
-                                        <td>Fatol Nehep</td>
-                                        <td>Mandeville</td>
-                                        <td>SRC</td>
-                                        <td>23</td>
-                                        <td>10/08/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>Uganda</td>
-                                        <td>9623589</td>
-                                        <td>Carter Carta</td>
-                                        <td>pending</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000006</td>
-                                        <td>Logan Small</td>
-                                        <td>May Pen</td>
-                                        <td>SRC</td>
-                                        <td>12</td>
                                         <td>02/26/2018</td>
                                         <td>5:00PM</td>
                                         <td>Uganda</td>
                                         <td>4625789</td>
-                                        <td>Shwale</td>
-                                        <td>disapproved</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000007</td>
-                                        <td>Fraudea Mornew</td>
-                                        <td>Santa Cryz</td>
-                                        <td>Accounts</td>
-                                        <td>18</td>
-                                        <td>03/21/2018</td>
-                                        <td>9:00AM</td>
-                                        <td>Zimbabwe</td>
-                                        <td>8638289</td>
-                                        <td>Shirley Ceasar</td>
+                                        <td>De Qween</td>
                                         <td>approved</td>
                                         <td>
                                             <a href="#" class="opt">
@@ -245,23 +155,24 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>0000008</td>
+                                        <td>0000001</td>
                                         <td>John Frescoe</td>
                                         <td>May Pen</td>
-                                        <td>SRC</td>
+                                        <td>HR</td>
                                         <td>23</td>
-                                        <td>09/02/2018</td>
+                                        <td>02/26/2018</td>
                                         <td>5:00PM</td>
                                         <td>Uganda</td>
                                         <td>4625789</td>
-                                        <td>Neeq Medeem</td>
-                                        <td>pending</td>
+                                        <td>De Qween</td>
+                                        <td>approved</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
+                                
                                 </tbody>
                             </table>
                         </div>

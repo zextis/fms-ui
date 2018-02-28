@@ -5,6 +5,7 @@ General Rules -------------------------------------------------------
 Colours: 
 Primary color: #252933
 Secondary color: #409DA6
+Light Sec: #93C8C6;
 Alt: #909187
 Dark text: #252933
 Light text: #eeeeee
@@ -120,7 +121,7 @@ a {
 }
 
 .btn-small,
-.reqtable .opt {
+.ptable .opt {
     font-size: small;
     padding: .6rem 1.8rem;
     border-radius: .4rem;
@@ -143,9 +144,9 @@ li>.logout:active {
     border: 1px solid transparent;
 }
 
-.reqtable .opt,
-.reqtable .opt:link,
-.reqtable .opt:visited {
+.ptable .opt,
+.ptable .opt:link,
+.ptable .opt:visited {
     background-color: transparent;
     color: #252933;
     -webkit-transition: all 0.2s ease-in-out;
@@ -153,8 +154,8 @@ li>.logout:active {
     padding: .6rem;
 }
 
-.reqtable .opt:hover,
-.reqtable .opt:active {
+.ptable .opt:hover,
+.ptable .opt:active {
     background-color: #93C8C6;
     color: #F3F5F4;
 }
@@ -404,12 +405,12 @@ tbody {
     font-size-adjust: 0.5;
 }
 
-.reqtable {
+.ptable {
     width: 100%;
     border-spacing: 0px;
 }
 
-.reqtable th {
+.ptable th {
     color: #F3F5F4;
     background-color: #252933;
     border-width: 0px;
@@ -418,20 +419,20 @@ tbody {
     font-size: 90%;
 }
 
-.reqtable tr {
+.ptable tr {
     background-color: #FFFFFF;
     -webkit-transition: all 0.1s ease-out;
     transition: all 0.1s ease-out;
 }
 
-.reqtable td {
+.ptable td {
     border-bottom: solid 1px #e7e7e7;
     border-right: solid 1px #e7e7e7;
     padding: 1rem .5rem;
 }
 
-.reqtable tr:hover,
-.reqtable tr td>a:hover {
+.ptable tr:hover,
+.ptable tr td>a:hover {
     background-color: #409DA6;
     color: #F3F5F4;
 }
@@ -530,7 +531,9 @@ label span {
     color: #888888;
     font-weight: 400;
 }
-
+.selectric{
+    width: 10rem;
+}
 .selectric-wrapper,
 .in_form {
     display: inline-block;
