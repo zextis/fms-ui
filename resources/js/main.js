@@ -30,7 +30,8 @@
 
 	//Dynatable Initializations
 	makeTable('#requestTable', "#search-status");
-	makeTable('#driverTable', "#search-department");
+	makeTable('#driverTable', "#search-status");
+	makeTable('#vehicleTable', "#search-availability");
 
 	//Selectric
 	$('select').selectric();

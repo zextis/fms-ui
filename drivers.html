@@ -23,7 +23,7 @@
             <div class="sidenav__content">
                 <nav class="nav">
                     <ul>
-                        <h3 class="sidenav__group--head">Requests: </i>
+                        <h3 class="sidenav__group--head">Requests: 
                         </h3>
                         <li>
                             <a href="./dashboard.html" class="navlink">Request Management</a>
@@ -31,7 +31,7 @@
                         <li>
                             <a href="./reqhistory.html" class="navlink">Request History</a>
                         </li>
-                        <h3 class="sidenav__group--head">Vehicles:</i>
+                        <h3 class="sidenav__group--head">Vehicles:
                         </h3>
                         <li>
                             <a href="vehicles.html" class="navlink">Vehicle Management</a>
@@ -89,29 +89,22 @@
                             <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
                         <div class="tablewrapper">
                             <span class="in_form">
-                                <label for="search-department">Filter: </label>
-                                <select id="search-department" name="department">
-                                    <option value="" disabled selected>Department</option>
+                                <label for="search-status">Filter: </label>
+                                <select id="search-status" name="status">
+                                    <option value="" disabled selected>Status</option>
                                     <option value="">all</option>
-                                    <option>HR</option>
-                                    <option>MIS</option>
-                                    <option>SRC</option>
+                                    <option>available</option>
+                                    <option>unavailable</option>
                                 </select>
                             </span>
 
                             <table class="ptable" id="driverTable" border="0">
                                 <thead>
                                     <tr>
-                                        <th>Request ID</th>
-                                        <th>Requested By</th>
+                                        <th>Employee No.</th>
+                                        <th>Driver Name</th>
                                         <th>Facility</th>
-                                        <th>Department</th>
-                                        <th>No. of Persons</th>
-                                        <th>Required Date</th>
-                                        <th>Departure Time</th>
-                                        <th>Destination</th>
                                         <th>Contact No.</th>
-                                        <th>Driver</th>
                                         <th>Status</th>
                                         <th>Edit</th>
                                     </tr>
@@ -122,14 +115,8 @@
                                         <td>0000001</td>
                                         <td>John Frescoe</td>
                                         <td>May Pen</td>
-                                        <td>SRC</td>
-                                        <td>23</td>
-                                        <td>02/26/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>Uganda</td>
                                         <td>4625789</td>
-                                        <td>De Qween</td>
-                                        <td>approved</td>
+                                        <td>available</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -137,17 +124,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>0000001</td>
-                                        <td>John Frescoe</td>
-                                        <td>May Pen</td>
-                                        <td>MIS</td>
-                                        <td>23</td>
-                                        <td>02/26/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>Uganda</td>
+                                        <td>0000002</td>
+                                        <td>Jeff Dunham</td>
+                                        <td>Black River</td>
                                         <td>4625789</td>
-                                        <td>De Qween</td>
-                                        <td>approved</td>
+                                        <td>unavailable</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -155,17 +136,95 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>0000001</td>
-                                        <td>John Frescoe</td>
-                                        <td>May Pen</td>
-                                        <td>HR</td>
-                                        <td>23</td>
-                                        <td>02/26/2018</td>
-                                        <td>5:00PM</td>
-                                        <td>Uganda</td>
+                                        <td>0000003</td>
+                                        <td>Walk Foot</td>
+                                        <td>Mandeville</td>
                                         <td>4625789</td>
-                                        <td>De Qween</td>
-                                        <td>approved</td>
+                                        <td>available</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000004</td>
+                                        <td>Steel Toe</td>
+                                        <td>Lionel Town</td>
+                                        <td>4625789</td>
+                                        <td>unavailable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000005</td>
+                                        <td>Jackie Strauss</td>
+                                        <td>Percy Junor</td>
+                                        <td>4625789</td>
+                                        <td>available</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000006</td>
+                                        <td>Edgar Allan Poe</td>
+                                        <td>SRHA</td>
+                                        <td>4625789</td>
+                                        <td>unavailable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000007</td>
+                                        <td>Deva Brat</td>
+                                        <td>MHD</td>
+                                        <td>4625789</td>
+                                        <td>available</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000008</td>
+                                        <td>Donald J Trump</td>
+                                        <td>CHD</td>
+                                        <td>4625789</td>
+                                        <td>unavailable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000009</td>
+                                        <td>Justin Trudeau</td>
+                                        <td>MPH</td>
+                                        <td>4625789</td>
+                                        <td>available</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000000</td>
+                                        <td>Ains Ool Gown</td>
+                                        <td>MRH</td>
+                                        <td>4625789</td>
+                                        <td>unavailable</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -182,56 +241,35 @@
                     <div id="addreq" class="tabs_item">
                         <form action="" method="get" class="form  clearfix newform">
                             <span class="in_form">
-                                <label for="department">Department</label>
-                                <input type="text" name="department" id="department" placeholder="Department" required>
+                                <label for="employee">Employee No.</label>
+                                <input type="tel" name="employee" id="employee" placeholder="0001111" maxlength="7" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="destination">Destination</label>
-                                <input type="text" name="destination" id="destination" placeholder="Destination" required>
+                                <label for="fname">First Name</label>
+                                <input type="text" name="fname" id="fname" placeholder="First Name" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="num_pers">No. of Persons
-                                    <span>(max: 30)</span>
-                                </label>
-                                <input type="number" value="1" name="num_pers" id="num_pers" min="1" max="30" required>
+                                <label for="lname">Last Name                          </label>
+                                <input type="text" name="lname" id="lname" placeholder="Last Name" required>
                             </span>
 
 
                             <span class="in_form">
                                 <label for="phone">Contact No.</label>
-                                <input type="text" name="phone" id="phone" placeholder="Phone number" required>
+                                <input type="tel" name="phone" id="phone" placeholder="Phone number" maxlength="11" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="pickup">Pickup Point</label>
-                                <input type="text" name="pickup" id="pickup" placeholder="Pickup location" required>
-                            </span>
-
-
-                            <span class="in_form">
-                                <label for="reqdate">Required Date
-                                    <span>(mm/dd/yy)</span>
-                                </label>
-                                <input type="date" name="reqdate" id="reqdate" required>
+                                <label for="facility">Facility</label>
+                               <input type="text" name="facility" id="facility" placeholder="SRHA" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="purpose">Purpose</label>
-                                <textarea name="purpose" id="purpose" cols="20" rows="3" placeholder="State the reason for your trip." required></textarea>
-                            </span>
-
-                            <span class="in_form">
-                                <label for="other_info">Other Info
-                                    <span>(optional)</span>
-                                </label>
-                                <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?"></textarea>
-                            </span>
-
-                            <span class="in_form">
-                                <label for="dep_time">Departure Time</label>
-                                <input type="time" name="dep_time" id="dep_time" required>
+                                <label for="status">Driver Status</label>
+                               <input type="radio" name="status" value="available" checked>&nbsp;&nbsp;Available &nbsp;
+                               <input type="radio" name="status" value="unavailable">&nbsp;&nbsp;Unavailable
                             </span>
 
                             <span class="form__btn--group">
@@ -245,8 +283,6 @@
             </div>
         </div>
 
-    </div>
-    </div>
     </div>
 
     <!-- VENDOR JAVASCRIPT FILES -->

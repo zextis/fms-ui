@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vehicle | Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
+    <link rel="stylesheet" href="./vendors/css/normalize.css">
+    <link rel="stylesheet" href="./vendors/css/grid.css">
+    <link rel="stylesheet" href="./vendors/css/animate.css">
+    <link rel="stylesheet" href="./vendors/css/jquery.dynatable.css">
+    <link rel="stylesheet" href="./vendors/css/selectric.css">
+    <link rel="stylesheet" href="./resources/css/main.css">
+</head>
+
+<body class="grey-bg">
+    <div class="row">
+        <div class="col span-2-of-12 side-nav clearfix matbox">
+            <h2 class="sidenav__heading">FLEET</h2>
+            <div class="sidenav__content">
+                <nav class="nav">
+                    <ul>
+                        <h3 class="sidenav__group--head">Requests: 
+                        </h3>
+                        <li>
+                            <a href="./dashboard.html" class="navlink">Request Management</a>
+                        </li>
+                        <li>
+                            <a href="./reqhistory.html" class="navlink">Request History</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Vehicles:
+                        </h3>
+                        <li>
+                            <a href="vehicles.html" class="navlink active">Vehicle Management</a>
+                        </li>
+                        <li>
+                            <a href="maintenance.html" class="navlink">Maintenance</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Drivers:</h3>
+                        <li>
+                            <a href="drivers.html" class="navlink">Driver Management</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Users:</h3>
+                        <li>
+                            <a href="users.html" class="navlink">User Management</a>
+                        </li>
+                        <h3 class="sidenav__group--head">Journeys:</h3>
+                        <li>
+                            <a href="journeys.html" class="navlink">Journey Logs</a>
+                        </li>
+                        <li>
+                            <a href="index.html" class="navlink logout">Logout
+                                <i class="ion-android-exit icon-small"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col span-10-of-12 main-content">
+            <header class="header">
+                <div class="header__text-box">
+                    <h2 class="content__heading--secondary managetext animated fadeInLeft">
+                        Vehicle Manager
+                    </h2>
+                </div>
+            </header>
+            <div class="row tab">
+                <ul class="tabs">
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-eye-outline icon-small"></i>
+                            View Vehicles</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="ion-ios-plus-outline icon-small"></i>
+                            New Vehicle</a>
+                    </li>
+                </ul>
+                <div class="tab_content">
+                    <div id="view" class="tabs_item">
+                        <p class="hint">
+                            <strong>Hint:</strong> Click on column titles to sort. You can also hold
+                            <kbd>Shift</kbd> or
+                            <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
+                        <div class="tablewrapper">
+                            <span class="in_form">
+                                <label for="search-availability">Filter: </label>
+                                <select id="search-availability" name="availability">
+                                    <option value="" disabled selected>Status</option>
+                                    <option value="">all</option>
+                                    <option>available</option>
+                                    <option>unavailable</option>
+                                </select>
+                            </span>
+
+                            <table class="ptable" id="vehicleTable" border="0">
+                                <thead>
+                                    <tr>
+                                        <th>Liscence Plate</th>
+                                        <th>Vehicle Make</th>
+                                        <th>Vehicle Model</th>
+                                        <th>Year</th>
+                                        <th>Facility</th>
+                                        <th>Capacity</th>
+                                        <th>Fitness Expiration</th>
+                                        <th>Liscence Expiration</th>
+                                        <th>Maintenance Date</th>
+                                        <th>Availability</th>
+                                        <th>Operability</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>0001EX</td>
+                                        <td>Toyota</td>
+                                        <td>Hiace</td>
+                                        <td>2015</td>
+                                        <td>SRHA</td>
+                                        <td>20</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>available</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0002EX</td>
+                                        <td>Honda</td>
+                                        <td>Civic</td>
+                                        <td>2012</td>
+                                        <td>SRHA</td>
+                                        <td>20</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>inoperable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0003EX</td>
+                                        <td>Mitsubishi</td>
+                                        <td>Pajero</td>
+                                        <td>2014</td>
+                                        <td>SRHA</td>
+                                        <td>7</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>available</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0004EX</td>
+                                        <td>Volvo</td>
+                                        <td>XC90</td>
+                                        <td>2016</td>
+                                        <td>SRHA</td>
+                                        <td>7</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0005EX</td>
+                                        <td>Nissan</td>
+                                        <td>Civilian</td>
+                                        <td>2013</td>
+                                        <td>SRHA</td>
+                                        <td>30</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>available</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0006EX</td>
+                                        <td>Infiniti</td>
+                                        <td>Q50</td>
+                                        <td>2015</td>
+                                        <td>SRHA</td>
+                                        <td>5</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0007EX</td>
+                                        <td>Hyundai</td>
+                                        <td>Sonata</td>
+                                        <td>2009</td>
+                                        <td>SRHA</td>
+                                        <td>4</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0008EX</td>
+                                        <td>Mazda</td>
+                                        <td>RX8</td>
+                                        <td>2008</td>
+                                        <td>SRHA</td>
+                                        <td>4</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>inoperable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0009EX</td>
+                                        <td>Acura</td>
+                                        <td>NSX</td>
+                                        <td>2017</td>
+                                        <td>SRHA</td>
+                                        <td>5</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>unavailable</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000EX</td>
+                                        <td>Ford</td>
+                                        <td>F150</td>
+                                        <td>2015</td>
+                                        <td>SRHA</td>
+                                        <td>9</td>
+                                        <td>05/31/2019</td>
+                                        <td>07/31/2019</td>
+                                        <td>06/12/2018</td>
+                                        <td>available</td>
+                                        <td>operable</td>
+                                        <td>
+                                            <a href="#" class="opt">
+                                                <i class="ion-edit btn-small"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                   
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                    <div id="addreq" class="tabs_item">
+                        <form action="" method="get" class="form  clearfix newform">
+                            <span class="in_form">
+                                <label for="lplate">Liscence Plate</label>
+                                <input type="text" name="lplate" id="lplate" placeholder="0001EX" maxlength="6" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vtype">Vehicle Type</label>
+                                <input type="text" name="vtype" id="vtype" placeholder="Car" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="btype">Body Type</label>
+                                <input type="text" name="btype" id="btype" placeholder="Sedan" required>
+                            </span>
+
+
+                            <span class="in_form">
+                                <label for="vmake">Vehicle Make</label>
+                                <input type="text" name="vmake" id="vmake" placeholder="Toyota" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vmodel">Vehicle Model</label>
+                                <input type="text" name="vmodel" id="vmodel" placeholder="Hiace" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vyear">Vehicle Year</label>
+                                <input type="tel" name="vyear" id="vyear" maxlength="4" placeholder="2012" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vtrans">Transmission</label>
+                                <input type="text" name="vtrans" id="vtrans" placeholder="Automatic" required>
+                            </span>
+                            
+                            <span class="in_form">
+                                <label for="vfuel">Vehicle Fuel</label>
+                                <input type="text" name="vfuel" id="vfuel" placeholder="Diesel" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vprod">Vehicle Fuel</label>
+                                <input type="tel" name="vprod" id="vprod"
+                                maxlength="4" placeholder="2013" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vfac">Facility</label>
+                                <input type="text" name="vfac" id="vfac"
+                                 placeholder="SRHA" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vEng">Engine Number</label>
+                                <input type="text" name="vEng" id="vEng"
+                                 placeholder="52WVC10338" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vchassis">Chassis Number</label>
+                                <input type="tel" name="vchassis" id="vchassis"
+                                 placeholder="999124" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vcolor">Vehicle Colour</label>
+                                <input type="color" name="vcolor" id="vcolor"
+                                 placeholder="" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vseat">Seating Capacity</label>
+                                <input type="tel" name="vseat" id="vseat"
+                                 placeholder="20" maxlength="2" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vrating">Seating Capacity</label>
+                                <input type="number" name="vrating" id="vrating"
+                                 placeholder="1500" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vfitness">Fitness Expiration</label>
+                                <input type="date" name="vfitness" id="vfitness"
+                                 placeholder="" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vliscence">Liscence Expiration</label>
+                                <input type="date" name="vliscence" id="vliscence"
+                                 placeholder="" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="vmaint">Next Maintentance</label>
+                                <input type="date" name="vmaint" id="vmaint"
+                                 placeholder="" required>
+                            </span>
+                            <br>
+
+                            <span class="in_form">
+                                <label for="availability">Availability</label>
+                                <input type="radio" name="available" value="available" checked>&nbsp;&nbsp;Available &nbsp;
+                                <input type="radio" name="available" value="unavailable">&nbsp;&nbsp;Unavailable
+                            </span>
+
+                            <span class="in_form">
+                                <label for="operability">Operability</label>
+                                <input type="radio" name="operable" value="operable" checked>&nbsp;&nbsp;Operable &nbsp;
+                                <input type="radio" name="operable" value="inoperable">&nbsp;&nbsp;Inoperable
+                            </span>
+
+                            <span class="form__btn--group">
+                                <input type="reset" value="reset" class="btn btn-small btn-reset">
+                                <input type="submit" value="Send Request" class="btn">
+                            </span>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- VENDOR JAVASCRIPT FILES -->
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+        </script>
+    <script>
+        window.jQuery || document.write('<script src="./vendors/js/jquery.min.js">\x3C/script>')
+    </script>
+    <!-- /JQuery -->
+
+    <script src="./vendors/js/jquery.dynatable.js"></script>
+    <script src="./vendors/js/jquery.selectric.min.js"></script>
+
+    <!-- ORIGINAL JAVASCRIPT FILES -->
+    <script src="./resources/js/main.js"></script>
+
+
+</body>
+
+</html>
