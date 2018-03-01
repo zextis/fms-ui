@@ -313,7 +313,7 @@
                             </span>
 
                             <span class="in_form">
-                                <label for="vtype">Vehicle Type</label>
+                                <label for="vtype">Type</label>
                                 <input type="text" name="vtype" id="vtype" placeholder="Car" required>
                             </span>
 
@@ -324,17 +324,17 @@
 
 
                             <span class="in_form">
-                                <label for="vmake">Vehicle Make</label>
+                                <label for="vmake">Make</label>
                                 <input type="text" name="vmake" id="vmake" placeholder="Toyota" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="vmodel">Vehicle Model</label>
+                                <label for="vmodel">Model</label>
                                 <input type="text" name="vmodel" id="vmodel" placeholder="Hiace" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="vyear">Vehicle Year</label>
+                                <label for="vyear">Year</label>
                                 <input type="tel" name="vyear" id="vyear" maxlength="4" placeholder="2012" required>
                             </span>
 
@@ -344,12 +344,12 @@
                             </span>
                             
                             <span class="in_form">
-                                <label for="vfuel">Vehicle Fuel</label>
+                                <label for="vfuel">Fuel</label>
                                 <input type="text" name="vfuel" id="vfuel" placeholder="Diesel" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="vprod">Vehicle Fuel</label>
+                                <label for="vprod">Production Year</label>
                                 <input type="tel" name="vprod" id="vprod"
                                 maxlength="4" placeholder="2013" required>
                             </span>
@@ -373,7 +373,7 @@
                             </span>
 
                             <span class="in_form">
-                                <label for="vcolor">Vehicle Colour</label>
+                                <label for="vcolor">Colour</label>
                                 <input type="color" name="vcolor" id="vcolor"
                                  placeholder="" required>
                             </span>
@@ -410,20 +410,28 @@
                             <br>
 
                             <span class="in_form">
-                                <label for="availability">Availability</label>
-                                <input type="radio" name="available" value="available" checked>&nbsp;&nbsp;Available &nbsp;
-                                <input type="radio" name="available" value="unavailable">&nbsp;&nbsp;Unavailable
+                                <label for="">Driver Status: </label>
+                                <div class="radio-group">
+                                    <label for="status-available">Available</label>
+                                    <input type="radio" id="status-available" name="status" value="available" checked>
+                                    <label for="status-unavailable">Unavailable</label>
+                                    <input type="radio" name="status" id="status-unavailable" value="unavailable">
+                                </div>
                             </span>
-
                             <span class="in_form">
-                                <label for="operability">Operability</label>
-                                <input type="radio" name="operable" value="operable" checked>&nbsp;&nbsp;Operable &nbsp;
-                                <input type="radio" name="operable" value="inoperable">&nbsp;&nbsp;Inoperable
+                                <label for="">Operability </label>
+                                <div class="radio-group">
+                                    <label for="op-operable">Operable</label>
+                                    <input type="radio" id="op-operable" name="op" value="operable" checked>
+                                    <label for="op-inoperable">Inoperable</label>
+                                    <input type="radio" id="op-inoperable" name="op" value="inoperable">
+                                    
+                                </div>
                             </span>
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
-                                <input type="submit" value="Send Request" class="btn">
+                                <input type="submit" value="Add Vehicle" class="btn">
                             </span>
 
                         </form>

@@ -526,6 +526,17 @@ label {
     display: block;
 }
 
+.radio-group label{
+    display: inline-block;
+    font-weight: 400;
+    margin-right: .4rem;
+}
+
+.radio-group input{
+    margin-right: 2rem;
+}
+
+
 label:hover {
     cursor: pointer;
 }

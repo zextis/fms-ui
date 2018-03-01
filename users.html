@@ -275,7 +275,7 @@
 
                             <span class="in_form">
                                 <label for="pass">Password</label>
-                                <input type="password" name="pass" id="pass" placeholder="password" required>
+                                <input type="password" name="pass" id="pass" placeholder="Password" required>
                             </span>
 
                             <span class="in_form">
@@ -284,19 +284,43 @@
                             </span>
 
                             <span class="in_form">
-                                <label for="facility">Facility</label>
-                                <input type="text" name="facility" id="facility" placeholder="SRHA" required>
+                                <label for="facility_opt">Facility: </label>
+                                <select id="facility_opt" name="facility">
+                                    <option value="" disabled selected>Choose Facility</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                </select>
                             </span>
 
                             <span class="in_form">
-                                <label for="active">Status</label>
-                                <input type="radio" name="active" value="active" checked>&nbsp;&nbsp;Active &nbsp;
-                                <input type="radio" name="active" value="inactive">&nbsp;&nbsp;Inactive
+                                <label for="">Status: </label>
+                                <div class="radio-group">
+                                    <label for="status-active">Active</label>
+                                    <input type="radio" id="status-active" name="status" value="active" checked>
+                                    <label for="status-inactive">Inactive</label>
+                                    <input type="radio" name="status" id="status-inactive" value="inactive">
+                                </div>
                             </span>
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
-                                <input type="submit" value="Send Request" class="btn">
+                                <input type="submit" value="Add User" class="btn">
                             </span>
 
                         </form>

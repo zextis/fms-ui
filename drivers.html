@@ -73,12 +73,12 @@
                     <li>
                         <a href="#">
                             <i class="ion-ios-eye-outline icon-small"></i>
-                            View Requests</a>
+                            View Drivers</a>
                     </li>
                     <li>
                         <a href="#">
                             <i class="ion-ios-plus-outline icon-small"></i>
-                            New Request</a>
+                            New Driver</a>
                     </li>
                 </ul>
                 <div class="tab_content">
@@ -239,7 +239,7 @@
 
 
                     <div id="addreq" class="tabs_item">
-                        <form action="" method="get" class="form  clearfix newform">
+                        <form action="" method="get" class="form clearfix newform" id="driverform">
                             <span class="in_form">
                                 <label for="employee">Employee No.</label>
                                 <input type="tel" name="employee" id="employee" placeholder="0001111" maxlength="7" required>
@@ -255,26 +255,50 @@
                                 <input type="text" name="lname" id="lname" placeholder="Last Name" required>
                             </span>
 
-
                             <span class="in_form">
                                 <label for="phone">Contact No.</label>
                                 <input type="tel" name="phone" id="phone" placeholder="Phone number" maxlength="11" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="facility">Facility</label>
-                               <input type="text" name="facility" id="facility" placeholder="SRHA" required>
+                                <label for="facility_opt">Facility: </label>
+                                <select id="facility_opt" name="facility">
+                                    <option value="" disabled selected>Choose Facility</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                    <option>John Brown</option>
+                                    <option>Safron James</option>
+                                    <option>Elias</option>
+                                </select>
                             </span>
 
                             <span class="in_form">
-                                <label for="status">Driver Status</label>
-                               <input type="radio" name="status" value="available" checked>&nbsp;&nbsp;Available &nbsp;
-                               <input type="radio" name="status" value="unavailable">&nbsp;&nbsp;Unavailable
+                                <label for="">Driver Status: </label>
+                                <div class="radio-group">
+                                    <label for="status-available">Available</label>
+                                    <input type="radio" id="status-available" name="status" value="available" checked>
+                                    <label for="status-unavailable">Unavailable</label>
+                                    <input type="radio" name="status" id="status-unavailable" value="unavailable">
+                                </div>
                             </span>
+
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
-                                <input type="submit" value="Send Request" class="btn">
+                                <input type="submit" value="Add Driver" class="btn">
                             </span>
 
                         </form>
