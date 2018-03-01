@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Driver | Dashboard</title>
+    <title>User | Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="./vendors/css/normalize.css">
@@ -23,7 +23,7 @@
             <div class="sidenav__content">
                 <nav class="nav">
                     <ul>
-                        <h3 class="sidenav__group--head">Requests: 
+                        <h3 class="sidenav__group--head">Requests:
                         </h3>
                         <li>
                             <a href="./dashboard.html" class="navlink">Request Management</a>
@@ -41,11 +41,11 @@
                         </li>
                         <h3 class="sidenav__group--head">Drivers:</h3>
                         <li>
-                            <a href="drivers.html" class="navlink active">Driver Management</a>
+                            <a href="drivers.html" class="navlink">Driver Management</a>
                         </li>
                         <h3 class="sidenav__group--head">Users:</h3>
                         <li>
-                            <a href="users.html" class="navlink">User Management</a>
+                            <a href="users.html" class="navlink active">User Management</a>
                         </li>
                         <h3 class="sidenav__group--head">Journeys:</h3>
                         <li>
@@ -64,7 +64,7 @@
             <header class="header">
                 <div class="header__text-box">
                     <h2 class="content__heading--secondary managetext animated fadeInLeft">
-                        Driver Manager
+                        User Manager
                     </h2>
                 </div>
             </header>
@@ -73,12 +73,12 @@
                     <li>
                         <a href="#">
                             <i class="ion-ios-eye-outline icon-small"></i>
-                            View Requests</a>
+                            View Users</a>
                     </li>
                     <li>
                         <a href="#">
                             <i class="ion-ios-plus-outline icon-small"></i>
-                            New Request</a>
+                            New User</a>
                     </li>
                 </ul>
                 <div class="tab_content">
@@ -89,23 +89,29 @@
                             <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
                         <div class="tablewrapper">
                             <span class="in_form">
-                                <label for="search-status">Filter: </label>
-                                <select id="search-status" name="status">
-                                    <option value="" disabled selected>Status</option>
+                                <label for="search-facility">Filter: </label>
+                                <select id="search-facility" name="facility">
+                                    <option value="" disabled selected>Facility</option>
                                     <option value="">all</option>
-                                    <option>available</option>
-                                    <option>unavailable</option>
+                                    <option>SRHA</option>
+                                    <option>MRH</option>
+                                    <option>MPH</option>
+                                    <option>CHD</option>
+                                    <option>MHD</option>
+                                    <option>LTH</option>
+                                    <option>PJH</option>
+                                    <option>BRH</option>
                                 </select>
                             </span>
 
-                            <table class="ptable" id="driverTable" border="0">
+                            <table class="ptable" id="userTable" border="0">
                                 <thead>
                                     <tr>
                                         <th>Employee No.</th>
-                                        <th>Driver Name</th>
+                                        <th>User Name</th>
+                                        <th>User Email</th>
+                                        <th>User Role</th>
                                         <th>Facility</th>
-                                        <th>Contact No.</th>
-                                        <th>Status</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
@@ -113,10 +119,10 @@
                                 <tbody>
                                     <tr>
                                         <td>0000001</td>
-                                        <td>John Frescoe</td>
-                                        <td>May Pen</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
+                                        <td>Jeff Dunham</td>
+                                        <td>jeff.dunham@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>SRHA</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -125,10 +131,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000002</td>
-                                        <td>Jeff Dunham</td>
-                                        <td>Black River</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
+                                        <td>Quell Kovacs</td>
+                                        <td>quell.kovacs@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>MRH</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -137,10 +143,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000003</td>
-                                        <td>Walk Foot</td>
-                                        <td>Mandeville</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
+                                        <td>Takeshi Kovacs</td>
+                                        <td>takeshi.kovacs@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>MPH</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -149,10 +155,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000004</td>
-                                        <td>Steel Toe</td>
-                                        <td>Lionel Town</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
+                                        <td>Gaza Man</td>
+                                        <td>gaza.man@srha.gov.jm</td>
+                                        <td>Administrator</td>
+                                        <td>SRHA</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -161,10 +167,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000005</td>
-                                        <td>Jackie Strauss</td>
-                                        <td>Percy Junor</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
+                                        <td>Gully God</td>
+                                        <td>gully.god@srha.gov.jm</td>
+                                        <td>Approver</td>
+                                        <td>SRHA</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -173,10 +179,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000006</td>
-                                        <td>Edgar Allan Poe</td>
-                                        <td>SRHA</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
+                                        <td>Ankle Socks</td>
+                                        <td>ankle.socks@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>PJH</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -185,10 +191,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000007</td>
-                                        <td>Deva Brat</td>
-                                        <td>MHD</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
+                                        <td>Fry Yiye</td>
+                                        <td>fry.yiye@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>LTH</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -197,10 +203,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000008</td>
-                                        <td>Donald J Trump</td>
+                                        <td>Rasta Man</td>
+                                        <td>rasta.man@srha.gov.jm</td>
+                                        <td>Supervisor</td>
                                         <td>CHD</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -209,10 +215,10 @@
                                     </tr>
                                     <tr>
                                         <td>0000009</td>
-                                        <td>Justin Trudeau</td>
-                                        <td>MPH</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
+                                        <td>Super Cat</td>
+                                        <td>super.cat@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>MHD</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
@@ -221,17 +227,18 @@
                                     </tr>
                                     <tr>
                                         <td>0000000</td>
-                                        <td>Ains Ool Gown</td>
-                                        <td>MRH</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
+                                        <td>Ninja Man</td>
+                                        <td>ninja.man@srha.gov.jm</td>
+                                        <td>Supervisor</td>
+                                        <td>BRH</td>
                                         <td>
                                             <a href="#" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
-                                
+                                   
+
                                 </tbody>
                             </table>
                         </div>
@@ -242,34 +249,49 @@
                         <form action="" method="get" class="form  clearfix newform">
                             <span class="in_form">
                                 <label for="employee">Employee No.</label>
-                                <input type="tel" name="employee" id="employee" placeholder="0001111" maxlength="7" required>
+                                <input type="tel" name="employee" id="employee" placeholder="0000001" maxlength="7" required>
                             </span>
 
                             <span class="in_form">
                                 <label for="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" placeholder="First Name" required>
+                                <input type="text" name="fname" id="fname" placeholder="Reileen" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="lname">Last Name                          </label>
-                                <input type="text" name="lname" id="lname" placeholder="Last Name" required>
+                                <label for="lname">Last Name</label>
+                                <input type="text" name="lname" id="lname" placeholder="Kovacs" required>
                             </span>
 
 
                             <span class="in_form">
-                                <label for="phone">Contact No.</label>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone number" maxlength="11" required>
+                                <label for="user">Username</label>
+                                <input type="text" name="user" id="user" placeholder="Envoy" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="reileen.kovacs@srha.gov.jm" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="pass">Password</label>
+                                <input type="password" name="pass" id="pass" placeholder="password" required>
+                            </span>
+
+                            <span class="in_form">
+                                <label for="role">Role</label>
+                                <input type="text" name="role" id="role" placeholder="Supervisor" required>
                             </span>
 
                             <span class="in_form">
                                 <label for="facility">Facility</label>
-                               <input type="text" name="facility" id="facility" placeholder="SRHA" required>
+                                <input type="text" name="facility" id="facility" placeholder="SRHA" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="status">Driver Status</label>
-                               <input type="radio" name="status" value="available" checked>&nbsp;&nbsp;Available &nbsp;
-                               <input type="radio" name="status" value="unavailable">&nbsp;&nbsp;Unavailable
+                                <label for="active">Status</label>
+                                <input type="radio" name="active" value="active" checked>&nbsp;&nbsp;Active &nbsp;
+                                <input type="radio" name="active" value="inactive">&nbsp;&nbsp;Inactive
                             </span>
 
                             <span class="form__btn--group">
@@ -289,7 +311,7 @@
     <!-- JQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
-    </script>
+        </script>
     <script>
         window.jQuery || document.write('<script src="./vendors/js/jquery.min.js">\x3C/script>')
     </script>
