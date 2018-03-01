@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class Songs
+ * Class VehicleRequest
  * This is a demo Model class.
  *
  * Please note:
@@ -13,15 +13,20 @@
 namespace Mini\Model;
 
 use Mini\Core\Model;
+use Mini\Libs\Helper;
 
-class Song extends Model
+class VehicleRequest extends Model
 {
     /**
-     * Get all songs from database
+     * Get all vehicle request from database
      */
-    public function getAllSongs()
+    public function getAllRequests()
     {
-        $sql = "SELECT id, artist, track, link FROM song";
+        $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
+        FROM requests
+        INNER JOIN users ON requests.dept_supervisor = users.id
+        INNER JOIN facilities ON requests.facility_id = facilities.id
+        LEFT JOIN drivers ON requests.driver_id = drivers.id";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -33,7 +38,7 @@ class Song extends Model
     }
 
     /**
-     * Add a song to database
+     * Add a request to database
      * TODO put this explanation into readme and remove it from here
      * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
      * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
@@ -43,7 +48,7 @@ class Song extends Model
      * @param string $track Track
      * @param string $link Link
      */
-    public function addSong($artist, $track, $link)
+    public function addRequest($facility_id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $dept_supervisor, $contact_num, $request_date)
     {
         // NOTE: stop registration flow if registrationInputValidation() returns false (= anything breaks the input check rules)
         // $validation_result = self::registrationInputValidation(Request::post('captcha'), $user_name, $user_password_new, $user_password_repeat, $user_email, $user_email_repeat);
@@ -51,9 +56,11 @@ class Song extends Model
         //     return false;
         // }
 
-        $sql = "INSERT INTO song (artist, track, link) VALUES (:artist, :track, :link)";
+        $sql = "INSERT INTO requests (facility_id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, request_date) VALUES (:facility_id, :department, :number_of_persons, :purpose_of_trip, :pick_up_point, :required_date, :departure_time, :destination, :other_info, :dept_supervisor, :contact_num, :request_date)";
+
         $query = $this->db->prepare($sql);
-        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link);
+
+        $parameters = array(':facility_id' => $facility_id, ':department' => $department, ':number_of_persons' => $number_of_persons, ':purpose_of_trip' => $purpose_of_trip, ':pick_up_point' => $pick_up_point, ':required_date' => $required_date, ':departure_time' => $departure_time, ':destination' => $destination, ':other_info' => $other_info, ':dept_supervisor' => $dept_supervisor, ':contact_num' => $contact_num, ':request_date' => $request_date);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -62,16 +69,16 @@ class Song extends Model
     }
 
     /**
-     * Delete a song in the database
+     * Delete a request in the database
      * Please note: this is just an example! In a real application you would not simply let everybody
      * add/update/delete stuff!
-     * @param int $song_id Id of song
+     * @param int $id Id of request
      */
-    public function deleteSong($song_id)
+    public function deleteRequest($id)
     {
-        $sql = "DELETE FROM song WHERE id = :song_id";
+        $sql = "DELETE FROM requests WHERE id = :id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':song_id' => $song_id);
+        $parameters = array(':id' => $id);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -80,14 +87,14 @@ class Song extends Model
     }
 
     /**
-     * Get a song from database
-     * @param integer $song_id
+     * Get a request from database
+     * @param integer $id
      */
-    public function getSong($song_id)
+    public function getRequest($id)
     {
-        $sql = "SELECT id, artist, track, link FROM song WHERE id = :song_id LIMIT 1";
+        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, request_date FROM requests WHERE id = :id LIMIT 1";
         $query = $this->db->prepare($sql);
-        $parameters = array(':song_id' => $song_id);
+        $parameters = array(':id' => $id);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -99,7 +106,7 @@ class Song extends Model
     }
 
     /**
-     * Update a song in database
+     * Update a request in database
      * // TODO put this explaination into readme and remove it from here
      * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
      * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
@@ -108,13 +115,13 @@ class Song extends Model
      * @param string $artist Artist
      * @param string $track Track
      * @param string $link Link
-     * @param int $song_id Id
+     * @param int $id Id
      */
-    public function updateSong($artist, $track, $link, $song_id)
+    public function updateRequest($id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $contact_num)
     {
-        $sql = "UPDATE song SET artist = :artist, track = :track, link = :link WHERE id = :song_id";
+        $sql = "UPDATE requests SET department = :department, number_of_persons = :number_of_persons, purpose_of_trip = :purpose_of_trip, pick_up_point = :pick_up_point, required_date = :required_date, departure_time = :departure_time, destination = :destination, other_info = :other_info, contact_num = :contact_num, updated_at = :updated_at WHERE id = :id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':artist' => $artist, ':track' => $track, ':link' => $link, ':song_id' => $song_id);
+        $parameters = array(':id' => $id, ':department' => $department, ':number_of_persons' => $number_of_persons, ':purpose_of_trip' => $purpose_of_trip, ':pick_up_point' => $pick_up_point, ':required_date' => $required_date, ':departure_time' => $departure_time, ':destination' => $destination, ':other_info' => $other_info, ':contact_num' => $contact_num, ':updated_at' => date("Y-m-d H:i:s"));
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -124,11 +131,11 @@ class Song extends Model
 
     /**
      * Get simple "stats". This is just a simple demo to show
-     * how to use more than one model in a controller (see application/controller/songs.php for more)
+     * how to use more than one model in a controller (see application/controller/vehicle request.php for more)
      */
     public function getAmountOfSongs()
     {
-        $sql = "SELECT COUNT(id) AS amount_of_songs FROM song";
+        $sql = "SELECT COUNT(id) AS amount_of_songs FROM request";
         $query = $this->db->prepare($sql);
         $query->execute();
 

@@ -17,15 +17,10 @@
     </script>
     <!-- /JQuery -->
 
-    <!-- ListJs -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-    <script>
-        window.List || document.write('<script src="<?php echo URL; ?>vendors/js/list.min.js">\x3C/script>')
-    </script>
-    <!-- /ListJs -->
+    <script src="<?php echo URL; ?>vendors/js/jquery.dynatable.js"></script>
+    <script src="<?php echo URL; ?>vendors/js/jquery.selectric.min.js"></script>
 
     <!-- ORIGINAL JAVASCRIPT FILES -->
     <script src="<?php echo URL; ?>resources/js/main.js"></script>
-    <script src="<?php echo URL; ?>resources/js/request_list.js"></script>
 </body>
 </html>

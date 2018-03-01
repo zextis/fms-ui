@@ -9,10 +9,9 @@
     </header>
 
     <section class="content">
-
         <div class="row not-full">
             <div class="col span-3-of-4 table">
-                <table class="reqtable matbox" border="0">
+                <table class="ptable matbox" border="0">
                     <caption><h2 class="content__heading--secondary light-text">Currently Approved Requests</h2></caption>
                     <tr>
                         <th>Request ID</th>
@@ -158,10 +157,10 @@
                     <?php $this->renderFeedbackMessages(); ?>
 
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="yourlogin@example.com">
+                    <input type="email" name="email" id="email" placeholder="yourlogin@example.com" required>
 
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="*********">
+                    <input type="password" name="password" id="password" placeholder="*********" required>
 
                     <input type="submit" value="Sign In" class="btn animated infinite pulse">
                 </form>

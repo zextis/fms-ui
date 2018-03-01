@@ -18,11 +18,12 @@ use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Request;
 use Mini\Core\Auth;
+use Mini\Model\VehicleRequest;
 
 class AdminController extends Controller
 {
     /**
-     * Construct this object by extending the basic Controller class.
+     * Construct this object by extending the basic Controller class.use Mini\Model\VehicleRequest;
      */
     public function __construct()
     {
@@ -39,13 +40,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $this->View->render('admin/index');
+        
     }
 
     /**
      * ACTION: Show the form for creating a new resource.
      *
-     * This method handles what happens when you move to http://yourproject/songs/addsong
+     * This method handles what happens when you move to http://yourproject/songs/addRequest
      * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "add a admin" form on songs/index
      * directs the user after the form submit. This method handles all the POST data from the form and then redirects
      * the user back to songs/index via the last line: header(...)

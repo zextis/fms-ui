@@ -29,7 +29,7 @@ class LoginController extends Controller
 
         // check login status: if true, then redirect user to user/index, if false, then to login form again
         if ($login_successful) {
-            Redirect::to('admin/index');
+            Redirect::to('requests/index');
         } else {
             Redirect::to('home/index'); // Redirect to home if login failed.
         }

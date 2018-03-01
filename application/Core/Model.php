@@ -19,7 +19,7 @@ class Model
         try {
             self::openDatabaseConnection();
         } catch (\PDOException $e) {
-            exit('Database connection could not be established.');
+            exit('Database connection could not be established.'.$e->getMessage());
         }
     }
 

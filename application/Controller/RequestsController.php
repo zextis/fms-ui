@@ -1,0 +1,187 @@
+<?php
+
+/**
+ * Class SongsController
+ * This is a demo Controller class.
+ *
+ * If you want, you can use multiple Models or Controllers.
+ *
+ * Please note:
+ * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
+ * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
+ *
+ */
+
+namespace Mini\Controller;
+
+use Mini\Core\Controller;
+use Mini\Core\Redirect;
+use Mini\Core\Request;
+use Mini\Core\Auth;
+use Mini\Model\VehicleRequest;
+
+class RequestsController extends Controller
+{
+    /**
+     * Construct this object by extending the basic Controller class.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // VERY IMPORTANT: All controllers/areas that should only be usable by logged-in users
+        // need this line! Otherwise not-logged in users could do actions.
+        Auth::checkAuthentication();
+    }
+
+    /**
+     * PAGE: index
+     * This method handles what happens when you move to http://yourproject/requests/index
+     */
+    public function index()
+    {
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        // getting all requests and amount of requests
+        $requests = $VehicleRequest->getAllRequests();
+
+        // load views. within the views we can echo out $requests and $amount_of_requests easily
+        $this->View->render('requests/index', array('requests' => $requests));
+    }
+
+    /**
+     * ACTION: Show the form for creating a new resource.
+     *
+     * This method handles what happens when you move to http://yourproject/requests/addrequest
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "add a vehicle_request" form on requests/index
+     * directs the user after the form submit. This method handles all the POST data from the form and then redirects
+     * the user back to requests/index via the last line: header(...)
+     * This is an example of how to handle a POST request.
+     */
+    public function create()
+    {
+        
+    }
+
+    /**
+     * Create a new vehicle_request object and stores to the database.
+     *
+     * @return void
+     */
+    public function store() {
+        // if we have POST data to create a new vehicle_request entry
+        if (Request::isset("submit_add_request")) {
+            // set the default timezone to use. Available since PHP 5.1
+            date_default_timezone_set('UTC');
+
+            // TODO: Get id's from logged in user.
+            $facility_id = 1; 
+            $dept_supervisor = 1;
+            $requested_date = date("Y-m-d H:i:s");
+
+            // Instance new Model (VehicleRequest)
+            $VehicleRequest = new VehicleRequest();
+            // do addRequest() in model/model.php
+            $VehicleRequest->addRequest($facility_id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), $dept_supervisor, Request::post('phone'), $requested_date);
+        }
+
+        // where to go after vehicle_request has been added
+        Redirect::to('requests/index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id) {
+
+    }
+
+     /**
+     * ACTION: Show the form for editing the specified resource.
+     * This method handles what happens when you move to http://yourproject/requests/editrequest
+     * @param int $id Id of the to-edit vehicle_request
+     */
+    public function edit($id)
+    {
+        // if we have an id of a vehicle_request that should be edited
+        if (isset($id)) {
+            // Instance new Model (VehicleRequest)
+            $VehicleRequest = new VehicleRequest();
+            // do getSong() in model/model.php
+            $request = $VehicleRequest->getRequest($id);
+
+            // in a real application we would also check if this db entry exists and therefore show the result or
+            // redirect the user to an error page or similar
+
+            // load views. within the views we can echo out $vehicle_request easily
+            $this->View->render('requests/edit', array('request' => $request));
+        } else {
+            // redirect user to requests index page (as we don't have a request_id)
+            Redirect::to('requests/index');
+        }
+    }
+
+    /**
+     * ACTION: Update the specified resource in storage.
+     *
+     * This method handles what happens when you move to http://yourproject/requests/updaterequest
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "update a vehicle_request" form on requests/edit
+     * directs the user after the form submit. This method handles all the POST data from the form and then redirects
+     * the user back to requests/index via the last line: header(...)
+     * This is an example of how to handle a POST request.
+     */
+    public function update($id)
+    {
+        // if we have POST data to create a new vehicle_request entry
+        if (Request::isset("submit_update_request")) {
+            // Instance new Model (VehicleRequest)
+            $VehicleRequest = new VehicleRequest();
+            // do updateSong() from model/model.php
+            $VehicleRequest->updateRequest($id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), Request::post('phone'));
+        }
+
+        // where to go after vehicle_request has been added
+        Redirect::to('requests/index');
+    }
+
+    /**
+     * AJAX-ACTION: ajaxGetStats
+     * TODO documentation
+     */
+    public function ajaxGetStats()
+    {
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        $amount_of_requests = $VehicleRequest->getAmountOfSongs();
+
+        // simply echo out something. A supersimple API would be possible by echoing JSON here
+        echo $amount_of_requests;
+    }
+
+    /**
+     * ACTION: Remove the specified resource from storage.
+     * 
+     * This method handles what happens when you move to http://yourproject/requests/deleterequest
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "delete a vehicle_request" button on requests/index
+     * directs the user after the click. This method handles all the data from the GET request (in the URL!) and then
+     * redirects the user back to requests/index via the last line: header(...)
+     * This is an example of how to handle a GET request.
+     * @param int $request_id Id of the to-delete vehicle_request
+     */
+    public function delete($id)
+    {
+        // if we have an id of a vehicle_request that should be deleted
+        if (isset($id)) {
+            // Instance new Model (VehicleRequest)
+            $VehicleRequest = new VehicleRequest();
+            // do deleteSong() in model/model.php
+            $VehicleRequest->deleteSong($id);
+        }
+
+        // where to go after vehicle_request has been deleted
+        Redirect::to('requests/index');
+    }
+}
