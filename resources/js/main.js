@@ -18,9 +18,13 @@
 	//Create Dynatable
 	function makeTable(tableId, queryId) {
 		return $(tableId).dynatable({
+			features:{
+				pushState:false,
+				sort:true
+			},
 			dataset: {
 				perPageDefault: 10,
-				perPageOptions: [10, 20, 30]
+				perPageOptions: [10, 20, 30],
 			},
 			inputs: {
 				queries: $(queryId)
@@ -28,11 +32,29 @@
 		});
 	}
 
+	$('#requestTable').bind('dynatable:init', function(e, dynatable) {
+		dynatable.sorts.add('status', -1);
+		dynatable.sorts.add('requiredDate', 1);
+	  }).dynatable({
+		features:{
+			pushState:false,
+			sort:true
+		},
+		dataset: {
+			perPageDefault: 10,
+			perPageOptions: [10, 20, 30],
+		},
+		inputs: {
+			queries: $('#search-status')
+		}
+	});
+
 	//Dynatable Initializations
 	makeTable('#requestTable', "#search-status");
 	makeTable('#driverTable', "#search-status");
 	makeTable('#vehicleTable', "#search-availability");
 	makeTable('#userTable', "#search-facility");
+
 
 	//Selectric
 	$('select').selectric();

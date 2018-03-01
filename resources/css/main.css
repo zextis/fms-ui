@@ -535,8 +535,12 @@ label span {
     color: #888888;
     font-weight: 400;
 }
-.selectric{
+.ptable .selectric{
     width: 10rem;
+}
+
+.newform .selectric {
+    width: 20rem;
 }
 .selectric-wrapper,
 .in_form {
