@@ -1,4 +1,5 @@
 <h2 class="sidenav__heading">FLEET</h2>
+<!-- TODO: Make conditions for the pages being active -->
 <div class="sidenav__content">
     <nav class="nav">
         <ul>
@@ -7,27 +8,27 @@
                 <a href="<?= URL ?>requests" class="navlink active">Request Management</a>
             </li>
             <li>
-                <a href="#" class="navlink">Request History</a>
+                <a href="<?= URL ?>reqhistory" class="navlink">Request History</a>
             </li>
             <h3 class="sidenav__group--head">Vehicles:</i>
             </h3>
             <li>
-                <a href="#" class="navlink">Vehicle Management</a>
+                <a href="<?= URL ?>vehicles" class="navlink">Vehicle Management</a>
             </li>
             <li>
-                <a href="#" class="navlink">Maintenance History</a>
+                <a href="<?= URL ?>maintenance" class="navlink">Maintenance History</a>
             </li>
             <h3 class="sidenav__group--head">Drivers:</h3>
             <li>
-                <a href="#" class="navlink">Driver Management</a>
+                <a href="<?= URL ?>drivers" class="navlink">Driver Management</a>
             </li>
             <h3 class="sidenav__group--head">Users:</h3>
             <li>
-                <a href="#" class="navlink">User Management</a>
+                <a href="<?= URL ?>users" class="navlink">User Management</a>
             </li>
             <h3 class="sidenav__group--head">Journeys:</h3>
             <li>
-                <a href="#" class="navlink">Journey Logs</a>
+                <a href="<?= URL ?>journeys" class="navlink">Journey Logs</a>
             </li>
             <li>
                 <a href="<?= URL ?>login/logout" class="navlink logout">Logout

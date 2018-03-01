@@ -1,92 +1,60 @@
-//  ---------------------------------------------------------------------
-//  Page Tab Function ---------------------------------------------------
-//  ---------------------------------------------------------------------
-function openPage(pageName, elmnt, color) {
-	// Hide all elements with class="tabcontent" by default */
-	var i, tabcontent, tablinks;
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
+(function ($) {
+	//Tab Functionality
+	$('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
+
+	$('.tab ul.tabs li a').click(function (g) {
+		var tab = $(this).closest('.tab'),
+			index = $(this).closest('li').index();
+
+		tab.find('ul.tabs > li').removeClass('current');
+		$(this).closest('li').addClass('current');
+
+		tab.find('.tab_content').find('div.tabs_item').not('div.tabs_item:eq(' + index + ')').slideUp();
+		tab.find('.tab_content').find('div.tabs_item:eq(' + index + ')').slideDown();
+
+		g.preventDefault();
+	});
+
+	//Create Dynatable
+	function makeTable(tableId, queryId) {
+		return $(tableId).dynatable({
+			features:{
+				pushState:false,
+				sort:true
+			},
+			dataset: {
+				perPageDefault: 10,
+				perPageOptions: [10, 20, 30],
+			},
+			inputs: {
+				queries: $(queryId)
+			}
+		});
 	}
 
-	// Remove the background color of all tablinks/buttons
-	tablinks = document.getElementsByClassName("tablink");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].style.backgroundColor = "";
-	}
-
-	// Show the specific tab content
-	document.getElementById(pageName).style.display = "block";
-
-	// Add the specific color to the button used to open the tab content
-	elmnt.style.backgroundColor = color;
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
-
-//  ---------------------------------------------------------------------
-//  Reset List Function -------------------------------------------------
-//  ---------------------------------------------------------------------
-function resetList(list) {
-	list.search();
-	list.filter();
-	list.update();
-	list.sort('reqdate', {
-		order: "asc"
-	});
-	list.sort('status', {
-		order: "desc"
-	});
-	$(".filter-all").prop('checked', true);
-	$('.filter').prop('checked', false);
-	$('.search').val('');
-	//console.log('Reset Successfully!');
-};
-
-
-
-// ----- TEMPLATE CODE DO NOT TOUCH!!!!!!!!! -------
-/* function updateList(){
-  var values_gender = $("input[name=gender]:checked").val();
-	var values_address = $("input[name=address]:checked").val();
-	console.log(values_gender, values_address);
-
-	userList.filter(function (item) {
-		var genderFilter = false;
-		var addressFilter = false;
-		
-		if(values_gender == "all")
-		{ 
-			genderFilter = true;
-		} else {
-			genderFilter = item.values().gender == values_gender;
-			
-		}
-		if(values_address == null)
-		{ 
-			addressFilter = true;
-		} else {
-			addressFilter = item.values().address.indexOf(values_address) >= 0;
-		}
-		return addressFilter && genderFilter
-	});
-	userList.update();
-	//console.log('Filtered: ' + values_gender);
-}
-                               
-$(function(){
-  //updateList();
-  $("input[name=gender]").change(updateList);
-	$('input[name=address]').change(updateList);
-	
-	userList.on('updated', function (list) {
-		if (list.matchingItems.length > 0) {
-			$('.no-result').hide()
-		} else {
-			$('.no-result').show()
+	$('#requestTable').bind('dynatable:init', function(e, dynatable) {
+		dynatable.sorts.add('requiredDate', 1);
+	  }).dynatable({
+		features:{
+			pushState:false,
+			sort:true
+		},
+		dataset: {
+			perPageDefault: 10,
+			perPageOptions: [10, 20, 30],
+		},
+		inputs: {
+			queries: $('#search-status')
 		}
 	});
-}); */
-// ----- TEMPLATE CODE DO NOT TOUCH!!!!!!!!! -------
+
+	//Dynatable Initializations
+	makeTable('#requestTable', "#search-status");
+	makeTable('#driverTable', "#search-status");
+	makeTable('#vehicleTable', "#search-availability");
+	makeTable('#userTable', "#search-facility");
+
+
+	//Selectric
+	$('select').selectric();
+})(jQuery);
