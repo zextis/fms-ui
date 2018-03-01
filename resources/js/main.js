@@ -32,6 +32,7 @@
 	makeTable('#requestTable', "#search-status");
 	makeTable('#driverTable', "#search-status");
 	makeTable('#vehicleTable', "#search-availability");
+	makeTable('#userTable', "#search-facility");
 
 	//Selectric
 	$('select').selectric();
