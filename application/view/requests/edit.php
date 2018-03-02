@@ -1,4 +1,4 @@
-<body>
+<body class="grey-bg">
 <div class="row">
         <!-- echo out the system feedback (error and success messages) -->
         <?php $this->renderFeedbackMessages(); ?>

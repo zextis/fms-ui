@@ -1,4 +1,4 @@
-<body>
+<body class="grey-bg">
 <div class="row">
         <!-- echo out the system feedback (error and success messages) -->
         <?php $this->renderFeedbackMessages(); ?>
@@ -33,7 +33,7 @@
                 <div class="tab_content">
                     <div id="view" class="tabs_item">
                         <p class="hint">
-                            <strong>Hint:</strong> Click on column titles to sort. You can also hold
+                            <strong>TIP:</strong> Click on column titles to sort. You can also hold
                             <kbd>Shift</kbd> or
                             <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
                         <div class="tablewrapper">
@@ -82,6 +82,9 @@
 
                     <div id="addreq" class="tabs_item">
                         <form action="<?= URL ?>requests/store" method="post" class="form clearfix newform">
+                        <p class="hint">
+                            <strong>NOTE:</strong> Vehicles are to be used for work-related activities.
+                        </p>
                             <span class="in_form">
                                 <label for="department">Department</label>
                                 <input type="text" name="department" id="department" placeholder="Department" required>
