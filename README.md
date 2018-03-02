@@ -52,6 +52,8 @@ delete - delete  passing the {id} as parameter
 The application's URL-path translates directly to the controllers (=files) and their methods inside
 application/controllers.
 
+A tutorial series for MVC framework can be found at: https://www.youtube.com/watch?v=OsCTzGASImQ&list=PLfdtiltiRHWGXVHXX09fxXDi-DqInchFD
+
 `example.com/home/exampleOne` will do what the *exampleOne()* method in application/Controller/HomeController.php says.
 
 `example.com/home` will do what the *index()* method in application/Controller/HomeController.php says.
