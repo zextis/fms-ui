@@ -48,6 +48,22 @@
 		}
 	});
 
+	$('#status-approved').click(function(){
+		$('.comment').removeClass("in_form animated fadeInUp");
+		$('.comment').addClass("form__hidden");
+		$('.condopt').removeClass("form__hidden");
+		$('.condopt').addClass("in_form animated fadeInUp");
+		console.log('Approve Button clicked!');
+	});
+
+	$('#status-rejected').click(function(){
+		$('.comment').removeClass("form__hidden");
+		$('.comment').addClass("in_form animated fadeInUp");
+		$('.condopt').removeClass("in_form animated fadeInUp");
+		$('.condopt').addClass("form__hidden");
+		console.log('Reject Button clicked!');
+	});
+
 	//Dynatable Initializations
 	makeTable('#requestTable', "#search-status");
 	makeTable('#driverTable', "#search-status");
@@ -57,4 +73,6 @@
 
 	//Selectric
 	$('select').selectric();
+
+	
 })(jQuery);

@@ -216,7 +216,6 @@ Header --------------------------------------------------------------
     padding: 2rem 0px;
     font-size: 3rem;
     font-weight: 400;
-    color: #F3F5F4;
     text-align: left;
     margin-left: 2rem;
 }
@@ -450,7 +449,12 @@ Form Specific -------------------------------------------------------
     padding: 2rem;
     margin: 0 auto;
 }
-
+.form h2{
+    margin-left: 0;
+}
+.form__hidden{
+    display: none;
+}
 .newform {
     width: 90%;
 }
@@ -553,7 +557,14 @@ label span {
 .newform .selectric {
     width: 20rem;
 }
+.long-opt .selectric{
+    width: 30rem;
+}
 .selectric-wrapper,
 .in_form {
     display: inline-block;
+}
+
+.comment{
+    margin-top: 2rem;
 }

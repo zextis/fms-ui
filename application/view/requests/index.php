@@ -1,4 +1,4 @@
-<body>
+<body class="grey-bg">
 <div class="row">
         <!-- echo out the system feedback (error and success messages) -->
         <?php $this->renderFeedbackMessages(); ?>
@@ -68,7 +68,8 @@
                                         <td><?php echo htmlspecialchars($request->contact_num, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="edit">
-                                            <a href="<?= URL ?>requests/edit/<?= $request->id ?>" class="opt">
+                                        <!-- TODO: Make the href based on user -->
+                                            <a href="<?= URL ?>requests/show/<?= $request->id ?>" class="opt">
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>

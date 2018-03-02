@@ -43,7 +43,7 @@ class RequestsController extends Controller
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests();
+        $requests = $VehicleRequest->getAllRequests(true);
 
         // load views. within the views we can echo out $requests and $amount_of_requests easily
         $this->View->render('requests/index', array('requests' => $requests));
@@ -96,7 +96,13 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
 
+        $request = $VehicleRequest->getRequest($id);
+        $vehicles = $VehicleRequest->getAllVehicles();
+        $drivers = $VehicleRequest->getAllDrivers();
+        $this->View->render('requests/screen', array('request' => $request,'vehicles' => $vehicles, 'drivers' => $drivers));
     }
 
      /**
@@ -143,6 +149,20 @@ class RequestsController extends Controller
             $VehicleRequest->updateRequest($id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), Request::post('phone'));
         }
 
+        // where to go after vehicle_request has been added
+        Redirect::to('requests/index');
+    }
+
+    public function screen($id)
+    {
+         // Instance new Model (VehicleRequest)
+         $VehicleRequest = new VehicleRequest();
+         
+        // if we have POST data to create a new vehicle_request entry
+        if (Request::isset("screen_request")) {
+            // do updateSong() from model/model.php
+            $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
+        }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
     }
