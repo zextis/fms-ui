@@ -9,6 +9,14 @@ namespace Mini\Core;
 class View
 {
     /**
+     * Create a request class variable to hold controller name.
+     */
+    public function __construct() {
+        // NOTE: Gets controller name (e.g. requests) from URL query string e.g. /requests/edit/3.
+        $this->which_ctrl = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'))[1];
+    }
+
+    /**
      * simply includes (=shows) the view. this is done from the controller. In the controller, you usually say
      * $this->view->render('help/index'); to show (in this example) the view index.php in the folder help.
      * Usually the Class and the method are the same like the view, but sometimes you need to show different views.
