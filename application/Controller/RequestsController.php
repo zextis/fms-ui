@@ -18,6 +18,7 @@ use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Request;
 use Mini\Core\Auth;
+use Mini\Core\Permission;
 use Mini\Model\VehicleRequest;
 
 class RequestsController extends Controller
@@ -42,6 +43,7 @@ class RequestsController extends Controller
     {
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
+        
         // getting all requests and amount of requests
         $requests = $VehicleRequest->getAllRequests();
 

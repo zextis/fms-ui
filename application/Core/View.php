@@ -8,12 +8,17 @@ namespace Mini\Core;
  */
 class View
 {
+    public $Permission;
+
     /**
      * Create a request class variable to hold controller name.
      */
     public function __construct() {
         // NOTE: Gets controller name (e.g. requests) from URL query string e.g. /requests/edit/3.
         $this->which_ctrl = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'))[1];
+
+        // NOTE: Create a new permission object.
+        $this->Permission  = new Permission();
     }
 
     /**
