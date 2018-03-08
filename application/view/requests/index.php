@@ -72,8 +72,12 @@
                                         <td><?php echo htmlspecialchars($request->contact_num, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="edit">
-                                        <!-- TODO: Make the href based on user -->
-                                            <a href="<?= URL ?>requests/show/<?= $request->id ?>" class="opt">
+                                          
+                                            <?php $url = ($this->Permission->can('do anything') || $this->Permission->can('manage request')) 
+                                            ? URL . 'requests/show/' . $request->id 
+                                            : URL . 'requests/edit/' . $request->id; ?>
+                                            <a href="<?= $url ?>" class="opt">
+
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
@@ -87,6 +91,9 @@
 
                     <div id="addreq" class="tabs_item">
                         <form action="<?= URL ?>requests/store" method="post" class="form clearfix newform">
+                        <p class="hint">
+                            <strong>NOTE:</strong> Vehicles are to be used for work-related activities.
+                        </p>
                             <span class="in_form">
                                 <label for="department">Department</label>
                                 <input type="text" name="department" id="department" placeholder="Department" required>

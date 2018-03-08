@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class SongsController
+ * Class AdminController
  * This is a demo Controller class.
  *
  * If you want, you can use multiple Models or Controllers.
@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     /**
      * PAGE: index
-     * This method handles what happens when you move to http://yourproject/songs/index
+     * This method handles what happens when you move to http://yourproject/admin/index
      */
     public function index()
     {
@@ -46,10 +46,10 @@ class AdminController extends Controller
     /**
      * ACTION: Show the form for creating a new resource.
      *
-     * This method handles what happens when you move to http://yourproject/songs/addRequest
-     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "add a admin" form on songs/index
+     * This method handles what happens when you move to http://yourproject/admin/addRequest
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "add a admin" form on admin/index
      * directs the user after the form submit. This method handles all the POST data from the form and then redirects
-     * the user back to songs/index via the last line: header(...)
+     * the user back to admin/index via the last line: header(...)
      * This is an example of how to handle a POST request.
      */
     public function create()
@@ -78,7 +78,7 @@ class AdminController extends Controller
 
      /**
      * ACTION: Show the form for editing the specified resource.
-     * This method handles what happens when you move to http://yourproject/songs/editsong
+     * This method handles what happens when you move to http://yourproject/admin/editsong
      * @param int $id Id of the to-edit admin
      */
     public function edit($id)
@@ -89,10 +89,10 @@ class AdminController extends Controller
     /**
      * ACTION: Update the specified resource in storage.
      *
-     * This method handles what happens when you move to http://yourproject/songs/updatesong
-     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "update a admin" form on songs/edit
+     * This method handles what happens when you move to http://yourproject/admin/updatesong
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "update a admin" form on admin/edit
      * directs the user after the form submit. This method handles all the POST data from the form and then redirects
-     * the user back to songs/index via the last line: header(...)
+     * the user back to admin/index via the last line: header(...)
      * This is an example of how to handle a POST request.
      */
     public function update($id)
@@ -103,10 +103,10 @@ class AdminController extends Controller
     /**
      * ACTION: Remove the specified resource from storage.
      * 
-     * This method handles what happens when you move to http://yourproject/songs/deletesong
-     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "delete a admin" button on songs/index
+     * This method handles what happens when you move to http://yourproject/admin/deletesong
+     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "delete a admin" button on admin/index
      * directs the user after the click. This method handles all the data from the GET request (in the URL!) and then
-     * redirects the user back to songs/index via the last line: header(...)
+     * redirects the user back to admin/index via the last line: header(...)
      * This is an example of how to handle a GET request.
      * @param int $song_id Id of the to-delete admin
      */

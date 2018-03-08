@@ -18,10 +18,11 @@ use Mini\Libs\Helper;
 class VehicleRequest extends Model
 {
     /**
-     * Get all vehicle request from database
+     * Get all vehicles request from database
      */
     public function getAllRequests($pending = false, $approved=false)
     {
+        // TODO: Show or filter by the logged in user role.
         $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
         FROM requests
         INNER JOIN users ON requests.dept_supervisor = users.id
@@ -202,15 +203,15 @@ class VehicleRequest extends Model
 
     /**
      * Get simple "stats". This is just a simple demo to show
-     * how to use more than one model in a controller (see application/controller/vehicle request.php for more)
+     * how to use more than one model in a controller (see application/controller/vehicles request.php for more)
      */
-    public function getAmountOfSongs()
+    public function getAmountOfRequests()
     {
-        $sql = "SELECT COUNT(id) AS amount_of_songs FROM request";
+        $sql = "SELECT COUNT(id) AS total_requests FROM request";
         $query = $this->db->prepare($sql);
         $query->execute();
 
         // fetch() is the PDO method that get exactly one result
-        return $query->fetch()->amount_of_songs;
+        return $query->fetch()->total_requests;
     }
 }

@@ -77,7 +77,6 @@ class Login extends Model
             return false;
         }
 
-        // echo password_hash('pass', PASSWORD_BCRYPT);
         // if hash of provided password does NOT match the hash in the database: +1 failed-login counter
         if (!password_verify($user_password, $result->password)) {
             Session::add('feedback_negative', 'Username or password does not match');
