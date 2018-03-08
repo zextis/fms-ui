@@ -35,7 +35,7 @@ class Permission extends Model
         if ($user_id == 0 && null !== Session::get('id')) {
             $user_id = Session::get('id');
         }
-
+        
         // Query the user table to get the user_id.
         // Get the user_id to get the assigned user role on the user_id.
         // Get the assigned permissions for the user role on the role_id.

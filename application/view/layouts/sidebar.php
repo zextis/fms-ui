@@ -4,7 +4,7 @@
     <nav class="nav">
         <ul>
             <h3 class="sidenav__group--head">Requests: </i></h3>
-            <?php if($this->Permission->hasAnyRole(['power-user'])) : ?>
+            <?php if($this->Permission->hasAnyRole(['power-user', 'supervisor'])) : ?>
             <li>
                 <a href="<?= URL ?>requests" class="navlink <?= !empty($this->which_ctrl) && $this->which_ctrl == 'requests' ? 'active' : ''; ?>">Request Management</a>
             </li>
@@ -35,6 +35,8 @@
             <h3 class="sidenav__group--head">Users:</h3>
             <li>
                 <a href="<?= URL ?>users" class="navlink <?= !empty($this->which_ctrl) && $this->which_ctrl == 'users' ? 'active' : ''; ?>">User Management</a>
+                <a href="<?= URL ?>permissions" class="navlink <?= !empty($this->which_ctrl) && $this->which_ctrl == 'permissions' ? 'active' : ''; ?>">Permissions</a>
+                <a href="<?= URL ?>roles" class="navlink <?= !empty($this->which_ctrl) && $this->which_ctrl == 'roles' ? 'active' : ''; ?>">Roles</a>
             </li>
             <?php endif; ?>
 

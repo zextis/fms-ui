@@ -134,13 +134,13 @@ class VehicleRequest extends Model
      * Get simple "stats". This is just a simple demo to show
      * how to use more than one model in a controller (see application/controller/vehicles request.php for more)
      */
-    public function getAmountOfSongs()
+    public function getAmountOfRequests()
     {
-        $sql = "SELECT COUNT(id) AS amount_of_songs FROM request";
+        $sql = "SELECT COUNT(id) AS total_requests FROM request";
         $query = $this->db->prepare($sql);
         $query->execute();
 
         // fetch() is the PDO method that get exactly one result
-        return $query->fetch()->amount_of_songs;
+        return $query->fetch()->total_requests;
     }
 }
