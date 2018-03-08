@@ -11,6 +11,24 @@ use Mini\Core\Model;
  */
 class User extends Model
 {
+    public function getAllUsers() {
+
+        $sql = "SELECT users.id, CONCAT(users.first_name, ' ', users.last_name) AS name, users.username, users.email, GROUP_CONCAT(roles.name) AS roles, users.is_active, facilities.name AS facility, users.created_at, users.updated_at
+            FROM users
+            INNER JOIN facilities ON users.facility_id = facilities.id
+            LEFT JOIN user_has_roles ON users.id = user_has_roles.user_id
+            LEFT JOIN roles ON user_has_roles.role_id = roles.id
+            GROUP BY id";
+        $query = $this->db->prepare($sql);
+
+        // DEFAULT is the marker for "normal" accounts (that have a password etc.)
+        // There are other types of accounts that don't have passwords etc. (FACEBOOK)
+        $query->execute();
+
+        // return one row (we only have one result or nothing)
+        return $query->fetchAll();
+    }
+
     /**
      * @param $user_name_or_email
      *
@@ -63,19 +81,97 @@ class User extends Model
     /**
      * Writes new username to database
      *
-     * @param $id int user id
-     * @param $new_user_name string new username
+     * @param integer $id
+     * @param integer $facility_id
+     * @param string $first_name
+     * @param string $last_name
+     * @param string $email
+     * @param string $password
+     * @param integer $is_active
+     * @param array $remove_roles
+     * @param array $add_roles
      *
      * @return bool
      */
-    public function saveNewUserName($id, $new_user_name)
+    public function addUser($facility_id, $first_name, $last_name, $email, $password, $is_active = 0, $roles = [])
     {
-        $query = $this->db->prepare("UPDATE users SET username = :username WHERE id = :id LIMIT 1");
-        $query->execute(array(':username' => $new_user_name, ':id' => $id));
-        if ($query->rowCount() == 1) {
-            return true;
+        $sql = "INSERT into users (facility_id, first_name, last_name, email, password, is_active, created_at) VALUES (:facility_id, :first_name, :last_name, :email, :password, :is_active, :created_at)";
+
+        $query = $this->db->prepare($sql);
+
+        // Encrypt password
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        $created_at = date("Y-m-d H:i:s");
+
+        $parameters = array(':facility_id' => $facility_id, ':first_name' => $first_name, ':last_name' => $last_name, ':email' => $email, ':password' => $password, ':is_active' => $is_active, ':created_at' => $created_at);
+
+        $query->execute($parameters);
+
+        if ($query) {
+            // Get the user id to add roles to
+            $user_id = $this->db->lastInsertId(); 
+
+            // Add each role for the user to user_has_roles table
+            foreach ($roles as $role) {
+                $sql = "INSERT into user_has_roles (user_id, role_id) VALUES (:user_id, :role_id)";
+                $query = $this->db->prepare($sql);
+                $query->execute(array(':user_id' => $user_id, ':role_id' => $role)); 
+            }
         }
-        return false;
+    }
+
+    /**
+     * Updates user record
+     *
+     * @param integer $id
+     * @param integer $facility_id
+     * @param string $first_name
+     * @param string $last_name
+     * @param string $email
+     * @param string $password
+     * @param integer $is_active
+     * @param array $remove_roles
+     * @param array $add_roles
+     * @return void
+     */
+    public function updateUser($id, $facility_id, $first_name, $last_name, $email, $password, $is_active = 0, $remove_roles = [], $add_roles = [])
+    {
+        $sql = "UPDATE users SET facility_id = :facility_id, first_name = :first_name, last_name = :last_name, email = :email, is_active = :is_active ";
+
+        // Check if password is set when updating
+        // If entered update password with other fields.
+        if (!empty($password)) {
+            $sql .= ", password = :password ";
+        }
+
+        $sql .= "WHERE id = :id";
+
+        $query = $this->db->prepare($sql);
+
+        $parameters = array(':id' => $id, ':facility_id' => $facility_id, ':first_name' => $first_name, ':last_name' => $last_name, ':email' => $email, ':is_active' => $is_active);
+
+        // Check if password is set when updating
+        // If entered update password add value to parameters array.
+        if (!empty($password)) {
+            // Encrypt password.
+            $password = password_hash($password, PASSWORD_BCRYPT);
+            $parameters[':password'] = $password;
+        }
+        $query->execute($parameters);
+
+        // Add each role for the user to user_has_roles table.
+        foreach ($add_roles as $role) {
+            $sql = "INSERT into user_has_roles (user_id, role_id) VALUES (:user_id, :role_id)";
+            $query = $this->db->prepare($sql);
+            $query->execute(array(':user_id' => $id, ':role_id' => $role)); 
+        }
+
+        // Remove roles from user.
+        foreach ($remove_roles as $role) {
+            $sql = "DELETE from user_has_roles WHERE (user_id = :user_id AND role_id = :role_id)";
+            $query = $this->db->prepare($sql);
+            $query->execute(array(':user_id' => $id, ':role_id' => $role)); 
+        }
     }
 
     /**
@@ -138,7 +234,7 @@ class User extends Model
         }
     }
 
-    /**
+    /**users
      * Edit the user's email
      *
      * @param $new_user_email
@@ -196,19 +292,23 @@ class User extends Model
      *
      * @return mixed
      */
-    public function getUserIdByUsername($username)
+    public function getUserById($id)
     {
-        $this->db = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT id FROM users WHERE username = :username LIMIT 1";
+        $sql = "SELECT users.id, users.first_name, users.last_name, users.username, users.email, GROUP_CONCAT(user_has_roles.role_id) AS roles, users.is_active, facility_id
+        FROM users
+        LEFT JOIN user_has_roles ON users.id = user_has_roles.user_id
+        WHERE users.id = :id
+        GROUP BY id";
+        
         $query = $this->db->prepare($sql);
 
         // DEFAULT is the marker for "normal" accounts (that have a password etc.)
         // There are other types of accounts that don't have passwords etc. (FACEBOOK)
-        $query->execute(array(':username' => $username));
+        $query->execute(array(':id' => $id));
 
         // return one row (we only have one result or nothing)
-        return $query->fetch()->id;
+        return $query->fetch();
     }
 
     /**
@@ -250,12 +350,6 @@ class User extends Model
     public function registrationInputValidation($captcha, $user_name, $user_password_new, $user_password_repeat, $user_email, $user_email_repeat)
     {
         $return = true;
-
-        // perform all necessary checks
-        if (!CaptchaModel::checkCaptcha($captcha)) {
-            Session::add('feedback_negative', Text::get('FEEDBACK_CAPTCHA_WRONG'));
-            $return = false;
-        }
 
         // if username, email and password are all correctly validated, but make sure they all run on first sumbit
         if (self::validateUserName($user_name) AND self::validateUserEmail($user_email, $user_email_repeat) AND self::validateUserPassword($user_password_new, $user_password_repeat) AND $return) {
