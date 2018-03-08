@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo URL; ?>vendors/css/grid.css">
     <link rel="stylesheet" href="<?php echo URL; ?>vendors/css/animate.css">
     <link rel="stylesheet" href="<?php echo URL; ?>vendors/css/jquery.dynatable.css">
+    <link rel="stylesheet" href="<?php echo URL; ?>vendors/css/alertify.css">
     <link rel="stylesheet" href="<?php echo URL; ?>vendors/css/selectric.css">
     <link rel="stylesheet" href="<?php echo URL; ?>resources/css/main.css">
 </head>

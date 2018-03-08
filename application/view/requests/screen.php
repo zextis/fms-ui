@@ -20,8 +20,8 @@
                 <ul class="tabs">
                     <li>
                         <a href="#">
-                            <i class="ion-ios-plus-outline icon-small"></i>
-                            Edit Request</a>
+                            <i class="ion-clipboard icon-small"></i>
+                            Screen Request</a>
                     </li>
                 </ul>
                 <div class="tab_content">
@@ -94,7 +94,7 @@
                              <span class="condopt form__hidden">
                                 <label for="driver_opt">Driver: </label>
                                 <select id="driver_opt" name="driver_id">
-                                    <option value="" disabled selected>Choose Driver</option>
+                                    <option value="" selected>Choose Driver</option>
                                     <?php foreach ($this->drivers as $driver) : ?>
                                     <option value="<?= $driver->id?>"><?php echo htmlspecialchars($driver->first_name." ".$driver->last_name, ENT_QUOTES, 'UTF-8'); ?></option>
                                 <?php endforeach; ?>
@@ -104,7 +104,7 @@
                             <span class="condopt long-opt form__hidden">
                                 <label for="vehicle_opt">Vehicle: </label>
                                 <select id="vehicle_opt" name="license_plate">
-                                <option value="" disabled selected>Choose Vehicle</option>
+                                <option value="" selected>Choose Vehicle</option>
                                 <?php foreach ($this->vehicles as $vehicle) : ?>
                                     <option value="<?= $vehicle->license_plate?>"><?php echo htmlspecialchars($vehicle->license_plate." | ". $vehicle->make." | ".$vehicle->model." | ".$vehicle->vehicle_type , ENT_QUOTES, 'UTF-8'); ?></option>
                                 <?php endforeach; ?>
@@ -118,7 +118,11 @@
 
 
                             <span class="form__btn--group">
-                                <input type="submit" value="Save Changes" class="btn" name="screen_request">
+                                <input type="submit" value="Save Changes" class="btn btn-submit" name="screen_request">
+                                <div class="reply form__hidden form__msg form__msg--error">
+                                </div>
+                                <div class="reply-two form__hidden form__msg form__msg--error">
+                                </div>
                             </span>
 
                         </form>

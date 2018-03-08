@@ -20,7 +20,7 @@ class VehicleRequest extends Model
     /**
      * Get all vehicle request from database
      */
-    public function getAllRequests($pending = false)
+    public function getAllRequests($pending = false, $approved=false)
     {
         $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
         FROM requests
@@ -30,6 +30,10 @@ class VehicleRequest extends Model
         
         if ( $pending ) {
             $sql = $sql." WHERE status = 'Pending'";
+        }
+
+        if ( $approved ) {
+            $sql = $sql." WHERE status = 'Approved'";
         }
 
         $query = $this->db->prepare($sql);
@@ -56,6 +60,40 @@ class VehicleRequest extends Model
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public function driverCheck()
+    {
+        $driver_id = $_POST['driver_id'];
+        $required_date = $_POST['required_date'];
+        $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, requests.required_date, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
+        FROM requests
+        INNER JOIN users ON requests.dept_supervisor = users.id
+        LEFT JOIN drivers ON requests.driver_id = drivers.id WHERE requests.driver_id = :driver_id AND requests.required_date = :required_date LIMIT 1";
+
+
+        $query = $this->db->prepare($sql);
+        $parameters = array(':required_date' => $required_date, ':driver_id'=>$driver_id);
+
+        $query->execute($parameters);
+        return $query->fetch();
+    }
+
+    public function vehicleCheck()
+    {
+        $license_plate = $_POST['license_plate'];
+        $required_date = $_POST['required_date'];
+        $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, requests.required_date, requests.contact_num, requests.license_plate, requests.status
+        FROM requests
+        INNER JOIN users ON requests.dept_supervisor = users.id
+        LEFT JOIN drivers ON requests.driver_id = drivers.id WHERE requests.license_plate = :license_plate AND requests.required_date = :required_date LIMIT 1";
+
+
+        $query = $this->db->prepare($sql);
+        $parameters = array(':required_date' => $required_date, ':license_plate'=>$license_plate);
+
+        $query->execute($parameters);
+        return $query->fetch();
     }
 
     /**

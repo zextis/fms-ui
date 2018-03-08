@@ -129,6 +129,53 @@ class RequestsController extends Controller
             Redirect::to('requests/index');
         }
     }
+    
+    public function checkDriver()
+    {   
+        $id = 1;
+    // if we have an id of a vehicle_request that should be edited
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        // do getSong() in model/model.php
+        $driver_id = $_POST['driver_id'];
+        $required_date = $_POST['required_date'];
+
+        $request = $VehicleRequest->driverCheck($driver_id, $required_date);
+
+        // in a real application we would also check if this db entry exists and therefore show the result or
+        // redirect the user to an error page or similar
+
+        // load views. within the views we can echo out $vehicle_request easily
+        if ($request) {
+            echo $request->driver." is already the driver for Request #".$request->id." on the same day.";
+        } else {
+            return false;
+        }
+
+    }
+    public function checkVehicle()
+    {   
+        $id = 1;
+    // if we have an id of a vehicle_request that should be edited
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        // do getSong() in model/model.php
+        $license_plate = $_POST['license_plate'];
+        $required_date = $_POST['required_date'];
+
+        $vrequest = $VehicleRequest->vehicleCheck($license_plate, $required_date);
+
+        // in a real application we would also check if this db entry exists and therefore show the result or
+        // redirect the user to an error page or similar
+
+        // load views. within the views we can echo out $vehicle_request easily
+        if ($vrequest) {
+            echo $vrequest->license_plate." is already the vehicle for Request #".$vrequest->id." on the same day.";
+        } else {
+            return false;
+        }
+
+    }
 
     /**
      * ACTION: Update the specified resource in storage.
