@@ -24,7 +24,7 @@ class Controller
         // always initialize a session
         Session::init();
 
-        // create a view object to be able to use it inside a controller, like $this->View->render();
+        // Create view object to use it inside a controller, like $this->View->render();
         $this->View = new View();
     }
 }

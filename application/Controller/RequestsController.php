@@ -18,6 +18,7 @@ use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Request;
 use Mini\Core\Auth;
+use Mini\Core\Permission;
 use Mini\Model\VehicleRequest;
 
 class RequestsController extends Controller
@@ -42,10 +43,11 @@ class RequestsController extends Controller
     {
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
+        
         // getting all requests and amount of requests
         $requests = $VehicleRequest->getAllRequests(true);
 
-        // load views. within the views we can echo out $requests and $amount_of_requests easily
+        // load views. within the views we can echo out $requests.
         $this->View->render('requests/index', array('requests' => $requests));
     }
 
@@ -76,7 +78,7 @@ class RequestsController extends Controller
 
             // TODO: Get id's from logged in user.
             $facility_id = 1; 
-            $dept_supervisor = 1;
+            $dept_supervisor = Session::get('id');
             $requested_date = date("Y-m-d H:i:s");
 
             // Instance new Model (VehicleRequest)
@@ -116,11 +118,7 @@ class RequestsController extends Controller
         if (isset($id)) {
             // Instance new Model (VehicleRequest)
             $VehicleRequest = new VehicleRequest();
-            // do getSong() in model/model.php
             $request = $VehicleRequest->getRequest($id);
-
-            // in a real application we would also check if this db entry exists and therefore show the result or
-            // redirect the user to an error page or similar
 
             // load views. within the views we can echo out $vehicle_request easily
             $this->View->render('requests/edit', array('request' => $request));
@@ -165,20 +163,6 @@ class RequestsController extends Controller
         }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
-    }
-
-    /**
-     * AJAX-ACTION: ajaxGetStats
-     * TODO documentation
-     */
-    public function ajaxGetStats()
-    {
-        // Instance new Model (VehicleRequest)
-        $VehicleRequest = new VehicleRequest();
-        $amount_of_requests = $VehicleRequest->getAmountOfSongs();
-
-        // simply echo out something. A supersimple API would be possible by echoing JSON here
-        echo $amount_of_requests;
     }
 
     /**
