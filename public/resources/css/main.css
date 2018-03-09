@@ -251,14 +251,24 @@ Side Nav ------------------------------------------------------------
     left: 0;
     overflow-x: hidden;
 }
+.signed{
+    text-align: center;
+    color: #99a4c0;
+    padding: .2rem;
+    font-size: smaller;
+}
 
+.signed span{
+    color: rgb(119, 163, 42);
+    margin-right: .4rem;
+}
 .sidenav__heading {
     text-align: center;
-    padding: 2.62rem 0px;
-    font-weight: 400;
+    padding: 2.62rem 0 1rem 0;
+    font-weight: 700;
     letter-spacing: .5rem;
     text-transform: uppercase;
-    font-size: 120%;
+    font-size: 140%;
     color: #F3F5F4;
     margin: 0;
 }
@@ -270,7 +280,7 @@ Side Nav ------------------------------------------------------------
 }
 
 .sidenav__content {
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 
 .nav>ul {
@@ -586,6 +596,7 @@ label span {
 .long-opt .selectric{
     width: 30rem;
 }
+.selectric-items { top: auto; bottom: 100%; }
 .selectric-wrapper,
 .in_form {
     display: inline-block;

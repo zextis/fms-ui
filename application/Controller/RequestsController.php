@@ -18,6 +18,7 @@ use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Request;
 use Mini\Core\Auth;
+use Mini\Core\Session;
 use Mini\Core\Permission;
 use Mini\Model\VehicleRequest;
 
@@ -45,11 +46,12 @@ class RequestsController extends Controller
         $VehicleRequest = new VehicleRequest();
         
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests(true);
+        $requests = $VehicleRequest->getAllRequests(true, false);
 
         // load views. within the views we can echo out $requests.
         $this->View->render('requests/index', array('requests' => $requests));
     }
+
 
     /**
      * ACTION: Show the form for creating a new resource.

@@ -13,6 +13,8 @@
 namespace Mini\Model;
 
 use Mini\Core\Model;
+use Mini\Core\Session;
+use Mini\Core\Permission;
 use Mini\Libs\Helper;
 
 class VehicleRequest extends Model
@@ -21,7 +23,9 @@ class VehicleRequest extends Model
      * Get all vehicles request from database
      */
     public function getAllRequests($pending = false, $approved=false)
-    {
+    {   // NOTE: Create a new permission object.
+        $this->Permission  = new Permission();
+
         // TODO: Show or filter by the logged in user role.
         $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
         FROM requests
@@ -29,14 +33,23 @@ class VehicleRequest extends Model
         INNER JOIN facilities ON requests.facility_id = facilities.id
         LEFT JOIN drivers ON requests.driver_id = drivers.id";
         
-        if ( $pending ) {
-            $sql = $sql." WHERE status = 'Pending'";
+        if ( $pending ) { 
+            $sql = $sql." WHERE status = 'Pending' ";
         }
 
         if ( $approved ) {
-            $sql = $sql." WHERE status = 'Approved'";
+            $sql = $sql." WHERE status = 'Approved' ";
         }
-
+        $cur_user = Session::get('id');
+        // die(var_dump($cur_user)); !empty($cur_user) && 
+        if (!empty($cur_user) && !$this->Permission->hasAnyRole(['power-user','approver']) ) {
+            if ($approved || $pending ) {
+                $sql = $sql."AND users.id = ".Session::get('id');
+            } else {
+                $sql = $sql." WHERE users.id = ".Session::get('id');
+            }
+        }
+        // die(var_dump($sql));
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -49,7 +62,7 @@ class VehicleRequest extends Model
 
     public function getAllVehicles()
     {
-        $sql = "SELECT `license_plate`, `vehicle_type`, `body_type`, `make`, `model`, `year`, `transmission`, `fuel`, `production_year`, `facility_id`, `engine_number`, `chasis_number`, `colour`, `seating`, `cc_rating`, `fitness_expiration`, `liscense_expiration`, `next_maintenance`, `is_available`, `is_operable`, `created_at`, `updated_at` FROM `vehicle`";
+        $sql = "SELECT `license_plate`, `vehicle_type`, `body_type`, `make`, `model`, `year`, `transmission`, `fuel`, `production_year`, `facility_id`, `engine_number`, `chasis_number`, `colour`, `seating`, `cc_rating`, `fitness_expiration`, `liscense_expiration`, `next_maintenance`, `is_available`, `is_operable`, `created_at`, `updated_at` FROM `vehicles`";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();

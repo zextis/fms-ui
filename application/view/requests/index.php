@@ -24,11 +24,13 @@
                             <i class="ion-ios-eye-outline icon-small"></i>
                             View Requests</a>
                     </li>
+                    <?php if($this->Permission->can('Create/Edit Requests')) :?>
                     <li>
                         <a href="#">
                             <i class="ion-ios-plus-outline icon-small"></i>
                             New Request</a>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <div class="tab_content">
                     <div id="view" class="tabs_item">
@@ -65,7 +67,7 @@
                                         <td><?php echo htmlspecialchars($request->facility, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->department, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->number_of_persons, ENT_QUOTES, 'UTF-8'); ?></td>
-                                        <td><?php echo htmlspecialchars(date_format(date_create($request->required_date),"m/d/Y"), ENT_QUOTES, 'UTF-8');
+                                        <td><?php echo htmlspecialchars(date_format(date_create($request->required_date), "m/d/Y"), ENT_QUOTES, 'UTF-8');
                                          ?></td>
                                         <td><?php echo htmlspecialchars($request->departure_time, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->destination, ENT_QUOTES, 'UTF-8'); ?></td>
@@ -73,7 +75,7 @@
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="edit">
                                           
-                                            <?php $url = ($this->Permission->can('do anything') || $this->Permission->can('manage request')) 
+                                            <?php $url = ($this->Permission->hasAnyRole(['power-user','approver'])) 
                                             ? URL . 'requests/show/' . $request->id 
                                             : URL . 'requests/edit/' . $request->id; ?>
                                             <a href="<?= $url ?>" class="opt">
@@ -88,7 +90,7 @@
                         </div>
                     </div>
 
-
+                    <?php if($this->Permission->can('Create/Edit Requests')) :?>
                     <div id="addreq" class="tabs_item">
                         <form action="<?= URL ?>requests/store" method="post" class="form clearfix newform">
                         <p class="hint">
@@ -151,9 +153,9 @@
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
                                 <input type="submit" value="Send Request" class="btn btn-submit" name="submit_add_request">
                             </span>
-
                         </form>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
