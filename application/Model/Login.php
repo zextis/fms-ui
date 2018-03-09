@@ -43,7 +43,7 @@ class Login extends Model
 
         // successfully logged in, so we write all necessary data into the session and set "user_logged_in" to true
         $this->setSuccessfulLoginIntoSession(
-            $result->id, $result->username, $result->email, $result->role
+            $result->id, $result->first_name." ".$result->last_name, $result->email, $result->role
         );
 
         // return true to make clear the login was successful
