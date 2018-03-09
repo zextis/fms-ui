@@ -62,7 +62,7 @@
                                 <label for="reqdate">Required Date
                                     <span>(mm/dd/yy)</span>
                                 </label>
-                                <input type="date" name="reqdate" id="reqdate" value="<?php echo htmlspecialchars($this->request->required_date, ENT_QUOTES, 'UTF-8'); ?>" required>
+                                <input type="date" name="reqdate" id="reqdate" value="<?php echo htmlspecialchars($this->request->required_date, ENT_QUOTES, 'UTF-8'); ?>" min=<?php echo date("Y-m-d", strtotime("+1day")); ?> required>
                             </span>
 
                             <span class="in_form">
@@ -83,7 +83,7 @@
                             </span>
 
                             <span class="form__btn--group">
-                                <input type="submit" value="Edit Request" class="btn" name="submit_update_request">
+                                <input type="submit" value="Edit Request" class="btn btn-submit" name="submit_update_request">
                             </span>
 
                         </form>

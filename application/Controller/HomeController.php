@@ -14,6 +14,7 @@ namespace Mini\Controller;
 use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Session;
+use Mini\Model\VehicleRequest;
 
 class HomeController extends Controller
 {
@@ -23,11 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $VehicleRequest = new VehicleRequest();
+        // getting all requests and amount of requests
+        $requests = $VehicleRequest->getAllRequests(false, true);
+
+        
         // load views
         if(Session::userIsLoggedIn()){ 
             $this->View->render('request/index');
         } else {
-            $this->View->render('home/index'); 
+        // load views. within the views we can echo out $requests and $amount_of_requests easily
+            $this->View->render('home/index', array('requests' => $requests));
         }
     }
 }

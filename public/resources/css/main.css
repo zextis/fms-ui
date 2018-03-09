@@ -62,6 +62,10 @@ body {
     overflow-x: hidden;
 }
 
+#main .content__heading--secondary{
+    color:#F3F5F4;
+}
+
 .grey-bg {
     background-color: #ddd;
 }
@@ -71,7 +75,11 @@ body {
 Components ----------------------------------------------------------
 --------------------------------------------------------------------- 
 */
-
+mark{
+ background-color: darkcyan;
+ color: whitesmoke;   
+ padding: .2rem .4rem;
+}
 kbd {
     display: inline-block;
     border: 1px solid #ccc;
@@ -80,7 +88,9 @@ kbd {
     margin: 0 0.2em;
     -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
-    background-color: #f7f7f7;
+    background-color: #eeeeee;
+    color: #409DA6;
+    font-size: smaller;
 }
 
 .clearfix {
@@ -216,7 +226,6 @@ Header --------------------------------------------------------------
     padding: 2rem 0px;
     font-size: 3rem;
     font-weight: 400;
-    color: #F3F5F4;
     text-align: left;
     margin-left: 2rem;
 }
@@ -242,14 +251,24 @@ Side Nav ------------------------------------------------------------
     left: 0;
     overflow-x: hidden;
 }
+.signed{
+    text-align: center;
+    color: #99a4c0;
+    padding: .2rem;
+    font-size: smaller;
+}
 
+.signed span{
+    color: rgb(119, 163, 42);
+    margin-right: .4rem;
+}
 .sidenav__heading {
     text-align: center;
-    padding: 2.62rem 0px;
-    font-weight: 400;
+    padding: 2.62rem 0 1rem 0;
+    font-weight: 700;
     letter-spacing: .5rem;
     text-transform: uppercase;
-    font-size: 120%;
+    font-size: 140%;
     color: #F3F5F4;
     margin: 0;
 }
@@ -261,7 +280,7 @@ Side Nav ------------------------------------------------------------
 }
 
 .sidenav__content {
-    padding-top: 1rem;
+    padding-top: 2rem;
 }
 
 .nav>ul {
@@ -400,9 +419,12 @@ tbody {
 }
 
 .hint {
-    color: #409DA6;
+    background-color: #20b2aa;
     margin-bottom: 2rem;
     font-size-adjust: 0.5;
+    color: #F3F5F4;
+    padding: 2rem;
+    border-radius: .4rem;
 }
 
 .ptable {
@@ -450,7 +472,12 @@ Form Specific -------------------------------------------------------
     padding: 2rem;
     margin: 0 auto;
 }
-
+.form h2{
+    margin-left: 0;
+}
+.form__hidden{
+    display: none;
+}
 .newform {
     width: 90%;
 }
@@ -458,7 +485,20 @@ Form Specific -------------------------------------------------------
 .in_form {
     margin-right: 4rem;
 }
+.form__msg{
+    margin-top: .6rem;
+    padding: .4rem;
+    border-radius: .4rem;
+    text-align: center;
+    font-size: smaller;
+    min-width: 30rem;
+    max-width: 40rem;
+}
 
+.form__msg--error{
+    background-color: #e63d00;
+    color: #F3F5F4;
+}
 textarea {
     resize: none;
 }
@@ -553,7 +593,15 @@ label span {
 .newform .selectric {
     width: 20rem;
 }
+.long-opt .selectric{
+    width: 30rem;
+}
+.selectric-items { top: auto; bottom: 100%; }
 .selectric-wrapper,
 .in_form {
     display: inline-block;
+}
+
+.comment{
+    margin-top: 2rem;
 }
