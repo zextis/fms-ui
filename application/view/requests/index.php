@@ -42,7 +42,7 @@
                             - Dates are ordered <mark>mm/dd/yyyy</mark>
                             </p>
                         <div class="tablewrapper">
-                            <table class="ptable" id="requestTable" border="0">
+                            <table class="ptable" id="requestTable">
                                 <thead>
                                     <tr>
                                         <th>Request ID</th>

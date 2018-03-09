@@ -40,7 +40,6 @@
                                         <th>Destination</th>
                                         <th>Contact No.</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -58,16 +57,6 @@
                                         <td><?php echo htmlspecialchars($request->destination, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->contact_num, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
-                                        <td class="edit">
-                                          
-                                            <?php $url = ($this->Permission->hasAnyRole(['power-user','approver'])) 
-                                            ? URL . 'requests/show/' . $request->id 
-                                            : URL . 'requests/edit/' . $request->id; ?>
-                                            <a href="<?= $url ?>" class="opt">
-
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

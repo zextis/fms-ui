@@ -76,7 +76,7 @@ Components ----------------------------------------------------------
 --------------------------------------------------------------------- 
 */
 mark{
- background-color: darkcyan;
+ background-color: #40739c;
  color: whitesmoke;   
  padding: .2rem .4rem;
 }
@@ -167,7 +167,7 @@ li>.logout:active {
 
 .ptable .opt:hover,
 .ptable .opt:active {
-    background-color: #93C8C6;
+    background-color: #4064a6;
     color: #F3F5F4;
 }
 
@@ -416,10 +416,16 @@ Table Specific ------------------------------------------------------
 
 tbody {
     font-size: smaller;
+    color: #4d515a;
 }
-
+tr:nth-of-type(even) {
+    background-color:#eeeeee;
+  } 
+tr:nth-of-type(odd) {
+    background-color:#ddd;
+  } 
 .hint {
-    background-color: #20b2aa;
+    background-color: #72a1c7;
     margin-bottom: 2rem;
     font-size-adjust: 0.5;
     color: #F3F5F4;
@@ -429,35 +435,26 @@ tbody {
 
 .ptable {
     width: 100%;
-    border-spacing: 0px;
+    border-spacing: 0;
 }
 
 .ptable th {
     color: #F3F5F4;
-    background-color: #252933;
-    border-width: 0px;
-    padding: 1rem .2em;
-    margin: 0;
-    font-size: 90%;
-}
-
-.ptable tr {
-    background-color: #FFFFFF;
-    -webkit-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
-}
-
-.ptable td {
-    border-bottom: solid 1px #e7e7e7;
-    border-right: solid 1px #e7e7e7;
-    padding: 1rem .5rem;
-}
-
-.ptable tr:hover,
-.ptable tr td>a:hover {
     background-color: #409DA6;
-    color: #F3F5F4;
+    padding: 1rem 0;
+    /* font-size: 90%; */
 }
+
+
+table td {
+    /* border-bottom: solid 1px #e7e7e7;
+    border-right: solid 1px #e7e7e7; */
+    padding: 1rem 0;
+    margin: 0;
+    border-width: 0px;
+    text-align: center;
+}
+
 
 /*
 ---------------------------------------------------------------------
