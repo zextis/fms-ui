@@ -45,7 +45,7 @@ class RequestsController extends Controller
         $VehicleRequest = new VehicleRequest();
         
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests();
+        $requests = $VehicleRequest->getAllRequests(true);
 
         // load views. within the views we can echo out $requests.
         $this->View->render('requests/index', array('requests' => $requests));
@@ -98,7 +98,13 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
 
+        $request = $VehicleRequest->getRequest($id);
+        $vehicles = $VehicleRequest->getAllVehicles();
+        $drivers = $VehicleRequest->getAllDrivers();
+        $this->View->render('requests/screen', array('request' => $request,'vehicles' => $vehicles, 'drivers' => $drivers));
     }
 
      /**
@@ -121,6 +127,53 @@ class RequestsController extends Controller
             Redirect::to('requests/index');
         }
     }
+    
+    public function checkDriver()
+    {   
+        $id = 1;
+    // if we have an id of a vehicle_request that should be edited
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        // do getSong() in model/model.php
+        $driver_id = $_POST['driver_id'];
+        $required_date = $_POST['required_date'];
+
+        $request = $VehicleRequest->driverCheck($driver_id, $required_date);
+
+        // in a real application we would also check if this db entry exists and therefore show the result or
+        // redirect the user to an error page or similar
+
+        // load views. within the views we can echo out $vehicle_request easily
+        if ($request) {
+            echo $request->driver." is already the driver for Request #".$request->id." on the same day.";
+        } else {
+            return false;
+        }
+
+    }
+    public function checkVehicle()
+    {   
+        $id = 1;
+    // if we have an id of a vehicle_request that should be edited
+        // Instance new Model (VehicleRequest)
+        $VehicleRequest = new VehicleRequest();
+        // do getSong() in model/model.php
+        $license_plate = $_POST['license_plate'];
+        $required_date = $_POST['required_date'];
+
+        $vrequest = $VehicleRequest->vehicleCheck($license_plate, $required_date);
+
+        // in a real application we would also check if this db entry exists and therefore show the result or
+        // redirect the user to an error page or similar
+
+        // load views. within the views we can echo out $vehicle_request easily
+        if ($vrequest) {
+            echo $vrequest->license_plate." is already the vehicle for Request #".$vrequest->id." on the same day.";
+        } else {
+            return false;
+        }
+
+    }
 
     /**
      * ACTION: Update the specified resource in storage.
@@ -141,6 +194,20 @@ class RequestsController extends Controller
             $VehicleRequest->updateRequest($id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), Request::post('phone'));
         }
 
+        // where to go after vehicle_request has been added
+        Redirect::to('requests/index');
+    }
+
+    public function screen($id)
+    {
+         // Instance new Model (VehicleRequest)
+         $VehicleRequest = new VehicleRequest();
+         
+        // if we have POST data to create a new vehicle_request entry
+        if (Request::isset("screen_request")) {
+            // do updateSong() from model/model.php
+            $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
+        }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
     }

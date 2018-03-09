@@ -33,9 +33,12 @@
                 <div class="tab_content">
                     <div id="view" class="tabs_item">
                         <p class="hint">
-                            <strong>TIP:</strong> Click on column titles to sort. You can also hold
+                            <strong>Hints:</strong><br> - Click on column titles to sort. You can also hold
                             <kbd>Shift</kbd> or
-                            <kbd>Ctrl</kbd> and click more titles to add more sorts.</p>
+                            <kbd>Ctrl</kbd> and click more titles to add more sorts.
+                            <br>
+                            - Dates are ordered <mark>mm/dd/yyyy</mark>
+                            </p>
                         <div class="tablewrapper">
                             <table class="ptable" id="requestTable" border="0">
                                 <thead>
@@ -62,16 +65,19 @@
                                         <td><?php echo htmlspecialchars($request->facility, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->department, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->number_of_persons, ENT_QUOTES, 'UTF-8'); ?></td>
-                                        <td><?php echo htmlspecialchars($request->required_date, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars(date_format(date_create($request->required_date),"m/d/Y"), ENT_QUOTES, 'UTF-8');
+                                         ?></td>
                                         <td><?php echo htmlspecialchars($request->departure_time, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->destination, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->contact_num, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td class="edit">
+                                          
                                             <?php $url = ($this->Permission->can('do anything') || $this->Permission->can('manage request')) 
                                             ? URL . 'requests/show/' . $request->id 
                                             : URL . 'requests/edit/' . $request->id; ?>
                                             <a href="<?= $url ?>" class="opt">
+
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
@@ -121,7 +127,7 @@
                                 <label for="reqdate">Required Date
                                     <span>(mm/dd/yy)</span>
                                 </label>
-                                <input type="date" name="reqdate" id="reqdate" required>
+                                <input type="date" name="reqdate" id="reqdate" min=<?php echo date("Y-m-d", strtotime("+1day")); ?> required>
                             </span>
 
                             <span class="in_form">
@@ -143,7 +149,7 @@
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
-                                <input type="submit" value="Send Request" class="btn" name="submit_add_request">
+                                <input type="submit" value="Send Request" class="btn btn-submit" name="submit_add_request">
                             </span>
 
                         </form>

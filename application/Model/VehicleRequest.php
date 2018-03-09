@@ -20,7 +20,7 @@ class VehicleRequest extends Model
     /**
      * Get all vehicles request from database
      */
-    public function getAllRequests()
+    public function getAllRequests($pending = false, $approved=false)
     {
         // TODO: Show or filter by the logged in user role.
         $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
@@ -28,6 +28,15 @@ class VehicleRequest extends Model
         INNER JOIN users ON requests.dept_supervisor = users.id
         INNER JOIN facilities ON requests.facility_id = facilities.id
         LEFT JOIN drivers ON requests.driver_id = drivers.id";
+        
+        if ( $pending ) {
+            $sql = $sql." WHERE status = 'Pending'";
+        }
+
+        if ( $approved ) {
+            $sql = $sql." WHERE status = 'Approved'";
+        }
+
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -36,6 +45,56 @@ class VehicleRequest extends Model
         // $query->fetchAll(PDO::FETCH_ASSOC); or change core/controller.php's PDO options to
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
+    }
+
+    public function getAllVehicles()
+    {
+        $sql = "SELECT `license_plate`, `vehicle_type`, `body_type`, `make`, `model`, `year`, `transmission`, `fuel`, `production_year`, `facility_id`, `engine_number`, `chasis_number`, `colour`, `seating`, `cc_rating`, `fitness_expiration`, `liscense_expiration`, `next_maintenance`, `is_available`, `is_operable`, `created_at`, `updated_at` FROM `vehicle`";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function getAllDrivers()
+    {
+        $sql = "SELECT `id`, `first_name`, `last_name`, `facility_id`, `is_active`, `created_at`, `updated_at` FROM `drivers`";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function driverCheck()
+    {
+        $driver_id = $_POST['driver_id'];
+        $required_date = $_POST['required_date'];
+        $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, requests.required_date, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
+        FROM requests
+        INNER JOIN users ON requests.dept_supervisor = users.id
+        LEFT JOIN drivers ON requests.driver_id = drivers.id WHERE requests.driver_id = :driver_id AND requests.required_date = :required_date LIMIT 1";
+
+
+        $query = $this->db->prepare($sql);
+        $parameters = array(':required_date' => $required_date, ':driver_id'=>$driver_id);
+
+        $query->execute($parameters);
+        return $query->fetch();
+    }
+
+    public function vehicleCheck()
+    {
+        $license_plate = $_POST['license_plate'];
+        $required_date = $_POST['required_date'];
+        $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, requests.required_date, requests.contact_num, requests.license_plate, requests.status
+        FROM requests
+        INNER JOIN users ON requests.dept_supervisor = users.id
+        LEFT JOIN drivers ON requests.driver_id = drivers.id WHERE requests.license_plate = :license_plate AND requests.required_date = :required_date LIMIT 1";
+
+
+        $query = $this->db->prepare($sql);
+        $parameters = array(':required_date' => $required_date, ':license_plate'=>$license_plate);
+
+        $query->execute($parameters);
+        return $query->fetch();
     }
 
     /**
@@ -126,6 +185,18 @@ class VehicleRequest extends Model
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query->execute($parameters);
+    }
+    /**
+     * Screening Function
+     *
+     */
+    public function screenRequest($id, $license_plate, $driver_id, $status, $comments)
+    {
+        $sql = "UPDATE requests SET license_plate = :license_plate, driver_id = :driver_id, status = :status, comments =:comments WHERE id = :id";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':id' => $id, ':license_plate' => $license_plate, ':driver_id' => $driver_id, ':status' => $status, ':comments' => $comments);
 
         $query->execute($parameters);
     }
