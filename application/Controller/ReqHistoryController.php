@@ -45,7 +45,7 @@ class ReqHistoryController extends Controller
         $VehicleRequest = new VehicleRequest();
         
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests(false, false);
+        $requests = $VehicleRequest->getAllRequests(false, true, true, false);
 
         // load views. within the views we can echo out $requests.
         $this->View->render('requests/reqhistory', array('requests' => $requests));

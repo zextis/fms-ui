@@ -22,8 +22,7 @@ class VehicleRequest extends Model
     /**
      * Get all vehicles request from database
      */
-    public function getAllRequests($pending = false, $approved=false)
-    {   // NOTE: Create a new permission object.
+    public function getAllRequests($pending = false, $approved = false,  $rejected = false, $timely = false) {   // NOTE: Create a new permission object.
         $this->Permission  = new Permission();
 
         // TODO: Show or filter by the logged in user role.
@@ -32,22 +31,31 @@ class VehicleRequest extends Model
         INNER JOIN users ON requests.dept_supervisor = users.id
         INNER JOIN facilities ON requests.facility_id = facilities.id
         LEFT JOIN drivers ON requests.driver_id = drivers.id";
-        
-        if ( $pending ) { 
-            $sql = $sql." WHERE status = 'Pending' ";
+        $where = "";
+        if ($pending ) { 
+            $where .= empty($where) ? " WHERE (status = 'Pending'" :  " AND status = 'Pending' ";
         }
 
-        if ( $approved ) {
-            $sql = $sql." WHERE status = 'Approved' ";
+        if ($approved ) {
+            $where .= empty($where) ? " WHERE (status = 'Approved'" :  " AND status = 'Approved' ";
         }
+         if ($rejected ) {
+             $where .= empty($where) ? " WHERE (status = 'Rejected'" :  " OR status = 'Rejected' ";
+        } 
+        if ($timely ) {
+            $where .= empty($where) ? " WHERE requests.required_date > CURDATE()" :  " AND requests.required_date > CURDATE() ";
+        }  
+        $where .= ")";
+        $sql .= $where;
         $cur_user = Session::get('id');
         // die(var_dump($cur_user)); !empty($cur_user) && 
         if (!empty($cur_user) && !$this->Permission->hasAnyRole(['power-user','approver']) ) {
             if ($approved || $pending ) {
-                $sql = $sql."AND users.id = ".Session::get('id');
+                $sql = $sql." AND (users.id = ".Session::get('id');
             } else {
-                $sql = $sql." WHERE users.id = ".Session::get('id');
+                $sql = $sql." WHERE (users.id = ".Session::get('id');
             }
+            $sql .= ")";
         }
         // die(var_dump($sql));
         $query = $this->db->prepare($sql);
@@ -206,10 +214,12 @@ class VehicleRequest extends Model
      *
      */
     public function screenRequest($id, $license_plate, $driver_id, $status, $comments)
-    {
+
+    { 
         $sql = "UPDATE requests SET license_plate = :license_plate, driver_id = :driver_id, status = :status, comments =:comments WHERE id = :id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':id' => $id, ':license_plate' => $license_plate, ':driver_id' => $driver_id, ':status' => $status, ':comments' => $comments);
+        $parameters = array(':id' => $id, ':license_plate' => !empty($license_plate) ? $license_plate : null, ':driver_id' => !empty($driver_id) ? $driver_id : null, ':status' => $status, ':comments' => $comments);
+        // die(var_dump($query));
 
         $query->execute($parameters);
     }

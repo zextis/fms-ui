@@ -26,11 +26,11 @@ class HomeController extends Controller
     {
         $VehicleRequest = new VehicleRequest();
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests(false, true);
+        $requests = $VehicleRequest->getAllRequests(false, true, false, false);
 
         
         // load views
-        if(Session::userIsLoggedIn()){ 
+        if (Session::userIsLoggedIn() ) { 
             $this->View->render('request/index');
         } else {
         // load views. within the views we can echo out $requests and $amount_of_requests easily

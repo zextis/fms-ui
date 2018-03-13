@@ -87,8 +87,9 @@
                                 <div class="radio-group">
                                     <label for="status-approved">Approve</label>
                                     <input type="radio" id="status-approved" name="status" value="Approved" required>
+
                                     <label for="status-rejected">Reject</label>
-                                    <input type="radio" name="status" id="status-rejected" value="Rejected" required>
+                                    <input type="radio" id="status-rejected" name="status"  value="Rejected" required>
                                 </div>
                             </span>
                              <span class="condopt form__hidden">

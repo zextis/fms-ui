@@ -161,6 +161,7 @@
 	});
 
 	$('#status-rejected').click(function () {
+		$num_msgs = 0;
 		formFooterReset('vehicle');
 		formFooterReset('driver');
 		$('.condopt').addClass("form__hidden");
