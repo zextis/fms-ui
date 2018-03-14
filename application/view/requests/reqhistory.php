@@ -44,7 +44,7 @@
                                 </thead>
 
                                 <tbody>
-                                    <?php foreach ($this->requests as $request) : ?>
+                                    <?php if($this->requests ): foreach ($this->requests as $request) : ?>
                                     <tr>
                                         <td><?php echo htmlspecialchars($request->id, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->dept_supervisor, ENT_QUOTES, 'UTF-8'); ?></td>
@@ -58,7 +58,20 @@
                                         <td><?php echo htmlspecialchars($request->contact_num, ENT_QUOTES, 'UTF-8'); ?></td>
                                         <td><?php echo htmlspecialchars($request->status, ENT_QUOTES, 'UTF-8'); ?></td>
                                     </tr>
-                                    <?php endforeach; ?>
+                                    <?php endforeach; else:?>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan="10">NO RESULTS</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                        <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
