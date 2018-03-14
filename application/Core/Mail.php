@@ -2,6 +2,11 @@
 
 namespace Mini\Core;
 
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 /**
  * Class Mail
  *
@@ -61,7 +66,7 @@ class Mail
         $mail->CharSet = 'UTF-8';
 
         // if you want to send mail via PHPMailer using SMTP credentials
-        if (Config::get('EMAIL_USE_SMTP')) {
+        if (EMAIL_USE_SMTP) {
 
             // set PHPMailer to use SMTP
             $mail->IsSMTP();
@@ -70,18 +75,18 @@ class Mail
             $mail->SMTPDebug = 0;
 
             // enable SMTP authentication
-            $mail->SMTPAuth = Config::get('EMAIL_SMTP_AUTH');
+            $mail->SMTPAuth = EMAIL_SMTP_AUTH;
 
             // encryption
-            if (Config::get('EMAIL_SMTP_ENCRYPTION')) {
-                $mail->SMTPSecure = Config::get('EMAIL_SMTP_ENCRYPTION');
+            if (EMAIL_SMTP_ENCRYPTION) {
+                $mail->SMTPSecure = EMAIL_SMTP_ENCRYPTION;
             }
 
             // set SMTP provider's credentials
-            $mail->Host = Config::get('EMAIL_SMTP_HOST');
-            $mail->Username = Config::get('EMAIL_SMTP_USERNAME');
-            $mail->Password = Config::get('EMAIL_SMTP_PASSWORD');
-            $mail->Port = Config::get('EMAIL_SMTP_PORT');
+            $mail->Host = EMAIL_SMTP_HOST;
+            $mail->Username = EMAIL_SMTP_USERNAME;
+            $mail->Password = EMAIL_SMTP_PASSWORD;
+            $mail->Port = EMAIL_SMTP_PORT;
 
         } else {
 
@@ -123,7 +128,7 @@ class Mail
      */
     public function sendMail($user_email, $from_email, $from_name, $subject, $body)
     {
-        if (Config::get('EMAIL_USED_MAILER') == "phpmailer") {
+        if (EMAIL_USED_MAILER == "phpmailer") {
 
             // returns true if successful, false if not
             return $this->sendMailWithPHPMailer(
@@ -131,11 +136,11 @@ class Mail
             );
         }
 
-        if (Config::get('EMAIL_USED_MAILER') == "swiftmailer") {
+        if (EMAIL_USED_MAILER == "swiftmailer") {
             return $this->sendMailWithSwiftMailer();
         }
 
-        if (Config::get('EMAIL_USED_MAILER') == "native") {
+        if (EMAIL_USED_MAILER == "native") {
             return $this->sendMailWithNativeMailFunction();
         }
     }

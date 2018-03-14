@@ -52,6 +52,3 @@ class ReqHistoryController extends Controller
     }
     
 }
-
-?>
-

@@ -57,7 +57,7 @@ define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'vehicle_request');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'Kenlock1');
 define('DB_CHARSET', 'utf8');
 
 /**
@@ -85,3 +85,24 @@ define('COOKIE_DOMAIN', "");
 define('COOKIE_SECURE', false);
 define('COOKIE_HTTP', true);
 define('SESSION_RUNTIME', 604800);
+
+/**
+ * Configuration for: Email server credentials
+ *
+ * Here you can define how you want to send emails.
+ * If you have successfully set up a mail server on your linux server and you know
+ * what you do, then you can skip this section. Otherwise please set EMAIL_USE_SMTP to true
+ * and fill in your SMTP provider account data.
+ *
+ * EMAIL_USED_MAILER: Check Mail class for alternatives
+ * EMAIL_USE_SMTP: Use SMTP or not
+ * EMAIL_SMTP_AUTH: leave this true unless your SMTP service does not need authentication
+ */
+define('EMAIL_USED_MAILER', 'phpmailer');
+define('EMAIL_USE_SMTP', false);
+define('EMAIL_SMTP_HOST', 'https://webmail2013.srha.gov.jm');
+define('EMAIL_SMTP_AUTH', true);
+define('EMAIL_SMTP_USERNAME', 'no-reply@srha.gov.jm');
+define('EMAIL_SMTP_PASSWORD', 'noreplypass');
+define('EMAIL_SMTP_PORT', 25);
+define('EMAIL_SMTP_ENCRYPTION', 'ssl');

@@ -1,16 +1,18 @@
 {
-    "name": "srha/mini3",
+    "name": "srha/mini",
     "description": "SRHA Fleet Management System application",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
             "name": "SHRA MIS",
-            "email": ""
+            "email": "admin@shra.gov.jm"
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "phpmailer/phpmailer": "dev-master"
+    },
     "autoload":
     {
         "psr-4":

@@ -20,6 +20,8 @@ use Mini\Core\Request;
 use Mini\Core\Auth;
 use Mini\Core\Session;
 use Mini\Core\Permission;
+use Mini\Core\Mail;
+use Mini\Core\Config;
 use Mini\Model\VehicleRequest;
 
 class RequestsController extends Controller
@@ -209,6 +211,11 @@ class RequestsController extends Controller
         if (Request::isset("screen_request")) {
             // do updateSong() from model/model.php
             $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
+
+            // TODO: Send email to notify the person making the request of status.
+            // $Mail = new Mail();
+            // $response = $Mail->sendMail('first.last@srha.gov.jm', 'no-reply@srha.gov.jm', 'Fleet Management System', 'RE: Request #123 to Kingston', 'Your request was approved. Have a nice trip.');
+            // die(var_dump($response));
         }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');

@@ -121,7 +121,7 @@ class VehicleRequest extends Model
      * @param string $track Track
      * @param string $link Link
      */
-    public function addRequest($facility_id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $dept_supervisor, $contact_num, $request_date)
+    public function addRequest($facility_id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $dept_supervisor, $contact_num, $created_at)
     {
         // NOTE: stop registration flow if registrationInputValidation() returns false (= anything breaks the input check rules)
         // $validation_result = self::registrationInputValidation(Request::post('captcha'), $user_name, $user_password_new, $user_password_repeat, $user_email, $user_email_repeat);
@@ -129,11 +129,11 @@ class VehicleRequest extends Model
         //     return false;
         // }
 
-        $sql = "INSERT INTO requests (facility_id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, request_date) VALUES (:facility_id, :department, :number_of_persons, :purpose_of_trip, :pick_up_point, :required_date, :departure_time, :destination, :other_info, :dept_supervisor, :contact_num, :request_date)";
+        $sql = "INSERT INTO requests (facility_id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at) VALUES (:facility_id, :department, :number_of_persons, :purpose_of_trip, :pick_up_point, :required_date, :departure_time, :destination, :other_info, :dept_supervisor, :contact_num, :created_at)";
 
         $query = $this->db->prepare($sql);
 
-        $parameters = array(':facility_id' => $facility_id, ':department' => $department, ':number_of_persons' => $number_of_persons, ':purpose_of_trip' => $purpose_of_trip, ':pick_up_point' => $pick_up_point, ':required_date' => $required_date, ':departure_time' => $departure_time, ':destination' => $destination, ':other_info' => $other_info, ':dept_supervisor' => $dept_supervisor, ':contact_num' => $contact_num, ':request_date' => $request_date);
+        $parameters = array(':facility_id' => $facility_id, ':department' => $department, ':number_of_persons' => $number_of_persons, ':purpose_of_trip' => $purpose_of_trip, ':pick_up_point' => $pick_up_point, ':required_date' => $required_date, ':departure_time' => $departure_time, ':destination' => $destination, ':other_info' => $other_info, ':dept_supervisor' => $dept_supervisor, ':contact_num' => $contact_num, ':created_at' => $created_at);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
@@ -165,7 +165,7 @@ class VehicleRequest extends Model
      */
     public function getRequest($id)
     {
-        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, request_date FROM requests WHERE id = :id LIMIT 1";
+        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at FROM requests WHERE id = :id LIMIT 1";
         $query = $this->db->prepare($sql);
         $parameters = array(':id' => $id);
 
@@ -212,6 +212,11 @@ class VehicleRequest extends Model
         $parameters = array(':id' => $id, ':license_plate' => $license_plate, ':driver_id' => $driver_id, ':status' => $status, ':comments' => $comments);
 
         $query->execute($parameters);
+
+        // NOTE: Print error message.
+        if (!$query) {
+            print_r($query->errorInfo());
+        }
     }
 
     /**
