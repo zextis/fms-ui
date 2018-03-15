@@ -1,4 +1,5 @@
 <?php 
+
 /**
  * Class SongsController
  * This is a demo Controller class.
@@ -21,7 +22,7 @@ use Mini\Core\Session;
 use Mini\Core\Permission;
 use Mini\Model\VehicleRequest;
 
-class ReqHistoryController extends Controller
+class ReqhistoryController extends Controller
 {
     /**
      * Construct this object by extending the basic Controller class.
@@ -35,12 +36,12 @@ class ReqHistoryController extends Controller
         Auth::checkAuthentication();
     }
 
-/**
+    /**
      * PAGE: request history
      * This method handles what happens when you move to http://yourproject/requests/reqhistory
      */
     public function index()
-    {
+    {   
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
         
