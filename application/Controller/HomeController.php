@@ -14,6 +14,7 @@ namespace Mini\Controller;
 use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Session;
+use Mini\Core\Config;
 use Mini\Model\VehicleRequest;
 
 class HomeController extends Controller
