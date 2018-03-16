@@ -75,14 +75,14 @@ class DriversController extends Controller
     public function store()
     {
         
-        // if we have POST data to create a new vehicle_request entry
-        if (Request::isset("submit_add_vehicle")) {
-            $Vehicles = new Vehicle();
-            $Vehicles->addVehicle(Request::post('name'));
+        // if we have POST data to create a new driver_request entry
+        if (Request::isset("submit_add_driver")) {
+            $Drivers = new Drivers();
+            $Drivers->addDriver(Request::post('first_name'), Request::post('last_name'), Request::post('facility'), Request::post('status'));
         }
 
-        // where to go after vehicle_request has been added
-        Redirect::to('vehicles/index');
+        // where to go after driver_request has been added
+        Redirect::to('drivers/index');
     }
 
     /**
@@ -104,14 +104,17 @@ class DriversController extends Controller
     public function edit($id)
     {
         if (isset($id)) {
-            $Vehicles = new Vehicle();
-            $vehicle = $Vehicles->getVehicles($id);
+            $Drivers = new Drivers();
+            $driver = $Drivers->getDriver($id);
+
+            $Facility = new Facility();
+            $facilities = $Facility->getAllFacilities();
 
             // load views. within the views we can echo out $vehicle_request easily
-            $this->View->render('vehicles/edit', array('vehicle' => $vehicle));
+            $this->View->render('drivers/edit', array('drivers' => $driver,  'facilities' => $facilities));
         } else {
             // redirect user to requests index page (as we don't have a request_id)
-            Redirect::to('vehicles/index');
+            Redirect::to('drivers/index');
         }
     }
 
@@ -127,13 +130,13 @@ class DriversController extends Controller
     public function update($id)
     {
         // if we have POST data to create a new vehicle_request entry
-        if (Request::isset("submit_update_vehicle")) {
-            $Vehicles = new Vehicle();
-            $Vehicles->updateVehicle($id, Request::post('name'));
+        if (Request::isset("submit_update_driver")) {
+            $Drivers = new Drivers();
+            $Drivers->updateDriver($id, Request::post('first_name'),  Request::post('last_name'),  Request::post('facility'),  Request::post('status'));
         }
 
         // where to go after vehicle_request has been added
-        Redirect::to('vehicles/index');
+        Redirect::to('drivers/index');
     }
 
     /**

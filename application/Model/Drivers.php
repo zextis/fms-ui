@@ -33,7 +33,7 @@ class Drivers extends Model
 
     public function addDriver($firstname, $lastname, $facility_id, $active)
     {
-        $sql = "INSERT INTO `drivers`(`id`, `first_name`, `last_name`, `facility_id`, `is_active`, `created_at`, `updated_at`) VALUES (:id, :first_name, :last_name, :facility_id, :is_active, :created_at, :updated_at)";
+        $sql = "INSERT INTO `drivers`(`first_name`, `last_name`, `facility_id`, `is_active`, `created_at`, `updated_at`) VALUES (:first_name, :last_name, :facility_id, :is_active, :created_at, :updated_at)";
 
         $query = $this->db->prepare($sql);
 
@@ -44,6 +44,7 @@ class Drivers extends Model
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
+        
     }
 
     /**
@@ -52,13 +53,13 @@ class Drivers extends Model
      */
     public function getDriver($id)
     {
-        $sql = "SELECT drivers.`id`, drivers.`first_name`, drivers.`last_name`, facilities.name AS facility, drivers.`is_active`, drivers.`created_at`, drivers.`updated_at` FROM  `drivers` INNER JOIN facilities ON drivers.facility_id=facilities.id WHERE id=:id LIMIT 1";
+        $sql = "SELECT drivers.`id`, drivers.`first_name`, drivers.`last_name`, drivers.facility_id, drivers.`is_active`, drivers.`created_at`, drivers.`updated_at` FROM  `drivers` WHERE drivers.id=:id LIMIT 1";
         
         $parameters = array(':id' => $id);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
+        $query = $this->db->prepare($sql);
         $query->execute($parameters);
 
         // fetch() is the PDO method that get exactly one result

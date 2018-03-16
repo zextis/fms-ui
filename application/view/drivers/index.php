@@ -1,64 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Driver | Dashboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="./vendors/css/ionicons.min.css">
-    <link rel="stylesheet" href="./vendors/css/normalize.css">
-    <link rel="stylesheet" href="./vendors/css/grid.css">
-    <link rel="stylesheet" href="./vendors/css/animate.css">
-    <link rel="stylesheet" href="./vendors/css/jquery.dynatable.css">
-    <link rel="stylesheet" href="./vendors/css/selectric.css">
-    <link rel="stylesheet" href="./resources/css/main.css">
-</head>
-
 <body class="grey-bg">
-    <div class="row">
+<div class="row">
+        <!-- echo out the system feedback (error and success messages) -->
+        <?php $this->renderFeedbackMessages(); ?>
+
         <div class="col span-2-of-12 side-nav clearfix matbox">
-            <h2 class="sidenav__heading">FLEET</h2>
-            <div class="sidenav__content">
-                <nav class="nav">
-                    <ul>
-                        <h3 class="sidenav__group--head">Requests: 
-                        </h3>
-                        <li>
-                            <a href="./dashboard.html" class="navlink">Request Management</a>
-                        </li>
-                        <li>
-                            <a href="./reqhistory.html" class="navlink">Request History</a>
-                        </li>
-                        <h3 class="sidenav__group--head">Vehicles:
-                        </h3>
-                        <li>
-                            <a href="vehicles.html" class="navlink">Vehicle Management</a>
-                        </li>
-                        <li>
-                            <a href="maintenance.html" class="navlink">Maintenance</a>
-                        </li>
-                        <h3 class="sidenav__group--head">Drivers:</h3>
-                        <li>
-                            <a href="drivers.html" class="navlink active">Driver Management</a>
-                        </li>
-                        <h3 class="sidenav__group--head">Users:</h3>
-                        <li>
-                            <a href="users.html" class="navlink">User Management</a>
-                        </li>
-                        <h3 class="sidenav__group--head">Journeys:</h3>
-                        <li>
-                            <a href="journeys.html" class="navlink">Journey Logs</a>
-                        </li>
-                        <li>
-                            <a href="index.html" class="navlink logout">Logout
-                                <i class="ion-android-exit icon-small"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+        
+            <!-- echo out the sidebar -->
+            <?php $this->renderSidebar(); ?>
+
         </div>
         <div class="col span-10-of-12 main-content">
             <header class="header">
@@ -102,136 +51,31 @@
                                 <thead>
                                     <tr>
                                         <th>Employee No.</th>
-                                        <th>Driver Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Facility</th>
-                                        <th>Contact No.</th>
                                         <th>Status</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+                                <?php foreach ($this->drivers as $driver) : ?>
                                     <tr>
-                                        <td>0000001</td>
-                                        <td>John Frescoe</td>
-                                        <td>May Pen</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
-                                        <td>
-                                            <a href="#" class="opt">
+                                        <td><?php echo htmlspecialchars($driver->id, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars($driver->first_name, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars($driver->last_name, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars($driver->facility, ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td><?php echo htmlspecialchars($driver->is_active == 1 ? "active" : "inactive" , ENT_QUOTES, 'UTF-8'); ?></td>
+                                        <td class="edit">
+                                            <?php $url = URL . 'drivers/edit/' . $driver->id; ?>
+                                            <a href="<?= $url ?>" class="opt">
+
                                                 <i class="ion-edit btn-small"></i>
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>0000002</td>
-                                        <td>Jeff Dunham</td>
-                                        <td>Black River</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000003</td>
-                                        <td>Walk Foot</td>
-                                        <td>Mandeville</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000004</td>
-                                        <td>Steel Toe</td>
-                                        <td>Lionel Town</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000005</td>
-                                        <td>Jackie Strauss</td>
-                                        <td>Percy Junor</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000006</td>
-                                        <td>Edgar Allan Poe</td>
-                                        <td>SRHA</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000007</td>
-                                        <td>Deva Brat</td>
-                                        <td>MHD</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000008</td>
-                                        <td>Donald J Trump</td>
-                                        <td>CHD</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000009</td>
-                                        <td>Justin Trudeau</td>
-                                        <td>MPH</td>
-                                        <td>4625789</td>
-                                        <td>available</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0000000</td>
-                                        <td>Ains Ool Gown</td>
-                                        <td>MRH</td>
-                                        <td>4625789</td>
-                                        <td>unavailable</td>
-                                        <td>
-                                            <a href="#" class="opt">
-                                                <i class="ion-edit btn-small"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -239,66 +83,41 @@
 
 
                     <div id="addreq" class="tabs_item">
-                        <form action="" method="get" class="form clearfix newform" id="driverform">
+                        <form action="<?= URL ?>drivers/store" method="post" class="form clearfix newform" id="driverform">
                             <span class="in_form">
-                                <label for="employee">Employee No.</label>
-                                <input type="tel" name="employee" id="employee" placeholder="0001111" maxlength="7" required>
+                                <label for="first_name">First Name</label>
+                                <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="fname">First Name</label>
-                                <input type="text" name="fname" id="fname" placeholder="First Name" required>
+                                <label for="last_name">Last Name                          </label>
+                                <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
                             </span>
 
                             <span class="in_form">
-                                <label for="lname">Last Name                          </label>
-                                <input type="text" name="lname" id="lname" placeholder="Last Name" required>
-                            </span>
-
-                            <span class="in_form">
-                                <label for="phone">Contact No.</label>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone number" maxlength="11" required>
-                            </span>
-
-                            <span class="in_form">
-                                <label for="facility_opt">Facility: </label>
-                                <select id="facility_opt" name="facility">
-                                    <option value="" disabled selected>Choose Facility</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
-                                    <option>John Brown</option>
-                                    <option>Safron James</option>
-                                    <option>Elias</option>
+                                <label for="facility">Facility: </label>
+                                <select id="facility" name="facility">
+                                    <option value="" selected>Choose Facility</option>
+                                    <?php foreach ($this->facilities as $facility) : ?>
+                                    <option value="<?= $facility->id?>"><?php echo htmlspecialchars($facility->name, ENT_QUOTES, 'UTF-8'); ?></option>
+                                <?php endforeach; ?>
                                 </select>
                             </span>
 
                             <span class="in_form">
                                 <label for="">Driver Status: </label>
                                 <div class="radio-group">
-                                    <label for="status-available">Available</label>
-                                    <input type="radio" id="status-available" name="status" value="available" checked>
-                                    <label for="status-unavailable">Unavailable</label>
-                                    <input type="radio" name="status" id="status-unavailable" value="unavailable">
+                                    <label for="status-active">Active</label>
+                                    <input type="radio" id="status-active" name="status" value="1" checked>
+                                    <label for="status-inactive">Inactive</label>
+                                    <input type="radio" name="status" id="status-inactive" value="0">
                                 </div>
                             </span>
 
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">
-                                <input type="submit" value="Add Driver" class="btn" name="">
+                                <input type="submit" value="Add Driver" class="btn" name="submit_add_driver">
                             </span>
 
                         </form>
@@ -308,24 +127,3 @@
         </div>
 
     </div>
-
-    <!-- VENDOR JAVASCRIPT FILES -->
-    <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-    </script>
-    <script>
-        window.jQuery || document.write('<script src="./vendors/js/jquery.min.js">\x3C/script>')
-    </script>
-    <!-- /JQuery -->
-
-    <script src="./vendors/js/jquery.dynatable.js"></script>
-    <script src="./vendors/js/jquery.selectric.min.js"></script>
-
-    <!-- ORIGINAL JAVASCRIPT FILES -->
-    <script src="./resources/js/main.js"></script>
-
-
-</body>
-
-</html>
