@@ -34,8 +34,8 @@ body {
     font-family: 'Lato', 'Arial Narrow', Arial, sans-serif;
     font-weight: 400;
     color: #252933;
-    font-size: 1.6rem;
-    line-height: 1.8;
+    font-size: 1.5rem;
+    line-height: 1.6;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: bottom;
@@ -445,7 +445,7 @@ tr:nth-of-type(odd) {
 .ptable th {
     color: #F3F5F4;
     background-color: #409DA6;
-    padding: 1rem 0;
+    padding: 1rem;
     /* font-size: 90%; */
 }
 
@@ -527,7 +527,6 @@ input[type=color],
 input[type=time],
 input[type=date],
 textarea {
-    width: 34rem;
     padding: 1.2rem 1rem;
     border-radius: 3px;
     border: 1px solid #ccc;
@@ -537,8 +536,25 @@ textarea {
     margin-bottom: 2rem;
 }
 
+input[type=email],
+input[type=password]{
+    width: 100%;
+}
+
+input[type=text]{
+    width: 20rem;
+}
+
+.row__sub{
+    margin-top: 1rem;
+}
+
+textarea{
+    width: 25rem;
+}
+
 input[type=search] {
-    width: 30rem;
+    float: right;
 }
 
 .form__btn--group {

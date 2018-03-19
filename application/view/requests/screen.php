@@ -57,14 +57,6 @@
                                 <input type="text" name="pickup" id="pickup" placeholder="Pickup location" value="<?php echo htmlspecialchars($this->request->pick_up_point, ENT_QUOTES, 'UTF-8'); ?>" disabled>
                             </span>
 
-
-                            <span class="in_form">
-                                <label for="reqdate">Required Date
-                                    <span>(mm/dd/yy)</span>
-                                </label>
-                                <input type="date" name="reqdate" id="reqdate" value="<?php echo htmlspecialchars($this->request->required_date, ENT_QUOTES, 'UTF-8'); ?>" disabled>
-                            </span>
-
                             <span class="in_form">
                                 <label for="purpose">Purpose</label>
                                 <textarea name="purpose" id="purpose" cols="20" rows="3" placeholder="State the reason for your trip." disabled><?php echo htmlspecialchars($this->request->purpose_of_trip, ENT_QUOTES, 'UTF-8'); ?></textarea>
@@ -75,6 +67,13 @@
                                     <span>(optional)</span>
                                 </label>
                                 <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?" disabled><?php echo htmlspecialchars($this->request->other_info, ENT_QUOTES, 'UTF-8'); ?></textarea>
+                            </span>
+                            
+                            <span class="in_form">
+                                <label for="reqdate">Required Date
+                                    <span>(mm/dd/yy)</span>
+                                </label>
+                                <input type="date" name="reqdate" id="reqdate" value="<?php echo htmlspecialchars($this->request->required_date, ENT_QUOTES, 'UTF-8'); ?>" disabled>
                             </span>
 
                             <span class="in_form">
