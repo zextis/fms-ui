@@ -21,6 +21,7 @@ class Drivers extends Model
         
 
         $sql = "SELECT drivers.`id`, drivers.`first_name`, drivers.`last_name`, facilities.name AS facility, drivers.`is_active`, drivers.`created_at`, drivers.`updated_at` FROM  `drivers` INNER JOIN facilities ON drivers.facility_id=facilities.id";
+        
         $query = $this->db->prepare($sql);
 
         // DEFAULT is the marker for "normal" accounts (that have a password etc.)

@@ -12,7 +12,7 @@
         <div class="col span-10-of-12 main-content">
             <header class="header">
                 <div class="header__text-box">
-                    <h2 class="content__heading--secondary managetext animated fadeInLeft">Edit Drivers #<?php echo htmlspecialchars($this->drivers->id, ENT_QUOTES, 'UTF-8'); ?> 
+                    <h2 class="content__heading--secondary managetext animated fadeInLeft">Edit Driver #<?php echo htmlspecialchars($this->drivers->id, ENT_QUOTES, 'UTF-8'); ?> 
                     </h2>
                 </div>
             </header>

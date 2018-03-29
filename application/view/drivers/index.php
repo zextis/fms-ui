@@ -42,8 +42,8 @@
                                 <select id="search-status" name="status">
                                     <option value="" disabled selected>Status</option>
                                     <option value="">all</option>
-                                    <option>available</option>
-                                    <option>unavailable</option>
+                                    <option>active</option>
+                                    <option>inactive</option>
                                 </select>
                             </span>
 

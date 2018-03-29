@@ -76,7 +76,7 @@ class VehiclesController extends Controller
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_vehicle")) {
             $Vehicles = new Vehicle();
-            $Vehicles->addVehicle(Request::post('name'));
+            $Vehicles->addVehicle(Request::post('license_plate'), Request::post('vehicle_type'), Request::post('body_type'), Request::post('make'), Request::post('model'), Request::post('year'), Request::post('transmission'), Request::post('fuel'), Request::post('production_year'), Request::post('facility_id'), Request::post('engine_number'), Request::post('chasis_number'), Request::post('colour'), Request::post('seating'), Request::post('cc_rating'), Request::post('fitness_expiration'), Request::post('license_expiration'), Request::post('next_maintenance'), Request::post('is_available'), Request::post('is_operable'));
         }
 
         // where to go after vehicle_request has been added
@@ -102,10 +102,13 @@ class VehiclesController extends Controller
     {
           if (isset($id)) {
             $Vehicles = new Vehicle();
-            $vehicle = $Vehicles->getVehicles($id);
+            $vehicle = $Vehicles->getVehicle($id);
+
+            $Facility = new Facility();
+            $facilities = $Facility->getAllFacilities();
 
             // load views. within the views we can echo out $vehicle_request easily
-            $this->View->render('vehicles/edit', array('vehicle' => $vehicle));
+            $this->View->render('vehicles/edit', array('vehicle' => $vehicle, 'facilities' => $facilities));
         } else {
             // redirect user to requests index page (as we don't have a request_id)
             Redirect::to('vehicles/index');
@@ -126,7 +129,7 @@ class VehiclesController extends Controller
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_vehicle")) {
             $Vehicles = new Vehicle();
-            $Vehicles->updateVehicle($id, Request::post('name'));
+            $Vehicles->updateVehicle($id, Request::post('license_plate'), Request::post('vehicle_type'), Request::post('body_type'), Request::post('make'), Request::post('model'), Request::post('year'), Request::post('transmission'), Request::post('fuel'), Request::post('production_year'), Request::post('facility_id'), Request::post('engine_number'), Request::post('chasis_number'), Request::post('colour'), Request::post('seating'), Request::post('cc_rating'), Request::post('fitness_expiration'), Request::post('license_expiration'), Request::post('next_maintenance'), Request::post('is_available'), Request::post('is_operable'));
         }
 
         // where to go after vehicle_request has been added
