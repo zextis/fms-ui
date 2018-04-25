@@ -1,13 +1,8 @@
 <?php
 
 /**
- * Class VehicleRequest
- * This is a demo Model class.
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
+ * Class Vehicle Request Controller
+ * 
  */
 
 namespace Mini\Model;
@@ -17,21 +12,39 @@ use Mini\Core\Session;
 use Mini\Core\Permission;
 use Mini\Libs\Helper;
 
+/**
+ * Class VehicleRequest
+ * 
+ * Please note:
+ * Don't use the same name for class and method, as this might trigger an       (unintended) __construct of the class.
+ *
+ */
+
 class VehicleRequest extends Model
 {
     /**
-     * Get all vehicles request from database
-     */
-    public function getAllRequests($pending = false, $approved = false,  $rejected = false, $timely = false) {   // NOTE: Create a new permission object.
+    * Gets all requests
+    *
+    * @param boolean $pending
+    * @param boolean $approved
+    * @param boolean $rejected
+    * @param boolean $timely
+    *
+    * @return void
+    */
+    public function getAllRequests($pending = false, $approved = false,         $rejected = false, $timely = false) 
+    {   
+        $where = "";
+
+        //Create a new permission object.
         $this->Permission  = new Permission();
 
-        // TODO: Show or filter by the logged in user role.
         $sql = "SELECT requests.id, CONCAT(users.first_name, ' ', users.last_name) AS dept_supervisor, facilities.name AS facility, requests.department, requests.number_of_persons, requests.required_date, requests.departure_time, requests.destination, requests.contact_num, CONCAT(drivers.first_name, ' ', drivers.last_name) AS driver, requests.status
         FROM requests
         INNER JOIN users ON requests.dept_supervisor = users.id
         INNER JOIN facilities ON requests.facility_id = facilities.id
         LEFT JOIN drivers ON requests.driver_id = drivers.id";
-        $where = "";
+
         if ($pending ) { 
             $where .= empty($where) ? " WHERE (status = 'Pending'" :  " AND status = 'Pending' ";
         }
@@ -39,16 +52,19 @@ class VehicleRequest extends Model
         if ($approved ) {
             $where .= empty($where) ? " WHERE (status = 'Approved'" :  " AND status = 'Approved' ";
         }
-         if ($rejected ) {
+        if ($rejected ) {
              $where .= empty($where) ? " WHERE (status = 'Rejected'" :  " OR status = 'Rejected' ";
         } 
         if ($timely ) {
             $where .= empty($where) ? " WHERE requests.required_date > CURDATE()" :  " AND requests.required_date > CURDATE() ";
         }  
+
         $where .= ")";
+
         $sql .= $where;
+
         $cur_user = Session::get('id');
-        // die(var_dump($cur_user)); !empty($cur_user) && 
+
         if (!empty($cur_user) && !$this->Permission->hasAnyRole(['power-user','approver']) ) {
             if ($approved || $pending ) {
                 $sql = $sql." AND (users.id = ".Session::get('id');
@@ -57,7 +73,7 @@ class VehicleRequest extends Model
             }
             $sql .= ")";
         }
-        // die(var_dump($sql));
+
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -67,7 +83,12 @@ class VehicleRequest extends Model
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
-
+    
+    /**
+     * Get all vehicles
+     *
+     * @return void
+     */
     public function getAllVehicles()
     {
         $sql = "SELECT `license_plate`, `vehicle_type`, `body_type`, `make`, `model`, `year`, `transmission`, `fuel`, `production_year`, `facility_id`, `engine_number`, `chasis_number`, `colour`, `seating`, `cc_rating`, `fitness_expiration`, `license_expiration`, `next_maintenance`, `is_available`, `is_operable`, `created_at`, `updated_at` FROM `vehicles`";
@@ -76,14 +97,25 @@ class VehicleRequest extends Model
         return $query->fetchAll();
     }
 
+    /**
+     * Get all drivers
+     *
+     * @return void
+     */
     public function getAllDrivers()
     {
         $sql = "SELECT `id`, `first_name`, `last_name`, `facility_id`, `is_active`, `created_at`, `updated_at` FROM `drivers`";
+
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
 
+    /**
+     * Check if driver is assigned to a request
+     *
+     * @return void
+     */
     public function driverCheck()
     {
         $driver_id = $_POST['driver_id'];
@@ -101,6 +133,11 @@ class VehicleRequest extends Model
         return $query->fetch();
     }
 
+    /**
+     * Checks if vehicle is assigned to a request
+     *
+     * @return void
+     */
     public function vehicleCheck()
     {
         $license_plate = $_POST['license_plate'];
@@ -119,15 +156,21 @@ class VehicleRequest extends Model
     }
 
     /**
-     * Add a request to database
-     * TODO put this explanation into readme and remove it from here
-     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
-     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
-     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
-     * in the views (see the views for more info).
-     * @param string $artist Artist
-     * @param string $track Track
-     * @param string $link Link
+     * Adds a request
+     *
+     * @param [type] $facility_id
+     * @param [type] $department
+     * @param [type] $number_of_persons
+     * @param [type] $purpose_of_trip
+     * @param [type] $pick_up_point
+     * @param [type] $required_date
+     * @param [type] $departure_time
+     * @param [type] $destination
+     * @param [type] $other_info
+     * @param [type] $dept_supervisor
+     * @param [type] $contact_num
+     * @param [type] $request_date
+     * @return void
      */
     public function addRequest($facility_id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $dept_supervisor, $contact_num, $created_at)
     {
@@ -150,10 +193,10 @@ class VehicleRequest extends Model
     }
 
     /**
-     * Delete a request in the database
-     * Please note: this is just an example! In a real application you would not simply let everybody
-     * add/update/delete stuff!
-     * @param int $id Id of request
+     * Deletes a request
+     *
+     * @param [type] $id
+     * @return void
      */
     public function deleteRequest($id)
     {
@@ -168,7 +211,7 @@ class VehicleRequest extends Model
     }
 
     /**
-     * Get a request from database
+     * Gets a request from database
      * @param integer $id
      */
     public function getRequest($id)
@@ -187,16 +230,19 @@ class VehicleRequest extends Model
     }
 
     /**
-     * Update a request in database
-     * // TODO put this explaination into readme and remove it from here
-     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
-     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
-     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
-     * in the views (see the views for more info).
-     * @param string $artist Artist
-     * @param string $track Track
-     * @param string $link Link
-     * @param int $id Id
+     * Updates a request
+     *
+     * @param [type] $id
+     * @param [type] $department
+     * @param [type] $number_of_persons
+     * @param [type] $purpose_of_trip
+     * @param [type] $pick_up_point
+     * @param [type] $required_date
+     * @param [type] $departure_time
+     * @param [type] $destination
+     * @param [type] $other_info
+     * @param [type] $contact_num
+     * @return void
      */
     public function updateRequest($id, $department, $number_of_persons, $purpose_of_trip, $pick_up_point, $required_date, $departure_time, $destination, $other_info, $contact_num)
     {
@@ -210,8 +256,14 @@ class VehicleRequest extends Model
         $query->execute($parameters);
     }
     /**
-     * Screening Function
+     * Screen request
      *
+     * @param [type] $id
+     * @param [type] $license_plate
+     * @param [type] $driver_id
+     * @param [type] $status
+     * @param [type] $comments
+     * @return void
      */
     public function screenRequest($id, $license_plate, $driver_id, $status, $comments)
 

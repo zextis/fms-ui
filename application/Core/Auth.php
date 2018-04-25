@@ -32,7 +32,8 @@ class Auth
             // send the user to the login form page, but also add the current page's URI (the part after the base URL)
             // as a parameter argument, making it possible to send the user back to where he/she came from after a
             // successful login
-            header('location: ' . URL . 'home?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+            // header('location: ' . URL . 'home?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+            header('location: ' . URL.'home');
 
             // to prevent fetching views via cURL (which "ignores" the header-redirect above) we leave the application
             // the hard way, via exit(). @see https://github.com/panique/php-login/issues/453

@@ -12,7 +12,7 @@
         <div class="col span-10-of-12 main-content">
             <header class="header">
                 <div class="header__text-box">
-                    <h2 class="content__heading--secondary managetext animated fadeInLeft">Your Request History
+                    <h2 class="content__heading--secondary managetext animated fadeInLeft">Request History
                     </h2>
                 </div>
             </header>

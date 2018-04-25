@@ -100,9 +100,8 @@
                                 <label for="department">Department</label>
                                 <input type="text" name="department" id="department" placeholder="Department" required>
                             </span>
-
                             <span class="in_form">
-                                <label for="destination">Destination</label>
+                            <label for="destination">Destination</label>
                                 <input type="text" name="destination" id="destination" placeholder="Destination" required>
                             </span>
 
@@ -112,7 +111,6 @@
                                 </label>
                                 <input type="number" value="1" name="num_pers" id="num_pers" min="1" max="30" required>
                             </span>
-
 
                             <span class="in_form">
                                 <label for="phone">Contact No.</label>
@@ -124,30 +122,28 @@
                                 <input type="text" name="pickup" id="pickup" placeholder="Pickup location" required>
                             </span>
 
+                                <span class="in_form">
+                                    <label for="purpose">Purpose</label>
+                                    <textarea name="purpose" id="purpose" cols="20" rows="3" placeholder="State the reason for your trip." required></textarea>
+                                </span>
 
-                            <span class="in_form">
-                                <label for="reqdate">Required Date
-                                    <span>(mm/dd/yy)</span>
-                                </label>
-                                <input type="date" name="reqdate" id="reqdate" min=<?php echo date("Y-m-d", strtotime("+1day")); ?> required>
-                            </span>
+                                <span class="in_form">
+                                    <label for="other_info">Other Info
+                                        <span>(optional)</span>
+                                    </label>
+                                    <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?"></textarea>
+                                </span>
 
-                            <span class="in_form">
-                                <label for="purpose">Purpose</label>
-                                <textarea name="purpose" id="purpose" cols="20" rows="3" placeholder="State the reason for your trip." required></textarea>
-                            </span>
+                                <span class="in_form">
+                                    <label for="dep_time">Departure Time</label>
+                                    <input type="time" name="dep_time" id="dep_time" required>
+                                </span>
 
-                            <span class="in_form">
-                                <label for="other_info">Other Info
-                                    <span>(optional)</span>
-                                </label>
-                                <textarea name="other_info" id="other_info" cols="30" rows="3" placeholder="Anything else?"></textarea>
-                            </span>
-
-                            <span class="in_form">
-                                <label for="dep_time">Departure Time</label>
-                                <input type="time" name="dep_time" id="dep_time" required>
-                            </span>
+                                <span class="in_form">
+                                    <label for="reqdate">Required Date
+                                    </label>
+                                    <input type="date" name="reqdate" id="reqdate" min=<?php echo date("Y-m-d", strtotime("+1day")); ?> required>
+                                </span>
 
                             <span class="form__btn--group">
                                 <input type="reset" value="reset" class="btn btn-small btn-reset">

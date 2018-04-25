@@ -15,7 +15,9 @@ class View
      */
     public function __construct() {
         // NOTE: Gets controller name (e.g. requests) from URL query string e.g. /requests/edit/3.
-        $this->which_ctrl = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'))[1];
+        $this->which_ctrl = (ENVIRONMENT == 'development') 
+            ? explode('/', ltrim($_SERVER['REQUEST_URI'], '/'))[1]
+            : explode('/', ltrim($_SERVER['REQUEST_URI'], '/'))[0];
 
         // NOTE: Create a new permission object.
         $this->Permission  = new Permission();

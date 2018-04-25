@@ -14,7 +14,7 @@
             <h3 class="sidenav__group--head">Requests: </i></h3>
             <?php if($this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) : ?>
             <li>
-                <a href="<?php echo URL; ?>requests" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'requests' ? 'active' : ''; ?>">Request Management</a>
+                <a href="<?php echo URL; ?>requests" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'requests' ? 'active' : ''; ?>">Request Manager</a>
             </li>
             <li>
                 <a href="<?php echo URL; ?>reqhistory" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'reqhistory' ? 'active' : ''; ?>">Request History</a>
@@ -25,24 +25,24 @@
             <h3 class="sidenav__group--head">Vehicles:</i>
             </h3>
             <li>
-                <a href="<?php echo URL; ?>vehicles" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'vehicles' ? 'active' : ''; ?>">Vehicle Management</a>
+                <a href="<?php echo URL; ?>vehicles" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'vehicles' ? 'active' : ''; ?>">Vehicle Manager</a>
             </li>
             <li>
-                <a href="<?php echo URL; ?>maintenance" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'maintenance' ? 'active' : ''; ?>">Maintenance History</a>
+                <a href="<?php echo URL; ?>maintenance" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'maintenance' ? 'active' : ''; ?>">Maintenance</a>
             </li>
             <?php endif; ?>
 
             <?php if($this->Permission->hasAnyRole(['power-user'])) : ?>
             <h3 class="sidenav__group--head">Drivers:</h3>
             <li>
-                <a href="<?php echo URL; ?>drivers" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'drivers' ? 'active' : ''; ?>">Driver Management</a>
+                <a href="<?php echo URL; ?>drivers" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'drivers' ? 'active' : ''; ?>">Driver Manager</a>
             </li>
             <?php endif; ?>
 
             <?php if($this->Permission->hasAnyRole(['power-user'])) : ?>
             <h3 class="sidenav__group--head">Users:</h3>
             <li>
-                <a href="<?php echo URL; ?>users" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'users' ? 'active' : ''; ?>">User Management</a>
+                <a href="<?php echo URL; ?>users" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'users' ? 'active' : ''; ?>">User Manager</a>
                 <a href="<?php echo URL; ?>permissions" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'permissions' ? 'active' : ''; ?>">Permissions</a>
                 <a href="<?php echo URL; ?>roles" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'roles' ? 'active' : ''; ?>">Roles</a>
             </li>
