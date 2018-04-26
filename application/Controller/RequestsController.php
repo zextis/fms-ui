@@ -23,6 +23,7 @@ use Mini\Core\Permission;
 use Mini\Core\Mail;
 use Mini\Core\Config;
 use Mini\Model\VehicleRequest;
+use Mini\Model\User;
 
 class RequestsController extends Controller
 {
@@ -202,6 +203,12 @@ class RequestsController extends Controller
         Redirect::to('requests/index');
     }
 
+    /**
+     * Approve/reject the request.
+     *
+     * @param integer $id The request id
+     * @return void
+     */
     public function screen($id)
     {
          // Instance new Model (VehicleRequest)
@@ -210,12 +217,50 @@ class RequestsController extends Controller
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("screen_request")) {
             // do updateSong() from model/model.php
-            $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
+            $updated = $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
 
-            // TODO: Send email to notify the person making the request of status.
-            // $Mail = new Mail();
-            // $response = $Mail->sendMail('first.last@srha.gov.jm', 'no-reply@srha.gov.jm', 'Fleet Management System', 'RE: Request #123 to Kingston', 'Your request was approved. Have a nice trip.');
-            // die(var_dump($response));
+            // Send email if no error.
+            if ($updated) {
+
+                // Instance new Model (VehicleRequest)
+                $VehicleRequest = new VehicleRequest();
+                $request = $VehicleRequest->getRequest($id);
+
+                if ($request) {                    
+                    // Get user making the request.
+                    // Instance new Model (VehicleRequest)
+                    $User = new User();
+                    $user = $User->getUserById($request->dept_supervisor);
+    
+                    // If user send email.
+                    if ($user) {
+                        // TODO: Create approved_by field to record the coordinator that
+                        // approves or reject request.
+                        $body = $request->status == 'Approved' 
+                            ? "Your request was $request->status. Have a nice and safe trip."
+                            : "Sorry, your request was $request->status. $request->comments.";
+
+$body .= <<<EOD
+\n
+Regards,
+
+Fleet Coordinator
+Robert Robinson
+Phone: 318-0787
+E-mail: robert.robinson@srha.gov.jm
+Southern Regional Health Authority
+3 Brumalia Road, Mandeville, Manchester
+Phone: 625-0612/3/779-2663
+www.srha.gov.jm
+EOD;
+    
+                        // TODO: Send email to notify the person making the request of status.
+                        $Mail = new Mail();
+                        $response = $Mail->sendMail($user->email, 'no-reply@srha.gov.jm', 'Fleet Management System', "RE: Request #$request->id to $request->destination", $body);
+                        // die(var_dump($response));
+                    }
+                }
+            } 
         }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');

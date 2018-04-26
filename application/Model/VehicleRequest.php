@@ -216,7 +216,7 @@ class VehicleRequest extends Model
      */
     public function getRequest($id)
     {
-        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at FROM requests WHERE id = :id LIMIT 1";
+        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at, status, comments FROM requests WHERE id = :id LIMIT 1";
         $query = $this->db->prepare($sql);
         $parameters = array(':id' => $id);
 
@@ -278,7 +278,9 @@ class VehicleRequest extends Model
         // NOTE: Print error message.
         if (!$query) {
             print_r($query->errorInfo());
+            return false; // Error return false.
         }
+        return true;
     }
 
     /**

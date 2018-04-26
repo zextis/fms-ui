@@ -21,7 +21,7 @@
             </li>
             <?php endif; ?>
 
-            <?php if($this->Permission->hasAnyRole(['power-user','approver'])) : ?>
+            <?php if($this->Permission->hasAnyRole(['power-user','data-entry'])) : ?>
             <h3 class="sidenav__group--head">Vehicles:</i>
             </h3>
             <li>
