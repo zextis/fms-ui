@@ -42,6 +42,10 @@ class DriversController extends Controller
      */
     public function index()
     {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
+            Redirect::toError();
+        }
+
        // Instance new Model (VehicleRequest)
         $Drivers = new Drivers();
         $drivers = $Drivers->getAllDrivers(); // getting all users and amount of users
@@ -74,6 +78,9 @@ class DriversController extends Controller
      */
     public function store()
     {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
+            Redirect::toError();
+        } 
         
         // if we have POST data to create a new driver_request entry
         if (Request::isset("submit_add_driver")) {
@@ -103,6 +110,10 @@ class DriversController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
+            Redirect::toError();
+        }
+
         if (isset($id)) {
             $Drivers = new Drivers();
             $driver = $Drivers->getDriver($id);
@@ -129,6 +140,10 @@ class DriversController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_driver")) {
             $Drivers = new Drivers();

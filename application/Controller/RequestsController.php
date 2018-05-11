@@ -45,6 +45,10 @@ class RequestsController extends Controller
      */
     public function index()
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
         
@@ -76,6 +80,10 @@ class RequestsController extends Controller
      * @return void
      */
     public function store() {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_request")) {
             // set the default timezone to use. Available since PHP 5.1
@@ -103,6 +111,10 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
 
@@ -119,6 +131,10 @@ class RequestsController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have an id of a vehicle_request that should be edited
         if (isset($id)) {
             // Instance new Model (VehicleRequest)
@@ -134,7 +150,7 @@ class RequestsController extends Controller
     }
     
     public function checkDriver()
-    {   
+    {
         $id = 1;
     // if we have an id of a vehicle_request that should be edited
         // Instance new Model (VehicleRequest)
@@ -156,6 +172,7 @@ class RequestsController extends Controller
         }
 
     }
+
     public function checkVehicle()
     {   
         $id = 1;
@@ -191,6 +208,10 @@ class RequestsController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_request")) {
             // Instance new Model (VehicleRequest)
@@ -211,6 +232,10 @@ class RequestsController extends Controller
      */
     public function screen($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
          // Instance new Model (VehicleRequest)
          $VehicleRequest = new VehicleRequest();
          
@@ -254,10 +279,16 @@ Phone: 625-0612/3/779-2663
 www.srha.gov.jm
 EOD;
     
-                        // TODO: Send email to notify the person making the request of status.
-                        $Mail = new Mail();
-                        $response = $Mail->sendMail($user->email, 'no-reply@srha.gov.jm', 'Fleet Management System', "RE: Request #$request->id to $request->destination", $body);
-                        // die(var_dump($response));
+                        try {
+                            // TODO: Send email to notify the person making the request of status.
+                            $Mail = new Mail();
+                            $response = $Mail->sendMail($user->email, 'no-reply@srha.gov.jm', 'Fleet Management System', "RE: Request #$request->id to $request->destination", $body);
+                            // die(var_dump($Mail->getError()));
+                        } catch (Exception $e) {
+                            // die(var_dump($Mail->ErrorInfo));
+                            echo 'Message could not be sent. Mailer Error: ', $Mail->ErrorInfo;
+                        }
+                        // die(var_dump('Response ' . $response . ' ' .$Mail->getError()));
                     }
                 }
             } 
@@ -278,6 +309,10 @@ EOD;
      */
     public function delete($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+        
         // if we have an id of a vehicle_request that should be deleted
         if (isset($id)) {
             // Instance new Model (VehicleRequest)

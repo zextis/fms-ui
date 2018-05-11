@@ -105,4 +105,4 @@ define('EMAIL_SMTP_AUTH', true);
 define('EMAIL_SMTP_USERNAME', 'no-reply@srha.gov.jm');
 define('EMAIL_SMTP_PASSWORD', 'admin@FLEETMANAGEMENT2018#');
 define('EMAIL_SMTP_PORT', 25);
-define('EMAIL_SMTP_ENCRYPTION', 'ssl');
+define('EMAIL_SMTP_ENCRYPTION', '');

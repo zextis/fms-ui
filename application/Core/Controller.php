@@ -26,5 +26,8 @@ class Controller
 
         // Create view object to use it inside a controller, like $this->View->render();
         $this->View = new View();
+        
+        // NOTE: Create a new permission object.
+        $this->Permission  = new Permission();
     }
 }

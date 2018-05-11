@@ -21,6 +21,7 @@ use Mini\Core\Auth;
 use Mini\Model\User;
 use Mini\Model\Facility;
 use Mini\Model\Role;
+use Mini\Model\Permission;
 
 class UsersController extends Controller
 {
@@ -42,18 +43,22 @@ class UsersController extends Controller
      */
     public function index()
     {
-       // Instance new Model (VehicleRequest)
-       $User = new User();
-       $users = $User->getAllUsers(); // getting all users and amount of users
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
 
-       $Facility = new Facility();
-       $facilities = $Facility->getAllFacilities();
+        // Instance new Model (VehicleRequest)
+        $User = new User();
+        $users = $User->getAllUsers(); // getting all users and amount of users
 
-       $Roles = new Role();
-       $roles = $Roles->getAllRoles();
+        $Facility = new Facility();
+        $facilities = $Facility->getAllFacilities();
 
-       // load views. within the views we can echo out $users easily
-       $this->View->render('users/index', array('users' => $users, 'facilities' => $facilities, 'roles' => $roles)); 
+        $Roles = new Role();
+        $roles = $Roles->getAllRoles();
+
+        // load views. within the views we can echo out $users easily
+        $this->View->render('users/index', array('users' => $users, 'facilities' => $facilities, 'roles' => $roles)); 
     }
 
     /**
@@ -77,6 +82,10 @@ class UsersController extends Controller
      */
     public function store() {
         
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_user")) {
             // set the default timezone to use. Available since PHP 5.1
@@ -111,8 +120,12 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-          // if we have an id of a vehicle_request that should be edited
-          if (isset($id)) {
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+
+        // if we have an id of a vehicle_request that should be edited
+        if (isset($id)) {
             // Instance new Model (VehicleRequest)
             $User = new User();
             $user = $User->getUserById($id);
@@ -142,6 +155,10 @@ class UsersController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+        
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_user")) {
 

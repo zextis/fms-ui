@@ -42,6 +42,10 @@ body {
     background-size: cover;
 }
 
+.container {
+    padding: 1em;
+}
+
 .row {
     height: auto;
     margin: 0 auto;

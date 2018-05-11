@@ -27,19 +27,19 @@
             <li>
                 <a href="<?php echo URL; ?>vehicles" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'vehicles' ? 'active' : ''; ?>">Vehicle Manager</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="<?php echo URL; ?>maintenance" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'maintenance' ? 'active' : ''; ?>">Maintenance</a>
-            </li>
+            </li> -->
             <?php endif; ?>
 
-            <?php if($this->Permission->hasAnyRole(['power-user'])) : ?>
+            <?php if($this->Permission->hasAnyRole(['power-user', 'data-entry'])) : ?>
             <h3 class="sidenav__group--head">Drivers:</h3>
             <li>
                 <a href="<?php echo URL; ?>drivers" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'drivers' ? 'active' : ''; ?>">Driver Manager</a>
             </li>
             <?php endif; ?>
 
-            <?php if($this->Permission->hasAnyRole(['power-user'])) : ?>
+            <?php if ($this->Permission->hasAnyRole(['power-user'])) : ?>
             <h3 class="sidenav__group--head">Users:</h3>
             <li>
                 <a href="<?php echo URL; ?>users" class="navlink <?php echo !empty($this->which_ctrl) && $this->which_ctrl == 'users' ? 'active' : ''; ?>">User Manager</a>

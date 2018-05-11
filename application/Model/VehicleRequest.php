@@ -273,11 +273,11 @@ class VehicleRequest extends Model
         $parameters = array(':id' => $id, ':license_plate' => !empty($license_plate) ? $license_plate : null, ':driver_id' => !empty($driver_id) ? $driver_id : null, ':status' => $status, ':comments' => $comments);
         // die(var_dump($query));
 
-        $query->execute($parameters);
+        $success = $query->execute($parameters);
 
         // NOTE: Print error message.
-        if (!$query) {
-            print_r($query->errorInfo());
+        if (!$success) {
+            // print_r($query->errorInfo());
             return false; // Error return false.
         }
         return true;

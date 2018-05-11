@@ -42,16 +42,20 @@ class RolesController extends Controller
      */
     public function index()
     {
-       // Instance new Model (VehicleRequest)
-       $Role = new Role();
-       $roles = $Role->getAllRoles(); // getting all users and amount of users
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
 
-       // Instance new Model (VehicleRequest)
-       $Permission = new Permission();
-       $permissions = $Permission->getAllPermissions();
+        // Instance new Model (VehicleRequest)
+        $Role = new Role();
+        $roles = $Role->getAllRoles(); // getting all users and amount of users
 
-       // load views. within the views we can echo out $users easily
-       $this->View->render('roles/index', array('roles' => $roles, 'permissions' => $permissions)); 
+        // Instance new Model (VehicleRequest)
+        $Permission = new Permission();
+        $permissions = $Permission->getAllPermissions();
+
+        // load views. within the views we can echo out $users easily
+        $this->View->render('roles/index', array('roles' => $roles, 'permissions' => $permissions));
     }
 
     /**
@@ -74,7 +78,10 @@ class RolesController extends Controller
      * @return void
      */
     public function store() {
-        
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_role")) {
             $Role = new Role();
@@ -102,7 +109,11 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-          if (isset($id)) {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
+        if (isset($id)) {
             $Role = new Role();
             $role = $Role->getRole($id);
 
@@ -129,6 +140,10 @@ class RolesController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+        
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_role")) {
 

@@ -18,7 +18,7 @@
     <!-- /JQuery -->
 
     <script src="<?php echo URL; ?>vendors/js/jquery.dynatable.js"></script>
-    <script src="<?php echo URL; ?>vendors/js/jquery.selectric.min.js"></script>
+    <!-- <script src="<?php echo URL; ?>vendors/js/jquery.selectric.min.js"></script> -->
     <script src="<?php echo URL; ?>vendors/js/alertify.js"></script>
 
     <!-- ORIGINAL JAVASCRIPT FILES -->
