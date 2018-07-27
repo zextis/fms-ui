@@ -40,7 +40,7 @@
                             <kbd>Ctrl</kbd> and click more titles to add more sorts.
                             <br>
                             - Dates are ordered <mark>mm/dd/yyyy</mark>
-                            </p>
+                        </p>
                         <div class="tablewrapper">
                             <table class="ptable" id="requestTable">
                                 <thead>

@@ -89,8 +89,8 @@ class RequestsController extends Controller
             // set the default timezone to use. Available since PHP 5.1
             date_default_timezone_set('UTC');
 
-            // TODO: Get id's from logged in user.
-            $facility_id = 1; 
+            // Get id from logged in user.
+            $facility_id = Session::get('facility_id'); 
             $dept_supervisor = Session::get('id');
             $requested_date = date("Y-m-d H:i:s");
 
@@ -99,7 +99,7 @@ class RequestsController extends Controller
             // do addRequest() in model/model.php
             $VehicleRequest->addRequest($facility_id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), $dept_supervisor, Request::post('phone'), $requested_date);
         }
-
+        
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
     }
@@ -212,6 +212,9 @@ class RequestsController extends Controller
             Redirect::toError();
         }
 
+        // TODO:
+        // Only allow user to update the request they create unless power-user
+        // Get request compare with user id from session against dept_supervisor.
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_request")) {
             // Instance new Model (VehicleRequest)

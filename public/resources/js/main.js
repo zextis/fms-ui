@@ -57,7 +57,9 @@
 
 
 	//Selectric
-	$('select').selectric();
+	$('select').selectric({
+		maxHeight: 100
+	  });
 
 	alertify.closeLogOnClick(true)
 		.logPosition("top right");

@@ -6,6 +6,7 @@
             if(Session::userIsLoggedIn() ) :
             ?>
             <p class="signed"><span><i class="ion-record"></i></span>  <?php echo Session::get('username'); ?></p>
+            <p class="signed"><?php echo Session::get('facility'); ?></p>
             <?php endif; ?>
 
 <div class="sidenav__content">
