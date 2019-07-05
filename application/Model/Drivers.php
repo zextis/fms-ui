@@ -10,12 +10,18 @@ use Mini\Libs\Helper;
  * Handles all the PUBLIC profile stuff. This is not for getting data of the logged in user, it's more for handling
  * data of all the other permissions. Useful for display profile information, creating user lists etc.
  */
-class Permission extends Model
+class Drivers extends Model
 {
-    public function getAllPermissions() {
+    /**
+     * getAllDrivers
+     * Gets all drivers from database
+     */
+    public function getAllDrivers()
+    {
+        
 
-        $sql = "SELECT permissions.id, permissions.name
-            FROM permissions";
+        $sql = "SELECT drivers.`id`, drivers.`first_name`, drivers.`last_name`, facilities.name AS facility, drivers.`is_active`, drivers.`created_at`, drivers.`updated_at` FROM  `drivers` INNER JOIN facilities ON drivers.facility_id=facilities.id";
+        
         $query = $this->db->prepare($sql);
 
         // DEFAULT is the marker for "normal" accounts (that have a password etc.)
@@ -26,45 +32,46 @@ class Permission extends Model
         return $query->fetchAll();
     }
 
-    public function addPermission($name)
+    public function addDriver($firstname, $lastname, $facility_id, $active)
     {
-        $sql = "INSERT INTO permissions (name, created_at, updated_at) VALUES (:name, :created_at, :updated_at)";
+        $sql = "INSERT INTO `drivers`(`first_name`, `last_name`, `facility_id`, `is_active`, `created_at`, `updated_at`) VALUES (:first_name, :last_name, :facility_id, :is_active, :created_at, :updated_at)";
 
         $query = $this->db->prepare($sql);
 
         $current_date = date("Y-m-d H:i:s");
-        $parameters = array(':name' => $name, ':created_at' => $current_date, ':updated_at' => $current_date);
+        $parameters = array(':first_name' => $firstname, ':last_name' => $lastname, ':facility_id' => $facility_id, ':is_active' => $active, ':created_at' => $current_date, ':updated_at' => $current_date);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
+        
     }
 
     /**
      * Get a permission from database
      * @param integer $id
      */
-    public function getPermission($id)
+    public function getDriver($id)
     {
-        $sql = "SELECT id, name FROM permissions WHERE id = :id LIMIT 1";
-        $query = $this->db->prepare($sql);
+        $sql = "SELECT drivers.`id`, drivers.`first_name`, drivers.`last_name`, drivers.facility_id, drivers.`is_active`, drivers.`created_at`, drivers.`updated_at` FROM  `drivers` WHERE drivers.id=:id LIMIT 1";
+        
         $parameters = array(':id' => $id);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
-
+        $query = $this->db->prepare($sql);
         $query->execute($parameters);
 
         // fetch() is the PDO method that get exactly one result
         return $query->fetch();
     }
 
-    public function updatePermission($id, $name)
+    public function updateDriver($id, $firstname, $lastname, $facility_id, $active)
     {
-        $sql = "UPDATE permissions SET name = :name, updated_at = :updated_at WHERE id = :id";
+        $sql = "UPDATE `drivers` SET `first_name`= :first_name,`last_name`= :last_name,`facility_id`=:facility_id,`is_active`=:is_active WHERE id=:id";
         $query = $this->db->prepare($sql);
-        $parameters = array(':id' => $id, ':name' => $name, ':updated_at' => date("Y-m-d H:i:s"));
+        $parameters = array(':id' => $id, ':first_name' => $firstname, ':last_name' => $lastname, ':facility_id' => $facility_id, ':is_active' => $active);
 
         // useful for debugging: you can see the SQL behind above construction by using:
         // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();

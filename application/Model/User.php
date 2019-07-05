@@ -320,8 +320,9 @@ class User extends Model
      */
     public function getUserDataByUsername($username)
     {
-        $sql = "SELECT id, first_name, last_name, username, email, password, role, is_active, facility_id, created_at, updated_at
+        $sql = "SELECT users.id, users.first_name, users.last_name, users.username, users.email, users.password, users.role, users.is_active, users.facility_id, users.created_at, users.updated_at, facilities.name AS facility
                  FROM users
+                 LEFT JOIN facilities ON users.facility_id = facilities.id
                  WHERE (username = :username OR email = :username)
                  LIMIT 1";
         $query = $this->db->prepare($sql);

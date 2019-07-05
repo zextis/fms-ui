@@ -103,6 +103,6 @@ define('EMAIL_USE_SMTP', false);
 define('EMAIL_SMTP_HOST', 'https://webmail2013.srha.gov.jm');
 define('EMAIL_SMTP_AUTH', true);
 define('EMAIL_SMTP_USERNAME', 'no-reply@srha.gov.jm');
-define('EMAIL_SMTP_PASSWORD', 'noreplypass');
+define('EMAIL_SMTP_PASSWORD', 'admin@FLEETMANAGEMENT2018#');
 define('EMAIL_SMTP_PORT', 25);
-define('EMAIL_SMTP_ENCRYPTION', 'ssl');
+define('EMAIL_SMTP_ENCRYPTION', '');

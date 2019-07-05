@@ -18,15 +18,14 @@ use Mini\Core\Controller;
 use Mini\Core\Redirect;
 use Mini\Core\Request;
 use Mini\Core\Auth;
-use Mini\Model\User;
+use Mini\Model\Vehicle;
 use Mini\Model\Facility;
-use Mini\Model\Role;
-use Mini\Model\Permission;
+use Mini\Model\Drivers;
 
-class UsersController extends Controller
+class DriversController extends Controller
 {
     /**
-     * Construct this object by extending the basic Controller class.use Mini\Model\VehicleRequest;
+     * Construct this object by extending the basic Controller class.use Mini\Model\DriversRequest;
      */
     public function __construct()
     {
@@ -43,22 +42,19 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (!$this->Permission->hasAnyRole(['power-user'])) {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
             Redirect::toError();
         }
 
-        // Instance new Model (VehicleRequest)
-        $User = new User();
-        $users = $User->getAllUsers(); // getting all users and amount of users
+       // Instance new Model (VehicleRequest)
+        $Drivers = new Drivers();
+        $drivers = $Drivers->getAllDrivers(); // getting all users and amount of users
 
         $Facility = new Facility();
         $facilities = $Facility->getAllFacilities();
 
-        $Roles = new Role();
-        $roles = $Roles->getAllRoles();
-
-        // load views. within the views we can echo out $users easily
-        $this->View->render('users/index', array('users' => $users, 'facilities' => $facilities, 'roles' => $roles)); 
+       // load views. within the views we can echo out $users easily
+        $this->View->render('drivers/index', array('drivers' => $drivers, 'facilities' => $facilities));
     }
 
     /**
@@ -80,27 +76,20 @@ class UsersController extends Controller
      *
      * @return void
      */
-    public function store() {
-        
-        if (!$this->Permission->hasAnyRole(['power-user'])) {
+    public function store()
+    {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
             Redirect::toError();
+        } 
+        
+        // if we have POST data to create a new driver_request entry
+        if (Request::isset("submit_add_driver")) {
+            $Drivers = new Drivers();
+            $Drivers->addDriver(Request::post('first_name'), Request::post('last_name'), Request::post('facility'), Request::post('status'));
         }
 
-        // if we have POST data to create a new vehicle_request entry
-        if (Request::isset("submit_add_user")) {
-            // set the default timezone to use. Available since PHP 5.1
-            date_default_timezone_set('UTC');
-
-            // Check if is_active is submitted i.e. checkbox is checked
-            // set to 1 for true is checked else 0
-            $is_active = !empty(Request::post('is_active')) ? 1 : 0;
-
-            $User = new User();
-            $User->addUser(Request::post('facility_id'), Request::post('first_name'), Request::post('last_name'), Request::post('email'), Request::post('password'), $is_active, Request::post('roles'));
-        }
-
-        // where to go after vehicle_request has been added
-        Redirect::to('users/index');
+        // where to go after driver_request has been added
+        Redirect::to('drivers/index');
     }
 
     /**
@@ -109,38 +98,34 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
 
     }
 
-     /**
+    /**
      * ACTION: Show the form for editing the specified resource.
      * This method handles what happens when you move to http://yourproject/user/editsong
      * @param int $id Id of the to-edit admin
      */
     public function edit($id)
     {
-        if (!$this->Permission->hasAnyRole(['power-user'])) {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
             Redirect::toError();
         }
 
-        // if we have an id of a vehicle_request that should be edited
         if (isset($id)) {
-            // Instance new Model (VehicleRequest)
-            $User = new User();
-            $user = $User->getUserById($id);
+            $Drivers = new Drivers();
+            $driver = $Drivers->getDriver($id);
 
             $Facility = new Facility();
             $facilities = $Facility->getAllFacilities();
-     
-            $Roles = new Role();
-            $roles = $Roles->getAllRoles();
 
             // load views. within the views we can echo out $vehicle_request easily
-            $this->View->render('users/edit', array('user' => $user, 'facilities' => $facilities, 'roles' => $roles));
+            $this->View->render('drivers/edit', array('drivers' => $driver,  'facilities' => $facilities));
         } else {
             // redirect user to requests index page (as we don't have a request_id)
-            Redirect::to('users/index');
+            Redirect::to('drivers/index');
         }
     }
 
@@ -155,29 +140,18 @@ class UsersController extends Controller
      */
     public function update($id)
     {
-        if (!$this->Permission->hasAnyRole(['power-user'])) {
+        if (!$this->Permission->hasAnyRole(['power-user','data-entry'])) {
             Redirect::toError();
         }
-        
+
         // if we have POST data to create a new vehicle_request entry
-        if (Request::isset("submit_update_user")) {
-
-            // New selected roles to be added to user.
-            $add_roles = array_diff(Request::post('roles'), explode(',', Request::post('old_roles')));;
-
-            // Roles that was deselected from user.
-            $remove_roles = array_diff(explode(',', Request::post('old_roles')), Request::post('roles'));
-
-            // Check if is_active is submitted i.e. checkbox is checked
-            // set to 1 for true is checked else 0
-            $is_active = !empty(Request::post('is_active')) ? 1 : 0;
-
-            $User = new User();
-            $User->updateUser($id, Request::post('facility_id'), Request::post('first_name'), Request::post('last_name'), Request::post('email'), Request::post('password'), $is_active, $remove_roles, $add_roles);
+        if (Request::isset("submit_update_driver")) {
+            $Drivers = new Drivers();
+            $Drivers->updateDriver($id, Request::post('first_name'),  Request::post('last_name'),  Request::post('facility'),  Request::post('status'));
         }
 
         // where to go after vehicle_request has been added
-        Redirect::to('users/index');
+        Redirect::to('drivers/index');
     }
 
     /**
@@ -192,6 +166,6 @@ class UsersController extends Controller
      */
     public function delete($id)
     {
-      
+
     }
 }

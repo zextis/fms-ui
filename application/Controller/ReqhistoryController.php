@@ -32,6 +32,10 @@ class ReqhistoryController extends Controller
      */
     public function index()
     {   
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
         

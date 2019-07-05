@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $VehicleRequest = new VehicleRequest();
         // getting all requests and amount of requests
-        $requests = $VehicleRequest->getAllRequests(false, true, false, false);
+        $requests = $VehicleRequest->getAllRequests(false, true, false, true);
 
         
         // load views

@@ -23,6 +23,7 @@ use Mini\Core\Permission;
 use Mini\Core\Mail;
 use Mini\Core\Config;
 use Mini\Model\VehicleRequest;
+use Mini\Model\User;
 
 class RequestsController extends Controller
 {
@@ -44,6 +45,10 @@ class RequestsController extends Controller
      */
     public function index()
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
         
@@ -75,13 +80,17 @@ class RequestsController extends Controller
      * @return void
      */
     public function store() {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_request")) {
             // set the default timezone to use. Available since PHP 5.1
             date_default_timezone_set('UTC');
 
-            // TODO: Get id's from logged in user.
-            $facility_id = 1; 
+            // Get id from logged in user.
+            $facility_id = Session::get('facility_id'); 
             $dept_supervisor = Session::get('id');
             $requested_date = date("Y-m-d H:i:s");
 
@@ -90,7 +99,7 @@ class RequestsController extends Controller
             // do addRequest() in model/model.php
             $VehicleRequest->addRequest($facility_id, Request::post('department'), Request::post('num_pers'), Request::post('purpose'), Request::post('pickup'), Request::post('reqdate'), Request::post('dep_time'), Request::post('destination'), Request::post('other_info'), $dept_supervisor, Request::post('phone'), $requested_date);
         }
-
+        
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
     }
@@ -102,6 +111,10 @@ class RequestsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // Instance new Model (VehicleRequest)
         $VehicleRequest = new VehicleRequest();
 
@@ -118,6 +131,10 @@ class RequestsController extends Controller
      */
     public function edit($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
         // if we have an id of a vehicle_request that should be edited
         if (isset($id)) {
             // Instance new Model (VehicleRequest)
@@ -133,7 +150,7 @@ class RequestsController extends Controller
     }
     
     public function checkDriver()
-    {   
+    {
         $id = 1;
     // if we have an id of a vehicle_request that should be edited
         // Instance new Model (VehicleRequest)
@@ -155,6 +172,7 @@ class RequestsController extends Controller
         }
 
     }
+
     public function checkVehicle()
     {   
         $id = 1;
@@ -190,6 +208,13 @@ class RequestsController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
+        // TODO:
+        // Only allow user to update the request they create unless power-user
+        // Get request compare with user id from session against dept_supervisor.
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_request")) {
             // Instance new Model (VehicleRequest)
@@ -202,20 +227,74 @@ class RequestsController extends Controller
         Redirect::to('requests/index');
     }
 
+    /**
+     * Approve/reject the request.
+     *
+     * @param integer $id The request id
+     * @return void
+     */
     public function screen($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+
          // Instance new Model (VehicleRequest)
          $VehicleRequest = new VehicleRequest();
          
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("screen_request")) {
             // do updateSong() from model/model.php
-            $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
+            $updated = $VehicleRequest->screenRequest($id, Request::post('license_plate'), Request::post('driver_id'), Request::post('status'), Request::post('comments'));
 
-            // TODO: Send email to notify the person making the request of status.
-            // $Mail = new Mail();
-            // $response = $Mail->sendMail('first.last@srha.gov.jm', 'no-reply@srha.gov.jm', 'Fleet Management System', 'RE: Request #123 to Kingston', 'Your request was approved. Have a nice trip.');
-            // die(var_dump($response));
+            // Send email if no error.
+            if ($updated) {
+
+                // Instance new Model (VehicleRequest)
+                $VehicleRequest = new VehicleRequest();
+                $request = $VehicleRequest->getRequest($id);
+
+                if ($request) {                    
+                    // Get user making the request.
+                    // Instance new Model (VehicleRequest)
+                    $User = new User();
+                    $user = $User->getUserById($request->dept_supervisor);
+    
+                    // If user send email.
+                    if ($user) {
+                        // TODO: Create approved_by field to record the coordinator that
+                        // approves or reject request.
+                        $body = $request->status == 'Approved' 
+                            ? "Your request was $request->status. Have a nice and safe trip."
+                            : "Sorry, your request was $request->status. $request->comments.";
+
+$body .= <<<EOD
+\n
+Regards,
+
+Fleet Coordinator
+Robert Robinson
+Phone: 318-0787
+E-mail: robert.robinson@srha.gov.jm
+Southern Regional Health Authority
+3 Brumalia Road, Mandeville, Manchester
+Phone: 625-0612/3/779-2663
+www.srha.gov.jm
+EOD;
+    
+                        try {
+                            // TODO: Send email to notify the person making the request of status.
+                            $Mail = new Mail();
+                            $response = $Mail->sendMail($user->email, 'no-reply@srha.gov.jm', 'Fleet Management System', "RE: Request #$request->id to $request->destination", $body);
+                            // die(var_dump($Mail->getError()));
+                        } catch (Exception $e) {
+                            // die(var_dump($Mail->ErrorInfo));
+                            echo 'Message could not be sent. Mailer Error: ', $Mail->ErrorInfo;
+                        }
+                        // die(var_dump('Response ' . $response . ' ' .$Mail->getError()));
+                    }
+                }
+            } 
         }
         // where to go after vehicle_request has been added
         Redirect::to('requests/index');
@@ -233,6 +312,10 @@ class RequestsController extends Controller
      */
     public function delete($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user', 'supervisor','approver'])) {
+            Redirect::toError();
+        }
+        
         // if we have an id of a vehicle_request that should be deleted
         if (isset($id)) {
             // Instance new Model (VehicleRequest)

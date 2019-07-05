@@ -9,6 +9,29 @@ namespace Mini\Core;
  */
 class Redirect
 {
+     /**
+     * Return user to error page.
+     *
+     * @return void
+     */
+    public static function toError()
+    {
+        header('Location: ' . URL . 'error');
+        exit;
+    }
+
+    /**
+     * Return user to URL they are coming from.
+     *
+     * @return void
+     */
+    public static function toPreviousViewed()
+    {
+        header('Location: ' . '');
+        // header('Location: ' . isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'javascript://history.go(-1)');
+        exit;
+    }
+
     /**
      * To the last visited page before user logged in (useful when people are on a certain page inside your application
      * and then want to log in (to edit or comment something for example) and don't to be redirected to the main page).

@@ -40,6 +40,10 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+
        // Instance new Model (VehicleRequest)
        $Permission = new Permission();
        $permissions = $Permission->getAllPermissions(); // getting all users and amount of users
@@ -68,7 +72,10 @@ class PermissionsController extends Controller
      * @return void
      */
     public function store() {
-        
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+         
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_add_permission")) {
             $Permission = new Permission();
@@ -96,7 +103,11 @@ class PermissionsController extends Controller
      */
     public function edit($id)
     {
-          if (isset($id)) {
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+        
+        if (isset($id)) {
             $Permission = new Permission();
             $permission = $Permission->getPermission($id);
 
@@ -119,6 +130,10 @@ class PermissionsController extends Controller
      */
     public function update($id)
     {
+        if (!$this->Permission->hasAnyRole(['power-user'])) {
+            Redirect::toError();
+        }
+        
         // if we have POST data to create a new vehicle_request entry
         if (Request::isset("submit_update_permission")) {
             $Permission = new Permission();

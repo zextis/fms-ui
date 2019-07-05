@@ -43,7 +43,7 @@ class Login extends Model
 
         // successfully logged in, so we write all necessary data into the session and set "user_logged_in" to true
         $this->setSuccessfulLoginIntoSession(
-            $result->id, $result->first_name." ".$result->last_name, $result->email, $result->role
+            $result->id, $result->first_name." ".$result->last_name, $result->email, $result->role, $result->facility_id, $result->facility
         );
 
         // return true to make clear the login was successful
@@ -113,7 +113,7 @@ class Login extends Model
      * @param $email
      * @param $user_account_type
      */
-    public function setSuccessfulLoginIntoSession($id, $username, $email, $user_account_type)
+    public function setSuccessfulLoginIntoSession($id, $username, $email, $user_account_type, $facility_id, $facility)
     {
         Session::init();
 
@@ -127,6 +127,8 @@ class Login extends Model
         Session::set('id', $id);
         Session::set('username', $username);
         Session::set('email', $email);
+        Session::set('facility_id', $facility_id);
+        Session::set('facility', $facility);
         Session::set('user_account_type', $user_account_type);
         Session::set('user_provider_type', 'DEFAULT');
 

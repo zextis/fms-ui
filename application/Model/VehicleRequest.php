@@ -92,7 +92,6 @@ class VehicleRequest extends Model
     public function getAllVehicles()
     {
         $sql = "SELECT `license_plate`, `vehicle_type`, `body_type`, `make`, `model`, `year`, `transmission`, `fuel`, `production_year`, `facility_id`, `engine_number`, `chasis_number`, `colour`, `seating`, `cc_rating`, `fitness_expiration`, `license_expiration`, `next_maintenance`, `is_available`, `is_operable`, `created_at`, `updated_at` FROM `vehicles`";
-
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -217,7 +216,7 @@ class VehicleRequest extends Model
      */
     public function getRequest($id)
     {
-        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at FROM requests WHERE id = :id LIMIT 1";
+        $sql = "SELECT id, department, number_of_persons, purpose_of_trip, pick_up_point, required_date, departure_time, destination, other_info, dept_supervisor, contact_num, created_at, status, comments FROM requests WHERE id = :id LIMIT 1";
         $query = $this->db->prepare($sql);
         $parameters = array(':id' => $id);
 
@@ -274,12 +273,14 @@ class VehicleRequest extends Model
         $parameters = array(':id' => $id, ':license_plate' => !empty($license_plate) ? $license_plate : null, ':driver_id' => !empty($driver_id) ? $driver_id : null, ':status' => $status, ':comments' => $comments);
         // die(var_dump($query));
 
-        $query->execute($parameters);
+        $success = $query->execute($parameters);
 
         // NOTE: Print error message.
-        if (!$query) {
-            print_r($query->errorInfo());
+        if (!$success) {
+            // print_r($query->errorInfo());
+            return false; // Error return false.
         }
+        return true;
     }
 
     /**
